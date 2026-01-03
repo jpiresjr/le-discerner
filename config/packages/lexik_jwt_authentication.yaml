@@ -9,7 +9,7 @@ lexik_jwt_authentication:
         AUTH_TOKEN:
             samesite: strict
             path: /
-            secure: '%env(default:0:bool:JWT_COOKIE_SECURE)%'
+            secure: '%env(bool:JWT_COOKIE_SECURE)%'
             httpOnly: true
 
     # Configuração CRÍTICA para cookies

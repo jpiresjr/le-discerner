@@ -13,9 +13,13 @@ class AuthService
         private JWTTokenManagerInterface $jwtManager
     ) {}
 
-    public function login(string $email, string $password): ?string
+    public function login(string $identifier, string $password): ?string
     {
-        $user = $this->userRepository->findOneBy(['email' => $email]);
+        $user = $this->userRepository->findOneBy(['email' => $identifier]);
+
+        if (!$user) {
+            $user = $this->userRepository->findOneBy(['username' => $identifier]);
+        }
 
         if (!$user) {
             return null;

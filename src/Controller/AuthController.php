@@ -98,18 +98,28 @@ class AuthController extends AbstractController
     ): JsonResponse {
 
         $data = json_decode($request->getContent(), true);
-
-        if (empty($data['email']) || empty($data['password'])) {
-            return $this->json(['error' => 'Email e senha são obrigatórios'], Response::HTTP_BAD_REQUEST);
+        if (!is_array($data)) {
+            $data = $request->request->all();
         }
 
-        $token = $authService->login($data['email'], $data['password']);
+        $identifier = trim((string) ($data['email'] ?? $data['username'] ?? ''));
+        $password = (string) ($data['password'] ?? '');
+
+        if ($identifier === '' || $password === '') {
+            return $this->json(['error' => 'Email/usuário e senha são obrigatórios'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $token = $authService->login($identifier, $password);
 
         if (!$token) {
             return $this->json(['error' => 'Credenciais inválidas'], Response::HTTP_UNAUTHORIZED);
         }
 
-        $user = $userRepository->findOneBy(['email' => $data['email']]);
+        $user = $userRepository->findOneBy(['email' => $identifier]);
+
+        if (!$user) {
+            $user = $userRepository->findOneBy(['username' => $identifier]);
+        }
 
         if (!$user) {
             return $this->json(['error' => 'Usuário não encontrado'], Response::HTTP_NOT_FOUND);

@@ -28,12 +28,17 @@ class AuthService
         }
 
         if (!$this->hasher->isPasswordValid($user, $password)) {
-            if (!hash_equals($user->getPassword(), $password)) {
+            $storedPassword = $user->getPassword();
+
+            if (password_verify($password, $storedPassword)) {
+                $user->setPassword($this->hasher->hashPassword($user, $password));
+                $this->em->flush();
+            } elseif (hash_equals($storedPassword, $password)) {
+                $user->setPassword($this->hasher->hashPassword($user, $password));
+                $this->em->flush();
+            } else {
                 return null;
             }
-
-            $user->setPassword($this->hasher->hashPassword($user, $password));
-            $this->em->flush();
         }
 
         // ⚠️ ESTE É O PONTO CRÍTICO

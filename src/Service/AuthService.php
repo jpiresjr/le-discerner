@@ -17,11 +17,7 @@ class AuthService
 
     public function login(string $identifier, string $password): ?string
     {
-        $user = $this->userRepository->findOneBy(['email' => $identifier]);
-
-        if (!$user) {
-            $user = $this->userRepository->findOneBy(['username' => $identifier]);
-        }
+        $user = $this->userRepository->findByIdentifier($identifier);
 
         if (!$user) {
             return null;

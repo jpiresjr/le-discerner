@@ -115,11 +115,7 @@ class AuthController extends AbstractController
             return $this->json(['error' => 'Credenciais inválidas'], Response::HTTP_UNAUTHORIZED);
         }
 
-        $user = $userRepository->findOneBy(['email' => $identifier]);
-
-        if (!$user) {
-            $user = $userRepository->findOneBy(['username' => $identifier]);
-        }
+        $user = $userRepository->findByIdentifier($identifier);
 
         if (!$user) {
             return $this->json(['error' => 'Usuário não encontrado'], Response::HTTP_NOT_FOUND);

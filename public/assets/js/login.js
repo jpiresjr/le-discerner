@@ -29,10 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
+                credentials: 'same-origin',
                 body: JSON.stringify({ email, password })
             });
 
-            const data = await response.json();
+            const contentType = response.headers.get('content-type') || '';
+            const isJson = contentType.includes('application/json');
+            const data = isJson ? await response.json() : { error: await response.text() };
 
             if (!response.ok) {
                 throw new Error(data.error || 'Erro ao fazer login');

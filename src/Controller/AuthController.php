@@ -143,6 +143,15 @@ class AuthController extends AbstractController
         return $response;
     }
 
+    #[Route('/login', name: 'api_login_get', methods: ['GET'])]
+    public function loginMethodNotAllowed(): JsonResponse
+    {
+        return $this->json(
+            ['error' => 'Método não permitido. Use POST para autenticar.'],
+            Response::HTTP_METHOD_NOT_ALLOWED
+        );
+    }
+
     #[Route('/logout', name: 'api_logout', methods: ['POST'])]
     public function logout(): JsonResponse
     {

@@ -1,8 +1,18 @@
 // assets/js/login.js
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('loginForm');
+    const passwordInput = document.getElementById('loginPassword');
+    const togglePasswordButton = document.getElementById('toggleLoginPassword');
 
     if (!form) return;
+
+    if (passwordInput && togglePasswordButton) {
+        togglePasswordButton.addEventListener('click', () => {
+            const isMasked = passwordInput.type === 'password';
+            passwordInput.type = isMasked ? 'text' : 'password';
+            togglePasswordButton.textContent = isMasked ? 'Ocultar' : 'Mostrar';
+        });
+    }
 
     // Se já tem cookie/sessão, redireciona
     if (document.cookie.includes('AUTH_TOKEN=')) {

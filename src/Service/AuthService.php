@@ -3,6 +3,7 @@ namespace App\Service;
 
 use App\Repository\UserRepository;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AuthService
@@ -10,7 +11,8 @@ class AuthService
     public function __construct(
         private UserRepository $userRepository,
         private UserPasswordHasherInterface $hasher,
-        private JWTTokenManagerInterface $jwtManager
+        private JWTTokenManagerInterface $jwtManager,
+        private EntityManagerInterface $em
     ) {}
 
     public function login(string $identifier, string $password): ?string
@@ -26,7 +28,12 @@ class AuthService
         }
 
         if (!$this->hasher->isPasswordValid($user, $password)) {
-            return null;
+            if (!hash_equals($user->getPassword(), $password)) {
+                return null;
+            }
+
+            $user->setPassword($this->hasher->hashPassword($user, $password));
+            $this->em->flush();
         }
 
         // ⚠️ ESTE É O PONTO CRÍTICO

@@ -1,0 +1,174 @@
+<!-- ================= HERO (MESMO DA HOME) ================= -->
+<header id="hero" class="hero-ipg">
+    <div class="hero-ipg__bg"></div>
+
+    <div class="container-lg hero-ipg__content">
+        <h1 class="hero-ipg__title">ABOUT</h1>
+        <p class="hero-ipg__sub">
+            Conheça a essência, os valores e a visão que guiam o Le Discerner.
+        </p>
+    </div>
+</header>
+
+<!-- ================= CONTEÚDO SOBRE ================= -->
+<section class="py-5 bg-light">
+    <div class="container" data-aos="fade-up">
+        <div class="row align-items-center g-5">
+
+            <!-- IMAGEM À ESQUERDA -->
+            <div class="col-lg-7 d-flex">
+                <div class="about-image-wrapper w-100">
+                    <img
+                        src="/images/about.jpeg"
+                        alt="Le Discerner — Sobre"
+                        class="about-image"
+                    />
+                </div>
+            </div>
+
+            <!-- TEXTO À DIREITA -->
+            <div class="col-lg-5">
+                <div class="p-4 p-lg-5"
+                     style="
+                        background:#fbf9f4;
+                        border-radius:18px;
+                        box-shadow:0 18px 40px rgba(0,0,0,.12);
+                     ">
+
+<!--                    <span class="text-uppercase small text-muted">-->
+<!--                        Experienced Psychotherapists-->
+<!--                    </span>-->
+
+                    <h2 class="mt-2" style="color:#3e4533;">
+                        O Cuidado da Alma e Mente: Uma Visão Integrada
+                    </h2>
+
+                    <!-- linha divisória animada -->
+                    <div class="my-3"
+                         style="
+                            width:70px;
+                            height:2px;
+                            background:#3e4533;
+                            animation: growLine 1.2s ease forwards;
+                         ">
+                    </div>
+
+                    <p class="text-muted">
+                        O universo do bem-estar emocional oferece caminhos diversos para o autoconhecimento e a cura.
+                        A Psicanálise nos convida a uma viagem profunda ao inconsciente,
+                        buscando as raízes históricas do sofrimento para uma transformação duradoura.
+                        Em contraste, abordagens mais focadas no presente e futuro, como o coaching orientado a metas,
+                        incentivam a ação e a concretização de objetivos específicos. Complementando esse espectro,
+                        as Terapias Integrativas oferecem um olhar holístico, tratando o indivíduo como um todo – corpo,
+                        mente e espírito – através de métodos naturais e complementares que buscam o equilíbrio e a promoção da saúde plena.
+                        Juntas, essas filosofias ressaltam a importância de uma escuta atenta e de um acolhimento total para a jornada contínua do desenvolvimento humano.
+                    </p>
+
+<!--                    <p class="text-muted">-->
+<!--                        Acreditamos que a terapia ajuda a encontrar clareza,-->
+<!--                        autoconsciência e alívio emocional para aqueles que se-->
+<!--                        sentem sobrecarregados ou perdidos.-->
+<!--                    </p>-->
+
+                    <a href="/about.php" class="btn btn-ipg-cta mt-3">
+                        Sobre nós
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-theme-dark text-light pt-5 pb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-md-3 mb-3">
+                <h5>Sobre</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-light text-decoration-none">Visão Geral</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Equipe</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Carreiras</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+                <h5>Serviços</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-light text-decoration-none">Psicoterapia Individual</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Terapia de Casal</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Terapia Familiar</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Terapia em Grupo</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+                <h5>Contato</h5>
+                <ul class="list-unstyled">
+                    <li>Telefone: (310) 461-4148</li>
+                    <li>Email: contato@ipgterapia.com</li>
+                    <li>Endereço: Beverly Hills, CA</li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+                <h5>Siga-nos</h5>
+                <a href="#" class="text-light me-2"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-light me-2"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="text-center text-secondary small pt-3">
+            © 2025 Le-Discerner. Todos os direitos reservados.
+        </div>
+    </div>
+</footer>
+
+<!-- ================= JS ================= -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+    AOS.init();
+
+    (() => {
+        const nav = document.getElementById('mainNavbar');
+        const hero = document.getElementById('hero');
+        const bg = document.querySelector('.hero-ipg__bg');
+        const content = document.querySelector('.hero-ipg__content');
+
+        function onScroll(){
+            const y = window.scrollY || 0;
+            nav.classList.toggle('scrolled', y > 10);
+
+            if (hero && bg){
+                const heroH = hero.offsetHeight;
+                const p = Math.min(1, y / heroH);
+                bg.style.transform = `translateY(${y * 0.25}px) scale(1.06)`;
+
+                if (content){
+                    content.style.opacity = (1 - p * 0.55).toFixed(3);
+                    content.style.transform = `translateY(${p * 18}px)`;
+                }
+            }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive:true });
+        onScroll();
+    })();
+</script>
+
+</body>
+</html>
+<style>
+    @keyframes growLine {
+        from {
+            width: 0;
+            opacity: 0;
+        }
+        to {
+            width: 70px;
+            opacity: 1;
+        }
+    }
+
+</style>

@@ -1,0 +1,148 @@
+/* ============================= */
+/*   ESTILO BASE DO FOOTER       */
+/* ============================= */
+.site-footer {
+    background: #3b3f32;
+    color: #f2f2f2;
+    padding: 60px 25px 40px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.footer-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+.footer-logo {
+    width: 140px;
+    margin-bottom: 15px;
+}
+
+.footer-about p {
+    line-height: 1.6;
+    max-width: 360px;
+}
+
+.footer-social a {
+    font-size: 22px;
+    color: #f2f2f2;
+    margin-right: 12px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: #d4c67a;
+    transform: translateY(-4px);
+}
+
+.footer-col h4 {
+    font-size: 18px;
+    margin-bottom: 14px;
+    font-weight: 600;
+}
+
+.footer-col ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    color: #e6e6e6;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #d4c67a;
+    padding-left: 6px;
+}
+
+.footer-col p {
+    margin-bottom: 12px;
+}
+
+.footer-col p i {
+    margin-right: 8px;
+    color: #d4c67a;
+}
+
+/* ============================= */
+/*   RODAPÉ FINAL                */
+/* ============================= */
+.footer-bottom {
+    text-align: center;
+    padding-top: 40px;
+    color: #bdbdbd;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ============================= */
+/*   ANIMAÇÕES                   */
+/* ============================= */
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+    opacity: 0;
+}
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.slide-up {
+    animation: slideUp 0.9s ease forwards;
+    opacity: 0;
+    transform: translateY(25px);
+}
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pulse {
+    animation: pulseIcon 2s infinite ease-in-out;
+}
+@keyframes pulseIcon {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.12); }
+    100% { transform: scale(1); }
+}
+
+/* ============================= */
+/*   VERSÃO MOBILE               */
+/* ============================= */
+@media(max-width: 900px) {
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px;
+    }
+}
+
+@media(max-width: 600px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-about p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .footer-social a {
+        margin: 0 12px;
+    }
+
+    .footer-col ul {
+        margin: 0 auto;
+    }
+}

@@ -1,0 +1,52 @@
+/* COLORS */
+:root {
+    --theme-dark: #3e4533;
+    --theme-light: #feffff;
+    --theme-accent: #e1e2a0;
+}
+
+/* GLOBAL */
+body {
+    background: var(--theme-dark);
+    color: var(--theme-light);
+}
+
+/* NAVBAR */
+.navbar {
+    background: var(--theme-dark);
+}
+.navbar .nav-link {
+    color: var(--theme-light) !important;
+}
+.navbar .nav-link:hover {
+    color: var(--theme-accent) !important;
+}
+
+/* CARDS */
+.card {
+    background: var(--theme-light);
+    color: var(--theme-dark);
+    border-radius: 14px;
+    border: none;
+}
+
+/* TABLE */
+.table {
+    color: var(--theme-light);
+}
+.table th {
+    background: var(--theme-dark);
+    color: var(--theme-accent);
+}
+.table td {
+    background: #404737;
+}
+
+/* BUTTONS */
+.btn-theme {
+    background: var(--theme-accent);
+    color: var(--theme-dark);
+}
+.btn-theme:hover {
+    background: #d4d596;
+}

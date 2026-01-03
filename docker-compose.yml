@@ -1,0 +1,57 @@
+services:
+  php:
+    build: ./docker/php
+    container_name: le_discerner_php
+    volumes:
+      - ./:/var/www/le-discerner/
+    working_dir: /var/www/le-discerner
+    environment:
+      APP_ENV: "dev"
+      DATABASE_URL: "mysql://root:root@mysql:3306/le_discerner?serverVersion=8"
+      DEFAULT_URI: "http://localhost:8080"
+      JWT_SECRET_KEY: /var/www/le-discerner/config/jwt/private.pem
+      JWT_PUBLIC_KEY: /var/www/le-discerner/config/jwt/public.pem
+      JWT_PASSPHRASE: de58b3e3d8c7f4b443356ec2b814a86cacfb3102821372bc66968f95f0b66bfe
+    depends_on:
+      - mysql
+      - redis
+
+  nginx:
+    image: nginx:alpine
+    container_name: le_discerner_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/le-discerner/:ro
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+
+  mysql:
+    image: mysql:8.0
+    container_name: le_discerner_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: le_discerner
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
+  redis:
+    image: redis:7-alpine
+    container_name: le_discerner_redis
+    ports:
+      - "6379:6379"
+
+  node:
+    image: node:18
+    container_name: le_discerner_node
+    working_dir: /var/www/le-discerner/
+    volumes:
+      - ./:/var/www/le-discerner/
+    command: ["bash", "-lc", "npm install || true; npm run dev || true"]
+
+volumes:
+  db-data:

@@ -1,0 +1,22 @@
+{
+  "brand": "Le Discerner",
+
+  "nav.home": "Startseite",
+  "nav.about": "Über uns",
+  "nav.pros": "Fachkräfte",
+  "nav.login": "Anmelden",
+  "nav.language": "Sprache",
+
+  "banner.title": "Therapie für CPLP-Einwanderer",
+  "banner.subtitle": "Finden Sie emotionale Unterstützung...",
+  "banner.prof": "Ich bin Profi",
+  "banner.patient": "Ich bin Patient",
+
+  "about.subtitle": "Über Le-discerner",
+  "about.title": "Lorem Ipsum",
+  "about.text1": "Lorem Ipsum ist einfach Beispieltext...",
+  "about.text2": "Die Mission Ihrer Therapie On...",
+  "about.more": "Mehr erfahren",
+
+  "footer.text": "© {{year}} De L'âme — Ganzheitliche Therapien"
+}

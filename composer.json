@@ -1,0 +1,48 @@
+{
+    "name": "le-discerner/le-discerner",
+    "type": "project",
+    "autoload": {
+        "psr-4": { "App\\": "src/" }
+    },
+    "require": {
+        "php": ">=8.1",
+        "symfony/framework-bundle": "^7.3",
+        "symfony/console": "^6.4|^7.0",
+        "symfony/dotenv": "^6.4|^7.0",
+        "symfony/security-bundle": "^6.4|^7.0",
+        "doctrine/doctrine-migrations-bundle": "^3.3",
+        "lexik/jwt-authentication-bundle": "^2.16",
+        "stripe/stripe-php": "^11.0",
+        "symfony/flex": "^2.10",
+        "doctrine/dbal": "^3",
+        "doctrine/doctrine-bundle": "^2.10",
+        "doctrine/orm": "^3.5",
+        "symfony/runtime": "^7.4",
+        "symfony/twig-bundle": "^7.3",
+        "symfony/yaml": "^7.4",
+        "symfony/routing": "^7.4",
+        "symfony/http-kernel": "^7.4",
+        "symfony/http-foundation": "^7.4",
+        "symfony/dependency-injection": "^7.4",
+        "symfony/config": "^7.4",
+        "symfony/asset": "^7.4",
+        "ext-http": "*"
+    },
+    "require-dev": {
+        "symfony/webpack-encore-bundle": "^2.0",
+        "phpunit/phpunit": "^9.5",
+        "symfony/maker-bundle": "^1.65"
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true,
+            "symfony/runtime": true
+        }
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
+    }
+}

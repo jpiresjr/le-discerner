@@ -1,0 +1,76 @@
+<nav id="mainNavbar" class="navbar navbar-expand-lg fixed-top navbar-ipg">
+    <div class="container-lg navbar-ipg__grid">
+
+        <!-- ESQUERDA (desktop) -->
+        <div class="navbar-ipg__left d-none d-lg-flex">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+
+                <!-- CORREÇÃO: Removido dropdown e tag duplicada -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="/therapies" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Therapies
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/therapies#psicanalise">Psicanálise</a></li>
+                        <li><a class="dropdown-item" href="/therapies#terapia-integrativa">Terapia Integrativa</a></li>
+                        <li><a class="dropdown-item" href="/therapies#coaching">Coaching</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- BRAND (sempre centro) -->
+        <a class="navbar-brand navbar-ipg__brand" href="/">
+            <img src="/images/logo2.png" alt="Le Discerner">
+        </a>
+
+        <!-- DIREITA (desktop) -->
+        <div class="navbar-ipg__right d-none d-lg-flex">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item"><a class="nav-link" href="/website-operation">website operation</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">search professionals</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">contact</a></li>
+            </ul>
+        </div>
+
+        <!-- TOGGLER (mobile) -->
+        <button class="navbar-toggler d-lg-none ms-auto" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navMain"
+                aria-controls="navMain" aria-expanded="false" aria-label="Abrir menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    </div>
+
+    <!-- MOBILE MENU (fora do grid) - CORRIGIDO -->
+    <div class="container-lg d-lg-none">
+        <div class="collapse navbar-collapse" id="navMain">
+            <ul class="navbar-nav mt-3">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Home</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Visão Geral</a></li>
+                        <li><a class="dropdown-item" href="#">Equipe</a></li>
+                        <li><a class="dropdown-item" href="#">Carreiras</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">therapies</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">website operation</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">search professionals</a></li>
+                <!-- CORREÇÃO: Aspas duplas removidas -->
+                <li class="nav-item mt-2"><a class="nav-link" href="#">contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

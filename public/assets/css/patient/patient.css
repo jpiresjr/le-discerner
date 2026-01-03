@@ -1,0 +1,47 @@
+/* COLORS */
+:root {
+    --theme-dark: #3e4533;
+    --theme-light: #feffff;
+    --theme-accent: #e1e2a0;
+}
+
+/* GLOBAL */
+body {
+    background: var(--theme-dark);
+    color: var(--theme-light);
+}
+
+/* NAVBAR */
+.navbar {
+    background: var(--theme-dark);
+}
+.navbar .nav-link {
+    color: var(--theme-light) !important;
+}
+.navbar .nav-link:hover {
+    color: var(--theme-accent) !important;
+}
+
+/* CARDS */
+.card {
+    background: var(--theme-light);
+    color: var(--theme-dark);
+    border: none;
+    border-radius: 14px;
+}
+
+/* CONSULTAS / LISTAS */
+.list-group-item {
+    background: #404737;
+    color: var(--theme-light);
+    border-color: var(--theme-light);
+}
+
+/* BUTTONS */
+.btn-agendar {
+    background: var(--theme-accent);
+    color: var(--theme-dark);
+}
+.btn-agendar:hover {
+    background: #d4d596;
+}

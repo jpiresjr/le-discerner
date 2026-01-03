@@ -1,0 +1,54 @@
+parameters:
+  # Aqui você pode adicionar parâmetros globais caso precise
+  locale: 'pt_BR'
+
+services:
+  # Configurações padrão
+  _defaults:
+    autowire: true        # Injeta dependências automaticamente
+    autoconfigure: true   # Registra automaticamente como Command/EventSubscriber/etc
+    bind:
+      string $stripeSecretKey: '%env(STRIPE_SECRET_KEY)%'
+
+  # Registra todos os serviços do diretório src/
+  App\:
+    resource: '../src/'
+    exclude:
+      - '../src/DependencyInjection/'
+      - '../src/Entity/'
+      - '../src/Kernel.php'
+      - '../src/View/'
+
+  # -------------------------------
+  #   SERVICES PERSONALIZADOS
+  # -------------------------------
+
+  # JWT Service
+  App\Service\AuthService:
+    arguments:
+      $jwtManager: '@lexik_jwt_authentication.jwt_manager'
+
+  # Patient Service
+  App\Service\PatientService:
+    arguments:
+      $em: '@doctrine.orm.entity_manager'
+
+  # Professional Service
+  App\Service\ProfessionalService:
+    arguments:
+      $em: '@doctrine.orm.entity_manager'
+
+  # Payment Service (Stripe)
+  App\Service\PaymentService:
+    arguments:
+      $secretKey: '%env(STRIPE_SECRET_KEY)%'
+
+  # Caso você use Redis futuramente:
+  # redis.client:
+  #     class: Redis
+  #     calls:
+  #         - method: connect
+  #           arguments:
+  #               - '%env(REDIS_HOST)%'
+  #               - '%env(int:REDIS_PORT)%'
+

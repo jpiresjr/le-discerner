@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Finalizar Cadastro — De L'âme</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/app.css" />
+</head>
+<body>
+  <main class="container py-5">
+    <div class="col-md-6 mx-auto">
+      <div class="card p-4 text-center">
+        <h3 class="header-crest mb-3">Finalizar Cadastro</h3>
+        <p>Mensalidade da conta profissional: <strong class="accent">30€</strong></p>
+        <div class="d-grid">
+          <button id="btnPay" class="btn btn-theme">Pagar 30€ com Stripe</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/assets/js/auth.js"></script>
+  <script>
+    document.getElementById('btnPay').addEventListener('click', async () => {
+      const params = new URLSearchParams(window.location.search);
+      const user_id = params.get('user_id');
+      if (!user_id) {
+        alert('Id do usuário ausente. Faça login e finalize pelo painel.');
+        window.location.href = '/login.html';
+        return;
+      }
+
+      try {
+        const res = await authFetch('/api/payments/create-link', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user_id: user_id })
+        });
+        const data = await res.json();
+        if (res.ok && (data.payment_url || data.url)) {
+          window.location.href = data.payment_url ?? data.url;
+        } else {
+          alert(data.error ?? 'Erro ao criar checkout');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Erro de rede');
+      }
+    });
+  </script>
+</body>
+</html>

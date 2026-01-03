@@ -1,0 +1,132 @@
+:root {
+    --theme-dark: #3e4533;
+    --theme-light: #feffff;
+    --theme-accent: #e1e2a0;
+}
+
+body {
+    background: var(--theme-dark);
+    color: var(--theme-light);
+}
+
+/* GARANTE QUE O MODAL TENHA FUNDO */
+.modal-content {
+    background: #ffffff;
+    color: #333;
+    border-radius: 18px;
+}
+
+/* BODY DO MODAL VISÍVEL */
+.modal-body {
+    background: #f9faf7;
+}
+
+/* LABELS SEMPRE VISÍVEIS */
+.modal-body label {
+    color: #333;
+}
+
+
+/* NAVBAR */
+.navbar {
+    background: var(--theme-dark);
+    padding: 12px 0;
+}
+.navbar-nav .nav-link {
+    color: var(--theme-light) !important;
+    font-weight: 500;
+}
+.navbar-nav .nav-link:hover {
+    color: var(--theme-accent) !important;
+}
+
+/* BANNER HERO */
+.hero-banner {
+    background: url('/assets/img/home.jpeg') center/cover no-repeat;
+    height: 330px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--theme-light);
+}
+.hero-banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(62,69,51, 0.65);
+}
+.hero-banner h1 {
+    position: relative;
+    font-size: 42px;
+    font-weight: 700;
+}
+.hero-banner {
+    position: relative;
+    height: 330px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-banner .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero-banner .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(62,69,51, 0.65);
+    z-index: 2;
+}
+
+
+/* CARD DE CADASTRO */
+/*.card-register {*/
+/*    background: #fff;*/
+/*    color: #333;*/
+/*    border-radius: 14px;*/
+/*    padding: 40px 35px;*/
+/*    box-shadow: 0 8px 18px rgba(0,0,0,0.25);*/
+/*}*/
+.form-control {
+    border-radius: 10px;
+    padding: 12px;
+}
+.form-control:focus {
+    border-color: var(--theme-dark);
+    box-shadow: 0 0 0 0.15rem rgba(62,69,51,.25);
+}
+.btn-theme {
+    background: var(--theme-accent);
+    color: var(--theme-dark);
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 10px;
+}
+.btn-theme:hover {
+    background: #d4d596;
+}
+
+.modal-header {
+    background: var(--theme-dark);
+    color: var(--theme-light);
+    border-bottom: none;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+.modal-body label {
+    color: #333;
+}
+

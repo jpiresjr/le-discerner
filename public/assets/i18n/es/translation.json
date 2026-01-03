@@ -1,0 +1,22 @@
+{
+  "brand": "Le Discerner",
+
+  "nav.home": "Inicio",
+  "nav.about": "Acerca de",
+  "nav.pros": "Profesionales",
+  "nav.login": "Entrar",
+  "nav.language": "Idioma",
+
+  "banner.title": "Terapia para Inmigrantes CPLP",
+  "banner.subtitle": "Encuentra apoyo emocional...",
+  "banner.prof": "Soy Profesional",
+  "banner.patient": "Soy Paciente",
+
+  "about.subtitle": "Sobre Le-discerner",
+  "about.title": "Lorem Ipsum",
+  "about.text1": "Lorem Ipsum es simplemente texto...",
+  "about.text2": "La misión de Su terapia On...",
+  "about.more": "Saber más",
+
+  "footer.text": "© {{year}} De L'âme — Terapias Holísticas"
+}

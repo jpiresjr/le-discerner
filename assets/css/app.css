@@ -1,0 +1,56 @@
+:root{
+  --brand-dark: #3e4533;
+  --brand-light: #e1e2a0;
+  --brand-text: #feffff;
+  --glass: rgba(255,255,255,0.06);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--brand-dark);
+  color: var(--brand-text);
+  -webkit-font-smoothing:antialiased;
+}
+
+.header-crest{
+  font-family: "Playfair Display", serif;
+  font-size: 1.4rem;
+  color: var(--brand-text);
+}
+
+.card{
+  background: var(--glass);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.btn-theme{
+  background: var(--brand-light);
+  color: var(--brand-dark);
+  border: none;
+  font-weight: 600;
+  padding: .6rem .9rem;
+  border-radius: 10px;
+}
+
+.btn-outline-light{
+  background: transparent;
+  color: var(--brand-text);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: .45rem .75rem;
+}
+
+.hero-img{
+  width:100%;
+  max-width:420px;
+  border-radius:12px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+
+/* small helpers */
+.lead{opacity:0.95}
+.accent{color:var(--brand-light); font-weight:700}
+.link-light{color:var(--brand-light)}

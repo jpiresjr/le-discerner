@@ -22,8 +22,8 @@ class UserRepository extends ServiceEntityRepository
         $normalized = mb_strtolower($identifier);
 
         return $this->createQueryBuilder('user')
-            ->where('LOWER(user.email) = :identifier')
-            ->orWhere('LOWER(user.username) = :identifier')
+            ->where('LOWER(TRIM(user.email)) = :identifier')
+            ->orWhere('LOWER(TRIM(user.username)) = :identifier')
             ->setParameter('identifier', $normalized)
             ->getQuery()
             ->getOneOrNullResult();

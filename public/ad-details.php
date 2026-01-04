@@ -1,267 +1,6 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Cadastro Profissional — Anúncio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/assets/css/app.css">
-    <style>
-        :root {
-            --theme-dark: #3e4533;
-            --theme-light: #feffff;
-            --theme-accent: #e1e2a0;
-            --theme-border: #dde2d5;
-        }
-
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
-
-        /* Hero Banner */
-        .hero-banner {
-            background: linear-gradient(135deg, rgba(62,69,51,0.9) 0%, rgba(90,100,75,0.9) 100%);
-            color: var(--theme-light);
-            padding: 4rem 0;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .hero-banner h1 {
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-banner .lead {
-            opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Form Section */
-        .form-container {
-            max-width: 1000px;
-            margin: 0 auto 3rem;
-        }
-
-        .form-section {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            margin-bottom: 2rem;
-            overflow: hidden;
-            border: 1px solid var(--theme-border);
-        }
-
-        .form-header {
-            background-color: rgba(62,69,51,0.05);
-            border-bottom: 2px solid var(--theme-accent);
-            padding: 1.25rem 1.5rem;
-            margin: 0;
-        }
-
-        .form-header h3 {
-            color: var(--theme-dark);
-            font-weight: 600;
-            font-size: 1.3rem;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .form-header h3 i {
-            color: var(--theme-dark);
-        }
-
-        .form-body {
-            padding: 2rem;
-        }
-
-        /* Form Elements */
-        .form-label {
-            font-weight: 500;
-            color: #495057;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-control, .form-select {
-            border-radius: 8px;
-            border: 1.5px solid var(--theme-border);
-            padding: 0.75rem 1rem;
-            transition: all 0.2s;
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: var(--theme-dark);
-            box-shadow: 0 0 0 0.25rem rgba(62,69,51,0.15);
-        }
-
-        .file-upload-area {
-            border: 2px dashed var(--theme-border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            background-color: #fafbf9;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .file-upload-area:hover {
-            border-color: var(--theme-dark);
-            background-color: rgba(225,226,160,0.05);
-        }
-
-        .file-upload-area i {
-            font-size: 2rem;
-            color: var(--theme-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .file-info {
-            font-size: 0.85rem;
-            color: #6c757d;
-            margin-top: 0.25rem;
-        }
-
-        /* Toggle Switch */
-        .form-switch .form-check-input {
-            width: 3em;
-            height: 1.5em;
-            margin-right: 0.5rem;
-        }
-
-        .form-switch .form-check-input:checked {
-            background-color: var(--theme-dark);
-            border-color: var(--theme-dark);
-        }
-
-        /* Buttons */
-        .btn-submit {
-            background-color: var(--theme-dark);
-            color: white;
-            padding: 0.875rem 2.5rem;
-            font-weight: 600;
-            border-radius: 8px;
-            border: none;
-            transition: all 0.2s;
-            font-size: 1.1rem;
-        }
-
-        .btn-submit:hover {
-            background-color: #2d3125;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(62,69,51,0.2);
-        }
-
-        .btn-outline-theme {
-            border: 2px solid var(--theme-dark);
-            color: var(--theme-dark);
-            font-weight: 500;
-            border-radius: 8px;
-            padding: 0.5rem 1.5rem;
-        }
-
-        .btn-outline-theme:hover {
-            background-color: var(--theme-dark);
-            color: white;
-        }
-
-        /* Progress Indicator */
-        .progress-indicator {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            margin-bottom: 3rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .progress-indicator::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background-color: var(--theme-border);
-            z-index: 1;
-        }
-
-        .progress-step {
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .step-number {
-            width: 32px;
-            height: 32px;
-            background-color: white;
-            border: 2px solid var(--theme-border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: #6c757d;
-            margin: 0 auto 0.5rem;
-            transition: all 0.3s;
-        }
-
-        .progress-step.active .step-number {
-            background-color: var(--theme-dark);
-            border-color: var(--theme-dark);
-            color: white;
-        }
-
-        .step-label {
-            font-size: 0.85rem;
-            color: #6c757d;
-            font-weight: 500;
-        }
-
-        .progress-step.active .step-label {
-            color: var(--theme-dark);
-            font-weight: 600;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .form-body {
-                padding: 1.5rem;
-            }
-
-            .hero-banner {
-                padding: 3rem 1rem;
-            }
-
-            .progress-indicator {
-                padding: 0 1rem;
-            }
-
-            .step-label {
-                font-size: 0.75rem;
-            }
-        }
-    </style>
-</head>
-<body>
-
-<?php require __DIR__ . '/../src/View/partials/navbar.php'; ?>
-
-<!-- Navigation -->
-<!--<nav class="navbar navbar-expand-lg navbar-custom">-->
-<!--    <div class="container">-->
-<!--        <a class="navbar-brand" href="#">-->
-<!--            <i class="bi bi-heart-pulse me-2"></i>Le Discerner-->
-<!--        </a>-->
-<!--    </div>-->
-<!--</nav>-->
-<?php include 'partials/navbar.php'; ?>
+<?php
+ob_start();
+?>
 
 <!-- Hero Banner -->
 <section class="hero-banner">
@@ -511,10 +250,6 @@
     </form>
 </main>
 
-<?php require __DIR__ . '/../src/View/partials/footer.php'; ?>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/assets/js/app.js"></script>
 <script>
     // Validação e interatividade básica
     document.getElementById('professionalAdForm').addEventListener('submit', function(e) {
@@ -534,42 +269,21 @@
         });
 
         if (isValid) {
-            // Simulação de envio
-            alert('Formulário enviado com sucesso! Em breve entraremos em contato.');
-            // this.submit(); // Descomente para envio real
+            alert('Formulário validado com sucesso! (funcionalidade a ser implementada)');
         } else {
-            alert('Por favor, preencha todos os campos obrigatórios (*)');
+            alert('Por favor, preencha todos os campos obrigatórios.');
         }
     });
-
-    // Atualização do progress indicator ao rolar
-    window.addEventListener('scroll', function() {
-        const sections = document.querySelectorAll('.form-section');
-        const progressSteps = document.querySelectorAll('.progress-step');
-
-        sections.forEach((section, index) => {
-            const rect = section.getBoundingClientRect();
-            if (rect.top <= 150 && rect.bottom >= 150) {
-                progressSteps.forEach(step => step.classList.remove('active'));
-                progressSteps[index].classList.add('active');
-            }
-        });
-    });
-
-    // Mostrar nome do arquivo no upload
-    document.querySelectorAll('input[type="file"]').forEach(input => {
-        input.addEventListener('change', function() {
-            const area = this.closest('.file-upload-area');
-            if (this.files.length > 0) {
-                const fileName = this.files.length === 1 ?
-                    this.files[0].name :
-                    `${this.files.length} arquivos selecionados`;
-                area.querySelector('p:nth-child(2)').textContent = fileName;
-                area.style.borderColor = 'var(--theme-dark)';
-                area.style.backgroundColor = 'rgba(225,226,160,0.1)';
-            }
-        });
-    });
 </script>
-</body>
-</html>
+
+<?php
+$content = ob_get_clean();
+$title = 'Cadastro Profissional — Anúncio';
+$extraCss = [
+    'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css',
+    '/assets/css/ad-details.css',
+];
+$extraJs = [];
+
+require __DIR__ . '/../src/View/layout.php';
+?>

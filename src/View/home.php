@@ -475,11 +475,15 @@
 
                 // Aguardar um pouco para o conteúdo carregar
                 setTimeout(function() {
-                    const form = document.getElementById('cadastroPacienteForm');
-                    console.log('Formulário no modal:', form);
+                    const patientForm = document.getElementById('cadastroPacienteForm');
+                    const professionalForm = document.getElementById('signupProfessional');
+                    console.log('Formulário no modal:', patientForm || professionalForm);
 
-                    if (form) {
-                        setupFormSubmit(form);
+                    if (patientForm) {
+                        setupFormSubmit(patientForm);
+                    }
+                    if (professionalForm) {
+                        setupFormSubmit(professionalForm);
                     }
                 }, 300);
             });
@@ -521,6 +525,8 @@
                     setTimeout(() => {
                         if (data.role === 'ROLE_PATIENT') {
                             window.location.href = '/dashboard/patient';
+                        } else if (data.role === 'ROLE_PROFESSIONAL') {
+                            window.location.href = '/ad-details.php';
                         } else {
                             window.location.href = '/';
                         }

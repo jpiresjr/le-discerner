@@ -52,6 +52,9 @@ class AuthController extends AbstractController
         if ($userRepository->findOneBy(['email' => $data['email']])) {
             return $this->json(['error' => 'Email already registered'], 400);
         }
+        if ($userRepository->findOneBy(['username' => $data['username']])) {
+            return $this->json(['error' => 'Username already registered'], 400);
+        }
 
         $user = new User();
         $user->setFullName($data['fullName']);

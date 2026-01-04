@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         preferences: document.getElementById('pro-contact-preferences'),
         paymentStatus: document.getElementById('pro-payment-status'),
         paymentHint: document.getElementById('pro-payment-hint'),
+        adFullName: document.getElementById('ad-fullName'),
+        adEmail: document.getElementById('ad-email'),
+        adPhone: document.getElementById('ad-phone'),
+        adWhatsapp: document.getElementById('ad-whatsapp'),
+        adCountry: document.getElementById('ad-country'),
+        adSpecialty: document.getElementById('ad-specialty'),
     };
 
     try {
@@ -32,6 +38,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (fields.country) fields.country.value = user.country || '';
         if (fields.contact) fields.contact.value = user.contact || '';
         if (fields.expertise) fields.expertise.value = data.expertise || '';
+        if (fields.adFullName) fields.adFullName.textContent = user.fullName || 'Não informado';
+        if (fields.adEmail) fields.adEmail.textContent = user.email || 'Não informado';
+        if (fields.adPhone) fields.adPhone.textContent = user.contact || 'Não informado';
+        if (fields.adWhatsapp) {
+            fields.adWhatsapp.textContent = user.whatsapp ? user.contact || 'WhatsApp habilitado' : 'Não informado';
+        }
+        if (fields.adCountry) fields.adCountry.textContent = user.country || 'Não informado';
+        if (fields.adSpecialty) fields.adSpecialty.textContent = data.expertise || 'Não informado';
 
         if (fields.preferences) {
             fields.preferences.innerHTML = '';

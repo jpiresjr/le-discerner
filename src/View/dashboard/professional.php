@@ -22,6 +22,11 @@
                 </button>
             </li>
             <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-ad">
+                    Meu Anúncio
+                </button>
+            </li>
+            <li class="nav-item">
                 <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-payments">
                     Pagamentos
                 </button>
@@ -71,6 +76,157 @@
                         <div class="col-12">
                             <label class="form-label">Especialidade</label>
                             <input class="form-control" id="pro-expertise" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== MEU ANÚNCIO ===================== -->
+            <div class="tab-pane fade" id="tab-ad">
+                <div class="card shadow-sm border-0 p-5 mx-auto mb-4" style="max-width:1200px;">
+                    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center mb-4">
+                        <div>
+                            <h4 class="mb-1">Detalhes do anúncio</h4>
+                            <p class="text-muted mb-0">
+                                Revise as informações que aparecem no seu perfil público.
+                            </p>
+                        </div>
+                        <a class="btn btn-outline-secondary mt-3 mt-lg-0" href="/ad-details.php">
+                            Editar anúncio
+                        </a>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="p-4 rounded-4 bg-light border">
+                                <h5 class="mb-3">Informações gerais</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Nome completo</div>
+                                        <div class="fw-semibold" id="ad-fullName">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Email de contato</div>
+                                        <div class="fw-semibold" id="ad-email">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Telefone</div>
+                                        <div class="fw-semibold" id="ad-phone">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">WhatsApp</div>
+                                        <div class="fw-semibold" id="ad-whatsapp">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Naturalidade</div>
+                                        <div class="fw-semibold" id="ad-naturality">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Idade</div>
+                                        <div class="fw-semibold" id="ad-age">Não informado</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="p-4 rounded-4 bg-light border">
+                                <h5 class="mb-3">Documentos</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="text-muted small">Documento de identificação</div>
+                                        <div class="fw-semibold" id="ad-idDocument">Não enviado</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="text-muted small">Foto profissional</div>
+                                        <div class="fw-semibold" id="ad-photo">Não enviada</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="text-muted small">Documento do conselho</div>
+                                        <div class="fw-semibold" id="ad-councilDoc">Não enviado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Formação acadêmica</div>
+                                        <div class="fw-semibold" id="ad-education">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Especialidade</div>
+                                        <div class="fw-semibold" id="ad-specialty">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Tempo de carreira</div>
+                                        <div class="fw-semibold" id="ad-experience">Não informado</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="p-4 rounded-4 bg-light border">
+                                <h5 class="mb-3">Consulta</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="text-muted small">Valor</div>
+                                        <div class="fw-semibold" id="ad-price">Não informado</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="text-muted small">Duração</div>
+                                        <div class="fw-semibold" id="ad-duration">Não informado</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="text-muted small">Categoria</div>
+                                        <div class="fw-semibold" id="ad-category">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Especialidade da consulta</div>
+                                        <div class="fw-semibold" id="ad-consultationSpecialty">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Gênero atendido</div>
+                                        <div class="fw-semibold" id="ad-gender">Não informado</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="p-4 rounded-4 bg-light border">
+                                <h5 class="mb-3">Sobre o profissional</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Portfólio</div>
+                                        <div class="fw-semibold" id="ad-portfolio">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Redes sociais</div>
+                                        <div class="fw-semibold" id="ad-social">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">País</div>
+                                        <div class="fw-semibold" id="ad-country">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Endereço</div>
+                                        <div class="fw-semibold" id="ad-address">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Localização</div>
+                                        <div class="fw-semibold" id="ad-location">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Horário de funcionamento</div>
+                                        <div class="fw-semibold" id="ad-workingHours">Não informado</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-muted small">Fuso horário</div>
+                                        <div class="fw-semibold" id="ad-timezone">Não informado</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="text-muted small">Descrição</div>
+                                        <div class="fw-semibold" id="ad-description">Não informado</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

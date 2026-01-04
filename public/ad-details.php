@@ -6,7 +6,7 @@
     <title>Cadastro Profissional — Anúncio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/assets/css/footer.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
     <style>
         :root {
             --theme-dark: #3e4533;
@@ -18,19 +18,6 @@
         body {
             background-color: #f8f9fa;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
-
-        /* Header/Navbar */
-        .navbar-custom {
-            background-color: var(--theme-dark) !important;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .navbar-brand {
-            color: var(--theme-light) !important;
-            font-weight: 600;
-            font-size: 1.4rem;
         }
 
         /* Hero Banner */
@@ -263,6 +250,8 @@
     </style>
 </head>
 <body>
+
+<?php require __DIR__ . '/../src/View/partials/navbar.php'; ?>
 
 <!-- Navigation -->
 <!--<nav class="navbar navbar-expand-lg navbar-custom">-->
@@ -522,16 +511,10 @@
     </form>
 </main>
 
-<!-- Footer -->
-<?php include 'partials/footer.php'; ?>
-<!--<footer class="bg-dark text-white py-4 mt-5">-->
-<!--    <div class="container text-center">-->
-<!--        <p class="mb-0">© 2024 SaúdeConnect. Todos os direitos reservados.</p>-->
-<!--        <p class="text-muted small mt-2">Plataforma de conexão entre profissionais de saúde e pacientes</p>-->
-<!--    </div>-->
-<!--</footer>-->
+<?php require __DIR__ . '/../src/View/partials/footer.php'; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/app.js"></script>
 <script>
     // Validação e interatividade básica
     document.getElementById('professionalAdForm').addEventListener('submit', function(e) {

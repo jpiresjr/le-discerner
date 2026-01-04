@@ -35,7 +35,6 @@ security:
             pattern: ^/dashboard
             stateless: false  # ← IMPORTANTE: false para cookies
             provider: app_user_provider
-            jwt: ~  # Lexik vai buscar token no cookie automaticamente
 
     access_control:
         - { path: ^/api/auth/(login|register), roles: PUBLIC_ACCESS }
@@ -43,4 +42,4 @@ security:
         - { path: ^/register, roles: PUBLIC_ACCESS }
         - { path: ^/$, roles: PUBLIC_ACCESS }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/dashboard, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/dashboard, roles: PUBLIC_ACCESS }

@@ -293,6 +293,43 @@ ob_start();
             alert(error.message);
         }
     });
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            const response = await fetch('/api/professionals/me', {
+                headers: { 'Accept': 'application/json' },
+                credentials: 'same-origin'
+            });
+
+            if (!response.ok) {
+                return;
+            }
+
+            const data = await response.json();
+            const user = data.user || {};
+            const adDetails = data.adDetails || {};
+
+            const defaults = {
+                fullName: user.fullName || '',
+                email: user.email || '',
+                phone: user.contact || '',
+                whatsapp: user.whatsapp ? user.contact || '' : '',
+                country: user.country || '',
+                specialty: data.expertise || ''
+            };
+
+            const merged = { ...defaults, ...adDetails };
+
+            Object.entries(merged).forEach(([key, value]) => {
+                const field = document.querySelector(`[name="${key}"]`);
+                if (field && typeof value !== 'undefined') {
+                    field.value = value ?? '';
+                }
+            });
+        } catch (error) {
+            console.error('Erro ao carregar dados do profissional:', error);
+        }
+    });
 </script>
 
 <?php

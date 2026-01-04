@@ -9,12 +9,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         preferences: document.getElementById('pro-contact-preferences'),
         paymentStatus: document.getElementById('pro-payment-status'),
         paymentHint: document.getElementById('pro-payment-hint'),
-        adFullName: document.getElementById('ad-fullName'),
-        adEmail: document.getElementById('ad-email'),
-        adPhone: document.getElementById('ad-phone'),
-        adWhatsapp: document.getElementById('ad-whatsapp'),
-        adCountry: document.getElementById('ad-country'),
-        adSpecialty: document.getElementById('ad-specialty'),
     };
 
     const adForm = document.getElementById('professionalAdEditForm');
@@ -55,15 +49,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
 
         const mergedAd = { ...adDefaults, ...adDetails };
-
-        if (fields.adFullName) fields.adFullName.textContent = mergedAd.fullName || 'Não informado';
-        if (fields.adEmail) fields.adEmail.textContent = mergedAd.email || 'Não informado';
-        if (fields.adPhone) fields.adPhone.textContent = mergedAd.phone || 'Não informado';
-        if (fields.adWhatsapp) {
-            fields.adWhatsapp.textContent = mergedAd.whatsapp || 'Não informado';
-        }
-        if (fields.adCountry) fields.adCountry.textContent = mergedAd.country || 'Não informado';
-        if (fields.adSpecialty) fields.adSpecialty.textContent = mergedAd.specialty || 'Não informado';
 
         if (adForm) {
             Object.entries(adFormFields).forEach(([key, field]) => {
@@ -127,13 +112,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (!response.ok) {
                     throw new Error('Não foi possível salvar o anúncio.');
                 }
-
-                if (fields.adFullName) fields.adFullName.textContent = payload.fullName || 'Não informado';
-                if (fields.adEmail) fields.adEmail.textContent = payload.email || 'Não informado';
-                if (fields.adPhone) fields.adPhone.textContent = payload.phone || 'Não informado';
-                if (fields.adWhatsapp) fields.adWhatsapp.textContent = payload.whatsapp || 'Não informado';
-                if (fields.adCountry) fields.adCountry.textContent = payload.country || 'Não informado';
-                if (fields.adSpecialty) fields.adSpecialty.textContent = payload.specialty || 'Não informado';
 
                 alert('✅ Anúncio atualizado com sucesso!');
             } catch (error) {

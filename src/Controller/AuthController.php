@@ -105,11 +105,25 @@ class AuthController extends AbstractController
             return $response;
         }
 
-        return $this->json([
+        $response = $this->json([
             'message' => 'User created',
             'token' => $token,
             'role' => $role
         ], 201);
+
+        $response->headers->setCookie(new Cookie(
+            'AUTH_TOKEN',
+            $token,
+            time() + 86400,
+            '/',
+            null,
+            $request->isSecure(),
+            true,
+            false,
+            Cookie::SAMESITE_STRICT
+        ));
+
+        return $response;
     }
 
     #[Route('/login', name: 'api_login', methods: ['POST'])]

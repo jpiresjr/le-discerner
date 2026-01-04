@@ -29,6 +29,21 @@
                     Profissionais
                 </button>
             </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-finance">
+                    Financeiro
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-content">
+                    Conteúdo & Serviços
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-settings">
+                    Configurações
+                </button>
+            </li>
         </ul>
 
         <div class="tab-content">
@@ -287,6 +302,168 @@
                                 <button class="btn btn-outline-secondary" id="admin-prof-message">Enviar comunicado</button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab-finance">
+                <div class="row g-4">
+                    <div class="col-lg-7">
+                        <div class="card shadow-sm border-0 p-4 h-100">
+                            <h4 class="mb-3">Mensalidades dos profissionais</h4>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>Profissional</th>
+                                        <th>Plano</th>
+                                        <th>Status</th>
+                                        <th>Vencimento</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="admin-finance-payments">
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted py-4">
+                                            Carregando pagamentos...
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="card shadow-sm border-0 p-4 mb-4">
+                            <h4 class="mb-3">Relatórios financeiros</h4>
+                            <ul class="list-group list-group-flush" id="admin-finance-reports">
+                                <li class="list-group-item text-muted">Sem relatórios gerados.</li>
+                            </ul>
+                            <button class="btn btn-outline-secondary mt-3" id="admin-generate-report">
+                                Gerar relatório
+                            </button>
+                        </div>
+                        <div class="card shadow-sm border-0 p-4">
+                            <h4 class="mb-3">Gateways de pagamento</h4>
+                            <div id="admin-payment-gateways" class="text-muted">
+                                Integrações configuradas aparecerão aqui.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab-content">
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card shadow-sm border-0 p-4 h-100">
+                            <h4 class="mb-3">Modalidades de terapia</h4>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>Modalidade</th>
+                                        <th>Status</th>
+                                        <th>Preço base</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="admin-therapy-modes">
+                                    <tr>
+                                        <td colspan="3" class="text-center text-muted py-4">
+                                            Nenhuma modalidade cadastrada.
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button class="btn btn-ipg-cta mt-3" id="admin-add-therapy">
+                                Cadastrar modalidade
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card shadow-sm border-0 p-4 h-100">
+                            <h4 class="mb-3">Pacotes e preços</h4>
+                            <ul class="list-group list-group-flush" id="admin-price-packages">
+                                <li class="list-group-item text-muted">Nenhum pacote configurado.</li>
+                            </ul>
+                            <button class="btn btn-outline-secondary mt-3" id="admin-add-package">
+                                Configurar pacote
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab-settings">
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="card shadow-sm border-0 p-4 h-100">
+                            <h4 class="mb-3">Permissões</h4>
+                            <ul class="list-group list-group-flush" id="admin-permissions">
+                                <li class="list-group-item">Administrador total</li>
+                                <li class="list-group-item">Moderador (acesso limitado)</li>
+                                <li class="list-group-item">Profissional (apenas seus dados)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card shadow-sm border-0 p-4 h-100">
+                            <h4 class="mb-3">Personalização</h4>
+                            <ul class="list-group list-group-flush" id="admin-customization">
+                                <li class="list-group-item">Configurações do site</li>
+                                <li class="list-group-item">Termos de uso e políticas</li>
+                                <li class="list-group-item">Modelos de e-mail</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card shadow-sm border-0 p-4 h-100">
+                            <h4 class="mb-3">Backup e segurança</h4>
+                            <ul class="list-group list-group-flush" id="admin-security">
+                                <li class="list-group-item">Exportação de dados</li>
+                                <li class="list-group-item">Log de atividades</li>
+                                <li class="list-group-item">Controle de acessos suspeitos</li>
+                            </ul>
+                            <button class="btn btn-outline-secondary mt-3" id="admin-export-data">
+                                Exportar dados
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm border-0 p-4 mt-4">
+                    <h4 class="mb-3">Notificações e alertas</h4>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="p-3 rounded-3 bg-light h-100">
+                                <div class="fw-semibold">Novos cadastros</div>
+                                <div class="text-muted small">Receba alertas em tempo real.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 rounded-3 bg-light h-100">
+                                <div class="fw-semibold">Pagamentos pendentes</div>
+                                <div class="text-muted small">Monitoramento automático.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 rounded-3 bg-light h-100">
+                                <div class="fw-semibold">Atividades suspeitas</div>
+                                <div class="text-muted small">Controle de acessos e logins.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm border-0 p-4 mt-4">
+                    <h4 class="mb-3">Atalhos de teclado</h4>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-secondary">Alt + 1 (Visão geral)</span>
+                        <span class="badge bg-secondary">Alt + 2 (Pacientes)</span>
+                        <span class="badge bg-secondary">Alt + 3 (Profissionais)</span>
+                        <span class="badge bg-secondary">Alt + 4 (Financeiro)</span>
+                        <span class="badge bg-secondary">Alt + 5 (Conteúdo)</span>
+                        <span class="badge bg-secondary">Alt + 6 (Configurações)</span>
                     </div>
                 </div>
             </div>

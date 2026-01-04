@@ -18,6 +18,13 @@ const professionalExportPdf = document.getElementById('admin-prof-export-pdf');
 const professionalApprove = document.getElementById('admin-prof-approve');
 const professionalReject = document.getElementById('admin-prof-reject');
 const professionalMessage = document.getElementById('admin-prof-message');
+const financeTable = document.getElementById('admin-finance-payments');
+const financeReports = document.getElementById('admin-finance-reports');
+const financeGateways = document.getElementById('admin-payment-gateways');
+const generateReportButton = document.getElementById('admin-generate-report');
+const addTherapyButton = document.getElementById('admin-add-therapy');
+const addPackageButton = document.getElementById('admin-add-package');
+const exportDataButton = document.getElementById('admin-export-data');
 
 let cachedPatients = [];
 let selectedPatient = null;
@@ -528,3 +535,112 @@ if (professionalReject) professionalReject.addEventListener('click', () => alert
 if (professionalMessage) professionalMessage.addEventListener('click', () => alert('Envio de comunicado em implementação.'));
 
 loadProfessionals();
+
+const renderFinance = () => {
+    if (financeTable) {
+        financeTable.innerHTML = `
+            <tr>
+                <td>Plano Profissional</td>
+                <td>Mensal</td>
+                <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                <td>05/04/2025</td>
+            </tr>
+            <tr>
+                <td>Plano Profissional</td>
+                <td>Mensal</td>
+                <td><span class="badge bg-success">Pago</span></td>
+                <td>05/03/2025</td>
+            </tr>
+        `;
+    }
+
+    if (financeReports) {
+        financeReports.innerHTML = `
+            <li class="list-group-item">Relatório mensal (mar/2025)</li>
+            <li class="list-group-item">Relatório trimestral (Q1/2025)</li>
+        `;
+    }
+
+    if (financeGateways) {
+        financeGateways.innerHTML = `
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="badge bg-success">Ativo</span>
+                Stripe
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <span class="badge bg-secondary">Inativo</span>
+                PayPal
+            </div>
+        `;
+    }
+};
+
+const renderContentServices = () => {
+    const therapyTable = document.getElementById('admin-therapy-modes');
+    if (therapyTable) {
+        therapyTable.innerHTML = `
+            <tr>
+                <td>Psicanálise</td>
+                <td><span class="badge bg-success">Ativo</span></td>
+                <td>€ 120,00</td>
+            </tr>
+            <tr>
+                <td>Terapia Integrativa</td>
+                <td><span class="badge bg-success">Ativo</span></td>
+                <td>€ 90,00</td>
+            </tr>
+            <tr>
+                <td>Coaching</td>
+                <td><span class="badge bg-warning text-dark">Em revisão</span></td>
+                <td>€ 70,00</td>
+            </tr>
+        `;
+    }
+
+    const packages = document.getElementById('admin-price-packages');
+    if (packages) {
+        packages.innerHTML = `
+            <li class="list-group-item">Pacote 4 sessões — € 320,00</li>
+            <li class="list-group-item">Pacote 8 sessões — € 600,00</li>
+        `;
+    }
+};
+
+const setupShortcuts = () => {
+    const tabs = {
+        Digit1: '#tab-overview',
+        Digit2: '#tab-patients',
+        Digit3: '#tab-professionals',
+        Digit4: '#tab-finance',
+        Digit5: '#tab-content',
+        Digit6: '#tab-settings',
+    };
+
+    document.addEventListener('keydown', (event) => {
+        if (!event.altKey) return;
+        const selector = tabs[event.code];
+        if (!selector) return;
+        const trigger = document.querySelector(`[data-bs-target="${selector}"]`);
+        if (trigger) {
+            trigger.click();
+            event.preventDefault();
+        }
+    });
+};
+
+if (generateReportButton) {
+    generateReportButton.addEventListener('click', () => alert('Geração de relatório em implementação.'));
+}
+if (addTherapyButton) {
+    addTherapyButton.addEventListener('click', () => alert('Cadastro de modalidade em implementação.'));
+}
+if (addPackageButton) {
+    addPackageButton.addEventListener('click', () => alert('Configuração de pacote em implementação.'));
+}
+if (exportDataButton) {
+    exportDataButton.addEventListener('click', () => alert('Exportação de dados em implementação.'));
+}
+
+renderFinance();
+renderContentServices();
+setupShortcuts();

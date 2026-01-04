@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             whatsapp: user.whatsapp ? user.contact || '' : '',
             country: user.country || '',
             specialty: data.expertise || '',
+            idDocumentName: adDetails.idDocumentName || '',
+            photoName: adDetails.photoName || '',
+            councilDocName: adDetails.councilDocName || '',
         };
 
         const mergedAd = { ...adDefaults, ...adDetails };
@@ -96,17 +99,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         adForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const payload = Object.fromEntries(new FormData(adForm).entries());
+            const formData = new FormData(adForm);
+            const payload = Object.fromEntries(formData.entries());
 
             try {
                 const response = await fetch('/api/professionals/ad-details', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
                         'Accept': 'application/json',
                     },
                     credentials: 'same-origin',
-                    body: JSON.stringify(payload),
+                    body: formData,
                 });
 
                 if (!response.ok) {

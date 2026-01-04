@@ -115,9 +115,18 @@ class ProfessionalController extends AbstractController
             return $this->json(['error' => 'Professional profile not found'], 404);
         }
 
-        $data = json_decode($request->getContent(), true);
-        if (!is_array($data)) {
-            $data = $request->request->all();
+        $data = $request->request->all();
+        if (!$data) {
+            $data = json_decode($request->getContent(), true);
+        }
+
+        $data = is_array($data) ? $data : [];
+
+        $files = $request->files->all();
+        foreach (['idDocumentFile' => 'idDocumentName', 'photoFile' => 'photoName', 'councilDocFile' => 'councilDocName'] as $fileKey => $nameKey) {
+            if (isset($files[$fileKey]) && $files[$fileKey]->isValid()) {
+                $data[$nameKey] = $files[$fileKey]->getClientOriginalName();
+            }
         }
 
         $professional->setAdDetails(json_encode($data, JSON_UNESCAPED_UNICODE));

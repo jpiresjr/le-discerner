@@ -145,15 +145,18 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Documento de identificação</label>
-                                        <input class="form-control" name="idDocument">
+                                        <input class="form-control" name="idDocumentName" placeholder="Arquivo atual">
+                                        <input class="form-control mt-2" name="idDocumentFile" type="file" accept="image/*,.pdf">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Foto profissional</label>
-                                        <input class="form-control" name="photo">
+                                        <input class="form-control" name="photoName" placeholder="Arquivo atual">
+                                        <input class="form-control mt-2" name="photoFile" type="file" accept="image/*">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Documento do conselho</label>
-                                        <input class="form-control" name="councilDoc">
+                                        <input class="form-control" name="councilDocName" placeholder="Arquivo atual">
+                                        <input class="form-control mt-2" name="councilDocFile" type="file" accept="image/*,.pdf">
                                     </div>
                                 </div>
                             </div>

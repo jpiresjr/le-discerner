@@ -32,6 +32,36 @@
                     <div class="display-6 fw-semibold" id="admin-total-professionals">0</div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 p-4 h-100">
+                    <div class="text-muted">Receita mensal</div>
+                    <div class="display-6 fw-semibold" id="admin-monthly-revenue">€ 0,00</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0 p-4 h-100">
+                    <h4 class="mb-3">Crescimento de usuários</h4>
+                    <div class="text-muted mb-4">Últimos 6 meses</div>
+                    <div id="admin-growth-chart" class="bg-light rounded-4 p-4"></div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0 p-4 h-100">
+                    <h4 class="mb-3">Próximos agendamentos</h4>
+                    <ul class="list-group list-group-flush" id="admin-upcoming">
+                        <li class="list-group-item text-muted">Sem agendamentos futuros.</li>
+                    </ul>
+                </div>
+                <div class="card shadow-sm border-0 p-4 h-100 mt-4">
+                    <h4 class="mb-3">Alertas e pendências</h4>
+                    <ul class="list-group list-group-flush" id="admin-alerts">
+                        <li class="list-group-item text-muted">Sem alertas no momento.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <div class="card shadow-sm border-0 p-4 mb-5">

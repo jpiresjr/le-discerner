@@ -15,16 +15,30 @@ class AdminController extends AbstractController
     public function overview(UserRepository $userRepository): JsonResponse
     {
         $users = $userRepository->findBy([], ['createdAt' => 'DESC'], 20);
+        $allUsers = $userRepository->findAll();
+
+        $now = new \DateTimeImmutable('first day of this month');
+        $growthBuckets = [];
+
+        for ($i = 5; $i >= 0; $i--) {
+            $month = $now->modify("-{$i} months");
+            $key = $month->format('Y-m');
+            $growthBuckets[$key] = [
+                'label' => $month->format('M Y'),
+                'count' => 0,
+            ];
+        }
 
         $stats = [
             'total' => 0,
             'patients' => 0,
             'professionals' => 0,
+            'monthlyRevenue' => 0,
         ];
 
         $payloadUsers = [];
 
-        foreach ($users as $user) {
+        foreach ($allUsers as $user) {
             $stats['total']++;
 
             if (in_array(User::ROLE_PATIENT, $user->getRoles(), true)) {
@@ -35,6 +49,13 @@ class AdminController extends AbstractController
                 $stats['professionals']++;
             }
 
+            $createdKey = $user->getCreatedAt()->format('Y-m');
+            if (isset($growthBuckets[$createdKey])) {
+                $growthBuckets[$createdKey]['count']++;
+            }
+        }
+
+        foreach ($users as $user) {
             $payloadUsers[] = [
                 'id' => $user->getId(),
                 'fullName' => $user->getFullName(),
@@ -45,9 +66,19 @@ class AdminController extends AbstractController
             ];
         }
 
+        $alerts = [
+            [
+                'title' => 'Nenhuma pendência crítica no momento.',
+                'type' => 'info',
+            ],
+        ];
+
         return $this->json([
             'stats' => $stats,
             'users' => $payloadUsers,
+            'growth' => array_values($growthBuckets),
+            'upcomingAppointments' => [],
+            'alerts' => $alerts,
         ]);
     }
 }

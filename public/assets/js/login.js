@@ -14,11 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Se já tem cookie/sessão, redireciona
-    if (document.cookie.includes('AUTH_TOKEN=')) {
-        window.location.href = '/dashboard/patient';
-        return;
-    }
+    // Cookie é HTTP-only, não dá para ler pelo JS.
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();

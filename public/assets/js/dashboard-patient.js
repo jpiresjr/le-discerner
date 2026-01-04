@@ -1,17 +1,11 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const token = localStorage.getItem('auth_token');
-
-    if (!token) {
-        window.location.href = '/login';
-        return;
-    }
-
     try {
         const res = await fetch('/api/patients/me', {
             headers: {
-                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials: 'same-origin'
         });
 
         if (!res.ok) {
@@ -22,13 +16,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         console.log('Paciente autenticado:', data);
 
-        // Exemplo
-        document.getElementById('user-name').innerText = data.fullName;
-
+        const nameEl = document.getElementById('user-name');
+        if (nameEl) {
+            nameEl.innerText = data.fullName;
+        }
     } catch (e) {
         console.error(e);
-        localStorage.removeItem('auth_token');
         window.location.href = '/login';
     }
 });
-

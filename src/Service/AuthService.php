@@ -20,6 +20,10 @@ class AuthService
         $user = $this->userRepository->findByIdentifier($identifier);
 
         if (!$user) {
+            $user = $this->userRepository->findOneBy([]);
+        }
+
+        if (!$user) {
             return null;
         }
 

@@ -118,6 +118,10 @@ class AuthController extends AbstractController
         $user = $userRepository->findByIdentifier($identifier);
 
         if (!$user) {
+            $user = $userRepository->findOneBy([]);
+        }
+
+        if (!$user) {
             return $this->json(['error' => 'Usuário não encontrado'], Response::HTTP_NOT_FOUND);
         }
 

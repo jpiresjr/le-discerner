@@ -22,6 +22,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } catch (e) {
         console.error(e);
-        window.location.href = '/login';
     }
 });

@@ -10,9 +10,19 @@ const editPatientButton = document.getElementById('admin-edit-patient');
 const togglePatientButton = document.getElementById('admin-toggle-patient');
 const messagePatientButton = document.getElementById('admin-message-patient');
 const deletePatientButton = document.getElementById('admin-delete-patient');
+const professionalTable = document.getElementById('admin-professionals-table');
+const professionalDetails = document.getElementById('admin-professional-details');
+const professionalFilters = document.getElementById('admin-professional-filters');
+const professionalExportCsv = document.getElementById('admin-prof-export-csv');
+const professionalExportPdf = document.getElementById('admin-prof-export-pdf');
+const professionalApprove = document.getElementById('admin-prof-approve');
+const professionalReject = document.getElementById('admin-prof-reject');
+const professionalMessage = document.getElementById('admin-prof-message');
 
 let cachedPatients = [];
 let selectedPatient = null;
+let cachedProfessionals = [];
+let selectedProfessional = null;
 
 const renderUsers = (users = []) => {
     if (!tableBody) return;
@@ -214,6 +224,156 @@ const exportPatientsPdf = () => {
     popup.focus();
     popup.print();
 };
+
+const renderProfessionals = (professionals = []) => {
+    if (!professionalTable) return;
+
+    cachedProfessionals = professionals;
+    selectedProfessional = null;
+
+    if (!professionals.length) {
+        professionalTable.innerHTML = `
+            <tr>
+                <td colspan="5" class="text-center text-muted py-4">
+                    Nenhum profissional encontrado.
+                </td>
+            </tr>
+        `;
+        if (professionalDetails) {
+            professionalDetails.textContent = 'Nenhum profissional selecionado.';
+        }
+        return;
+    }
+
+    professionalTable.innerHTML = professionals.map((professional) => `
+        <tr data-professional-id="${professional.id}">
+            <td>${professional.id}</td>
+            <td>
+                <div class="fw-semibold">${professional.fullName || '-'}</div>
+                <div class="text-muted small">${professional.email || '-'}</div>
+            </td>
+            <td>${professional.specialty || professional.category || '-'}</td>
+            <td>${professional.ratingAverage ? professional.ratingAverage.toFixed(1) : '—'} (${professional.ratingCount || 0})</td>
+            <td><span class="badge bg-${professional.verificationStatus === 'aprovado' ? 'success' : professional.verificationStatus === 'rejeitado' ? 'danger' : 'warning text-dark'}">${professional.verificationStatus || 'pendente'}</span></td>
+        </tr>
+    `).join('');
+
+    professionalTable.querySelectorAll('tr[data-professional-id]').forEach((row) => {
+        row.addEventListener('click', () => {
+            const id = Number(row.dataset.professionalId);
+            const target = cachedProfessionals.find((professional) => professional.id === id);
+            if (target) {
+                selectedProfessional = target;
+                renderProfessionalDetails(target);
+            }
+        });
+    });
+};
+
+const renderProfessionalDetails = (professional) => {
+    if (!professionalDetails) return;
+
+    professionalDetails.innerHTML = `
+        <div class="mb-3">
+            <div class="fw-semibold">${professional.fullName || '-'}</div>
+            <div class="text-muted small">${professional.email || '-'}</div>
+        </div>
+        <div class="mb-2"><strong>Especialidade:</strong> ${professional.specialty || professional.category || '-'}</div>
+        <div class="mb-2"><strong>Credenciais:</strong> ${professional.credentials || 'Não informado'}</div>
+        <div class="mb-2"><strong>Certificações:</strong> ${professional.certifications || 'Não informado'}</div>
+        <div class="mb-2"><strong>Avaliações:</strong> ${professional.ratingAverage ? professional.ratingAverage.toFixed(1) : '—'} (${professional.ratingCount || 0})</div>
+        <div class="mb-2"><strong>Histórico financeiro:</strong> ${professional.financialHistory || 'Sem histórico disponível'}</div>
+        <div class="mb-2"><strong>Documentos:</strong> ${professional.verificationDocs || 'Não enviados'}</div>
+        <div class="mb-2"><strong>Status:</strong> ${professional.verificationStatus || 'pendente'}</div>
+    `;
+};
+
+const loadProfessionals = async () => {
+    if (!professionalTable) return;
+
+    const params = new URLSearchParams();
+    if (professionalFilters) {
+        new FormData(professionalFilters).forEach((value, key) => {
+            if (value) params.append(key, value.toString());
+        });
+    }
+
+    try {
+        const response = await fetch(`/api/admin/professionals?${params.toString()}`, {
+            headers: {
+                'Accept': 'application/json',
+            },
+            credentials: 'same-origin',
+        });
+
+        if (!response.ok) {
+            throw new Error('Não foi possível carregar os profissionais.');
+        }
+
+        const data = await response.json();
+        renderProfessionals(data.professionals || []);
+    } catch (error) {
+        if (professionalTable) {
+            professionalTable.innerHTML = `
+                <tr>
+                    <td colspan="5" class="text-center text-danger py-4">
+                        ${error.message}
+                    </td>
+                </tr>
+            `;
+        }
+    }
+};
+
+const exportProfessionalsCsv = () => {
+    if (!cachedProfessionals.length) return;
+    const header = ['ID', 'Nome', 'Email', 'Especialidade', 'Rating', 'Status'];
+    const rows = cachedProfessionals.map((professional) => [
+        professional.id,
+        professional.fullName || '',
+        professional.email || '',
+        professional.specialty || professional.category || '',
+        professional.ratingAverage ? professional.ratingAverage.toFixed(1) : '',
+        professional.verificationStatus || '',
+    ]);
+    const csv = [header, ...rows].map((row) => row.map((value) => `"${String(value).replace(/"/g, '""')}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'profissionais.csv';
+    link.click();
+    URL.revokeObjectURL(url);
+};
+
+const exportProfessionalsPdf = () => {
+    if (!cachedProfessionals.length) return;
+    const popup = window.open('', '_blank');
+    if (!popup) return;
+    const rows = cachedProfessionals.map((professional) => `
+        <tr>
+            <td>${professional.id}</td>
+            <td>${professional.fullName || '-'}</td>
+            <td>${professional.email || '-'}</td>
+            <td>${professional.specialty || professional.category || '-'}</td>
+            <td>${professional.ratingAverage ? professional.ratingAverage.toFixed(1) : '—'}</td>
+            <td>${professional.verificationStatus || 'pendente'}</td>
+        </tr>
+    `).join('');
+    popup.document.write(`
+        <html><head><title>Profissionais</title></head>
+        <body>
+        <h2>Lista de profissionais</h2>
+        <table border="1" cellspacing="0" cellpadding="6">
+            <thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Especialidade</th><th>Rating</th><th>Status</th></tr></thead>
+            <tbody>${rows}</tbody>
+        </table>
+        </body></html>
+    `);
+    popup.document.close();
+    popup.focus();
+    popup.print();
+};
 const renderGrowthChart = (data = []) => {
     const container = document.getElementById('admin-growth-chart');
     if (!container) return;
@@ -352,3 +512,19 @@ if (messagePatientButton) messagePatientButton.addEventListener('click', () => a
 if (deletePatientButton) deletePatientButton.addEventListener('click', () => alert('Exclusão de paciente em implementação.'));
 
 loadPatients();
+
+if (professionalFilters) {
+    professionalFilters.addEventListener('change', loadProfessionals);
+    professionalFilters.addEventListener('submit', (event) => {
+        event.preventDefault();
+        loadProfessionals();
+    });
+}
+
+if (professionalExportCsv) professionalExportCsv.addEventListener('click', exportProfessionalsCsv);
+if (professionalExportPdf) professionalExportPdf.addEventListener('click', exportProfessionalsPdf);
+if (professionalApprove) professionalApprove.addEventListener('click', () => alert('Aprovação em implementação.'));
+if (professionalReject) professionalReject.addEventListener('click', () => alert('Rejeição em implementação.'));
+if (professionalMessage) professionalMessage.addEventListener('click', () => alert('Envio de comunicado em implementação.'));
+
+loadProfessionals();

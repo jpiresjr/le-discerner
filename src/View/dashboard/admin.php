@@ -24,6 +24,11 @@
                     Pacientes
                 </button>
             </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-professionals">
+                    Profissionais
+                </button>
+            </li>
         </ul>
 
         <div class="tab-content">
@@ -200,6 +205,86 @@
                                 <button class="btn btn-outline-secondary" id="admin-toggle-patient">Bloquear/Desbloquear</button>
                                 <button class="btn btn-outline-secondary" id="admin-message-patient">Enviar comunicado</button>
                                 <button class="btn btn-outline-danger" id="admin-delete-patient">Excluir paciente</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab-professionals">
+                <div class="card shadow-sm border-0 p-4 mb-4">
+                    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center mb-3">
+                        <div>
+                            <h4 class="mb-1">Gestão de profissionais</h4>
+                            <p class="text-muted mb-0">Verifique especialidades, credenciais e status.</p>
+                        </div>
+                        <div class="d-flex gap-2 mt-3 mt-lg-0">
+                            <button class="btn btn-outline-secondary" id="admin-prof-export-csv">Exportar CSV</button>
+                            <button class="btn btn-outline-secondary" id="admin-prof-export-pdf">Exportar PDF</button>
+                        </div>
+                    </div>
+
+                    <form class="row g-3 align-items-end" id="admin-professional-filters">
+                        <div class="col-md-4">
+                            <label class="form-label">Busca</label>
+                            <input type="text" class="form-control" name="search" placeholder="Nome ou email">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Especialidade</label>
+                            <select class="form-select" name="category">
+                                <option value="">Todas</option>
+                                <option value="psicanalista">Psicanalistas</option>
+                                <option value="coach">Coaches</option>
+                                <option value="terapeuta-integrativo">Terapeutas integrativos</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Status de verificação</label>
+                            <select class="form-select" name="status">
+                                <option value="">Todos</option>
+                                <option value="pendente">Pendente</option>
+                                <option value="aprovado">Aprovado</option>
+                                <option value="rejeitado">Rejeitado</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div class="card shadow-sm border-0 p-4">
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Profissional</th>
+                                        <th>Especialidade</th>
+                                        <th>Avaliação</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="admin-professionals-table">
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted py-4">
+                                            Carregando profissionais...
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card shadow-sm border-0 p-4">
+                            <h5 class="mb-3">Detalhes do profissional</h5>
+                            <div id="admin-professional-details" class="text-muted">
+                                Selecione um profissional para ver os detalhes.
+                            </div>
+                            <div class="mt-4 d-flex flex-column gap-2">
+                                <button class="btn btn-outline-secondary" id="admin-prof-approve">Aprovar</button>
+                                <button class="btn btn-outline-secondary" id="admin-prof-reject">Rejeitar</button>
+                                <button class="btn btn-outline-secondary" id="admin-prof-message">Enviar comunicado</button>
                             </div>
                         </div>
                     </div>

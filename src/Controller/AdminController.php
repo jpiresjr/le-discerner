@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\PatientRepository;
+use App\Repository\ProfessionalRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -121,6 +122,41 @@ class AdminController extends AbstractController
 
         return $this->json([
             'patients' => $payload,
+        ]);
+    }
+
+    #[Route('/professionals', methods: ['GET'])]
+    public function professionals(Request $request, ProfessionalRepository $professionalRepository): JsonResponse
+    {
+        $filters = [
+            'search' => trim((string) $request->query->get('search')),
+            'category' => $request->query->get('category'),
+            'status' => $request->query->get('status'),
+        ];
+
+        $professionals = $professionalRepository->search($filters);
+        $payload = [];
+
+        foreach ($professionals as $professional) {
+            $user = $professional->getUser();
+            $payload[] = [
+                'id' => $professional->getId(),
+                'fullName' => $user->getFullName(),
+                'email' => $user->getEmail(),
+                'category' => $professional->getSpecialtyCategory(),
+                'specialty' => $professional->getExpertise(),
+                'verificationStatus' => $professional->getVerificationStatus() ?? 'pendente',
+                'ratingAverage' => $professional->getRatingAverage(),
+                'ratingCount' => $professional->getRatingCount(),
+                'financialHistory' => $professional->getFinancialHistory(),
+                'credentials' => $professional->getCredentials(),
+                'certifications' => $professional->getCertifications(),
+                'verificationDocs' => $professional->getVerificationDocs(),
+            ];
+        }
+
+        return $this->json([
+            'professionals' => $payload,
         ]);
     }
 }

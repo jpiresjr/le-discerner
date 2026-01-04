@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -85,6 +86,24 @@ class AuthController extends AbstractController
 
         // 🔑 LOGIN AUTOMÁTICO
         $token = $authService->login($data['email'], $data['password']);
+
+        if (!$request->isXmlHttpRequest() && str_contains((string) $request->headers->get('Accept'), 'text/html')) {
+            $redirectUrl = $role === User::ROLE_PROFESSIONAL ? '/ad-details.php' : '/dashboard/patient';
+            $response = new RedirectResponse($redirectUrl);
+            $response->headers->setCookie(new Cookie(
+                'AUTH_TOKEN',
+                $token,
+                time() + 86400,
+                '/',
+                null,
+                $request->isSecure(),
+                true,
+                false,
+                Cookie::SAMESITE_STRICT
+            ));
+
+            return $response;
+        }
 
         return $this->json([
             'message' => 'User created',

@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\PatientRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/api/admin')]
@@ -79,6 +81,46 @@ class AdminController extends AbstractController
             'growth' => array_values($growthBuckets),
             'upcomingAppointments' => [],
             'alerts' => $alerts,
+        ]);
+    }
+
+    #[Route('/patients', methods: ['GET'])]
+    public function patients(Request $request, PatientRepository $patientRepository): JsonResponse
+    {
+        $filters = [
+            'search' => trim((string) $request->query->get('search')),
+            'therapyType' => $request->query->get('therapyType'),
+            'status' => $request->query->get('status'),
+            'dateFrom' => $request->query->get('dateFrom'),
+            'dateTo' => $request->query->get('dateTo'),
+        ];
+
+        $patients = $patientRepository->search($filters);
+        $payload = [];
+
+        foreach ($patients as $patient) {
+            $user = $patient->getUser();
+            $payload[] = [
+                'id' => $patient->getId(),
+                'fullName' => $user->getFullName(),
+                'email' => $user->getEmail(),
+                'phone' => $user->getContact(),
+                'therapyType' => $patient->getTherapyType(),
+                'status' => $patient->getStatus() ?? 'ativo',
+                'createdAt' => $user->getCreatedAt()->format('Y-m-d'),
+                'details' => [
+                    'username' => $user->getUsername(),
+                    'country' => $user->getCountry(),
+                    'whatsapp' => $user->isWhatsapp(),
+                    'telegram' => $user->isTelegram(),
+                    'gender' => $patient->getGender(),
+                    'language' => $patient->getLanguage(),
+                ],
+            ];
+        }
+
+        return $this->json([
+            'patients' => $payload,
         ]);
     }
 }

@@ -13,7 +13,23 @@
 <section class="dashboard-content py-5 bg-light">
     <div class="container-fluid px-lg-5">
 
-        <div class="row g-4 mb-5">
+        <ul class="nav nav-pills justify-content-center mb-5" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-overview">
+                    Visão Geral
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-patients">
+                    Pacientes
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+
+            <div class="tab-pane fade show active" id="tab-overview">
+                <div class="row g-4 mb-5">
             <div class="col-md-4">
                 <div class="card shadow-sm border-0 p-4 h-100">
                     <div class="text-muted">Usuários cadastrados</div>
@@ -96,6 +112,100 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab-patients">
+                <div class="card shadow-sm border-0 p-4 mb-4">
+                    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center mb-3">
+                        <div>
+                            <h4 class="mb-1">Gestão de pacientes</h4>
+                            <p class="text-muted mb-0">Gerencie cadastros, status e comunicações.</p>
+                        </div>
+                        <div class="d-flex gap-2 mt-3 mt-lg-0">
+                            <button class="btn btn-outline-secondary" id="admin-export-csv">Exportar CSV</button>
+                            <button class="btn btn-outline-secondary" id="admin-export-pdf">Exportar PDF</button>
+                            <button class="btn btn-ipg-cta" id="admin-create-patient">Cadastrar paciente</button>
+                        </div>
+                    </div>
+
+                    <form class="row g-3 align-items-end" id="admin-patient-filters">
+                        <div class="col-md-4">
+                            <label class="form-label">Busca</label>
+                            <input type="text" class="form-control" name="search" placeholder="Nome, email ou telefone">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Tipo de terapia</label>
+                            <select class="form-select" name="therapyType">
+                                <option value="">Todos</option>
+                                <option value="psicanalise">Psicanálise</option>
+                                <option value="terapia-integrativa">Terapia Integrativa</option>
+                                <option value="coaching">Coaching</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" name="status">
+                                <option value="">Todos</option>
+                                <option value="ativo">Ativo</option>
+                                <option value="inativo">Inativo</option>
+                                <option value="bloqueado">Bloqueado</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Cadastro (de)</label>
+                            <input type="date" class="form-control" name="dateFrom">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Cadastro (até)</label>
+                            <input type="date" class="form-control" name="dateTo">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div class="card shadow-sm border-0 p-4">
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Paciente</th>
+                                        <th>Contato</th>
+                                        <th>Terapia</th>
+                                        <th>Status</th>
+                                        <th>Cadastro</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="admin-patients-table">
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted py-4">
+                                            Carregando pacientes...
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card shadow-sm border-0 p-4">
+                            <h5 class="mb-3">Detalhes do paciente</h5>
+                            <div id="admin-patient-details" class="text-muted">
+                                Selecione um paciente na lista para visualizar os detalhes.
+                            </div>
+                            <div class="mt-4 d-flex flex-column gap-2">
+                                <button class="btn btn-outline-secondary" id="admin-edit-patient">Editar paciente</button>
+                                <button class="btn btn-outline-secondary" id="admin-toggle-patient">Bloquear/Desbloquear</button>
+                                <button class="btn btn-outline-secondary" id="admin-message-patient">Enviar comunicado</button>
+                                <button class="btn btn-outline-danger" id="admin-delete-patient">Excluir paciente</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>

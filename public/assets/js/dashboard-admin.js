@@ -1,5 +1,18 @@
 const tableBody = document.getElementById('admin-users-table');
 const refreshButton = document.getElementById('admin-refresh');
+const patientTable = document.getElementById('admin-patients-table');
+const patientDetails = document.getElementById('admin-patient-details');
+const patientFilters = document.getElementById('admin-patient-filters');
+const exportCsvButton = document.getElementById('admin-export-csv');
+const exportPdfButton = document.getElementById('admin-export-pdf');
+const createPatientButton = document.getElementById('admin-create-patient');
+const editPatientButton = document.getElementById('admin-edit-patient');
+const togglePatientButton = document.getElementById('admin-toggle-patient');
+const messagePatientButton = document.getElementById('admin-message-patient');
+const deletePatientButton = document.getElementById('admin-delete-patient');
+
+let cachedPatients = [];
+let selectedPatient = null;
 
 const renderUsers = (users = []) => {
     if (!tableBody) return;
@@ -35,6 +48,172 @@ const renderUsers = (users = []) => {
     }).join('');
 };
 
+const formatStatusBadge = (status) => {
+    const normalized = (status || 'ativo').toLowerCase();
+    const map = {
+        ativo: 'success',
+        inativo: 'secondary',
+        bloqueado: 'danger',
+    };
+    const tone = map[normalized] || 'secondary';
+    return `<span class="badge bg-${tone}">${normalized}</span>`;
+};
+
+const renderPatients = (patients = []) => {
+    if (!patientTable) return;
+
+    cachedPatients = patients;
+    selectedPatient = null;
+
+    if (!patients.length) {
+        patientTable.innerHTML = `
+            <tr>
+                <td colspan="6" class="text-center text-muted py-4">
+                    Nenhum paciente encontrado.
+                </td>
+            </tr>
+        `;
+        if (patientDetails) {
+            patientDetails.textContent = 'Nenhum paciente selecionado.';
+        }
+        return;
+    }
+
+    patientTable.innerHTML = patients.map((patient) => `
+        <tr data-patient-id="${patient.id}">
+            <td>${patient.id}</td>
+            <td>
+                <div class="fw-semibold">${patient.fullName || '-'}</div>
+                <div class="text-muted small">${patient.email || '-'}</div>
+            </td>
+            <td>${patient.phone || '-'}</td>
+            <td>${patient.therapyType || '-'}</td>
+            <td>${formatStatusBadge(patient.status)}</td>
+            <td>${patient.createdAt || '-'}</td>
+        </tr>
+    `).join('');
+
+    patientTable.querySelectorAll('tr[data-patient-id]').forEach((row) => {
+        row.addEventListener('click', () => {
+            const id = Number(row.dataset.patientId);
+            const target = cachedPatients.find((patient) => patient.id === id);
+            if (target) {
+                selectedPatient = target;
+                renderPatientDetails(target);
+            }
+        });
+    });
+};
+
+const renderPatientDetails = (patient) => {
+    if (!patientDetails) return;
+
+    const details = patient.details || {};
+    patientDetails.innerHTML = `
+        <div class="mb-3">
+            <div class="fw-semibold">${patient.fullName || '-'}</div>
+            <div class="text-muted small">${patient.email || '-'}</div>
+        </div>
+        <div class="mb-2"><strong>Telefone:</strong> ${patient.phone || '-'}</div>
+        <div class="mb-2"><strong>Usuário:</strong> ${details.username || '-'}</div>
+        <div class="mb-2"><strong>País:</strong> ${details.country || '-'}</div>
+        <div class="mb-2"><strong>Gênero:</strong> ${details.gender || '-'}</div>
+        <div class="mb-2"><strong>Idioma:</strong> ${details.language || '-'}</div>
+        <div class="mb-2"><strong>WhatsApp:</strong> ${details.whatsapp ? 'Sim' : 'Não'}</div>
+        <div class="mb-2"><strong>Telegram:</strong> ${details.telegram ? 'Sim' : 'Não'}</div>
+        <div class="mb-2"><strong>Status:</strong> ${patient.status || 'ativo'}</div>
+        <div class="mb-2"><strong>Tipo de terapia:</strong> ${patient.therapyType || '-'}</div>
+    `;
+};
+
+const loadPatients = async () => {
+    if (!patientTable) return;
+
+    const params = new URLSearchParams();
+    if (patientFilters) {
+        new FormData(patientFilters).forEach((value, key) => {
+            if (value) params.append(key, value.toString());
+        });
+    }
+
+    try {
+        const response = await fetch(`/api/admin/patients?${params.toString()}`, {
+            headers: {
+                'Accept': 'application/json',
+            },
+            credentials: 'same-origin',
+        });
+
+        if (!response.ok) {
+            throw new Error('Não foi possível carregar os pacientes.');
+        }
+
+        const data = await response.json();
+        renderPatients(data.patients || []);
+    } catch (error) {
+        if (patientTable) {
+            patientTable.innerHTML = `
+                <tr>
+                    <td colspan="6" class="text-center text-danger py-4">
+                        ${error.message}
+                    </td>
+                </tr>
+            `;
+        }
+    }
+};
+
+const exportPatientsCsv = () => {
+    if (!cachedPatients.length) return;
+    const header = ['ID', 'Nome', 'Email', 'Telefone', 'Terapia', 'Status', 'Cadastro'];
+    const rows = cachedPatients.map((patient) => [
+        patient.id,
+        patient.fullName || '',
+        patient.email || '',
+        patient.phone || '',
+        patient.therapyType || '',
+        patient.status || '',
+        patient.createdAt || '',
+    ]);
+    const csv = [header, ...rows].map((row) => row.map((value) => `"${String(value).replace(/"/g, '""')}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'pacientes.csv';
+    link.click();
+    URL.revokeObjectURL(url);
+};
+
+const exportPatientsPdf = () => {
+    if (!cachedPatients.length) return;
+    const popup = window.open('', '_blank');
+    if (!popup) return;
+    const rows = cachedPatients.map((patient) => `
+        <tr>
+            <td>${patient.id}</td>
+            <td>${patient.fullName || '-'}</td>
+            <td>${patient.email || '-'}</td>
+            <td>${patient.phone || '-'}</td>
+            <td>${patient.therapyType || '-'}</td>
+            <td>${patient.status || '-'}</td>
+            <td>${patient.createdAt || '-'}</td>
+        </tr>
+    `).join('');
+    popup.document.write(`
+        <html><head><title>Pacientes</title></head>
+        <body>
+        <h2>Lista de pacientes</h2>
+        <table border="1" cellspacing="0" cellpadding="6">
+            <thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Telefone</th><th>Terapia</th><th>Status</th><th>Cadastro</th></tr></thead>
+            <tbody>${rows}</tbody>
+        </table>
+        </body></html>
+    `);
+    popup.document.close();
+    popup.focus();
+    popup.print();
+};
 const renderGrowthChart = (data = []) => {
     const container = document.getElementById('admin-growth-chart');
     if (!container) return;
@@ -155,3 +334,21 @@ if (refreshButton) {
 }
 
 loadOverview();
+
+if (patientFilters) {
+    patientFilters.addEventListener('change', loadPatients);
+    patientFilters.addEventListener('submit', (event) => {
+        event.preventDefault();
+        loadPatients();
+    });
+}
+
+if (exportCsvButton) exportCsvButton.addEventListener('click', exportPatientsCsv);
+if (exportPdfButton) exportPdfButton.addEventListener('click', exportPatientsPdf);
+if (createPatientButton) createPatientButton.addEventListener('click', () => alert('Cadastro de paciente em implementação.'));
+if (editPatientButton) editPatientButton.addEventListener('click', () => alert('Edição de paciente em implementação.'));
+if (togglePatientButton) togglePatientButton.addEventListener('click', () => alert('Bloqueio/desbloqueio em implementação.'));
+if (messagePatientButton) messagePatientButton.addEventListener('click', () => alert('Envio de comunicados em implementação.'));
+if (deletePatientButton) deletePatientButton.addEventListener('click', () => alert('Exclusão de paciente em implementação.'));
+
+loadPatients();

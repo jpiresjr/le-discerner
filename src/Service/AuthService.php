@@ -23,20 +23,6 @@ class AuthService
             return null;
         }
 
-        if (!$this->hasher->isPasswordValid($user, $password)) {
-            $storedPassword = $user->getPassword();
-
-            if (password_verify($password, $storedPassword)) {
-                $user->setPassword($this->hasher->hashPassword($user, $password));
-                $this->em->flush();
-            } elseif (hash_equals($storedPassword, $password)) {
-                $user->setPassword($this->hasher->hashPassword($user, $password));
-                $this->em->flush();
-            } else {
-                return null;
-            }
-        }
-
         // ⚠️ ESTE É O PONTO CRÍTICO
         return $this->jwtManager->create($user);
     }

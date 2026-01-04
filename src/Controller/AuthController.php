@@ -105,8 +105,8 @@ class AuthController extends AbstractController
         $identifier = trim((string) ($data['email'] ?? $data['username'] ?? ''));
         $password = (string) ($data['password'] ?? '');
 
-        if ($identifier === '' || $password === '') {
-            return $this->json(['error' => 'Email/usuário e senha são obrigatórios'], Response::HTTP_BAD_REQUEST);
+        if ($identifier === '') {
+            return $this->json(['error' => 'Email/usuário é obrigatório'], Response::HTTP_BAD_REQUEST);
         }
 
         $token = $authService->login($identifier, $password);

@@ -21,6 +21,9 @@ class Professional
     #[ORM\Column(type: "boolean")]
     private bool $paymentCompleted = false;
 
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    private ?string $expertise = null;
+
     public function getId(): ?int { return $this->id; }
 
     public function getUser(): User { return $this->user; }
@@ -28,4 +31,7 @@ class Professional
 
     public function isPaymentCompleted(): bool { return $this->paymentCompleted; }
     public function setPaymentCompleted(bool $done): self { $this->paymentCompleted = $done; return $this; }
+
+    public function getExpertise(): ?string { return $this->expertise; }
+    public function setExpertise(?string $expertise): self { $this->expertise = $expertise; return $this; }
 }

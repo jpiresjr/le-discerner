@@ -1,25 +1,69 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const DEMO = true;
+document.addEventListener('DOMContentLoaded', async () => {
+    const fields = {
+        fullName: document.getElementById('pro-fullName'),
+        username: document.getElementById('pro-username'),
+        email: document.getElementById('pro-email'),
+        country: document.getElementById('pro-country'),
+        contact: document.getElementById('pro-contact'),
+        expertise: document.getElementById('pro-expertise'),
+        preferences: document.getElementById('pro-contact-preferences'),
+        paymentStatus: document.getElementById('pro-payment-status'),
+        paymentHint: document.getElementById('pro-payment-hint'),
+    };
 
-    const user = DEMO ? {
-        name: "Dr. Maria Conte",
-        avatar: "/images/default-avatar.png",
-        stats: {
-            patients: 32,
-            appointments: 14,
-            earnings: 1450
+    try {
+        const res = await fetch('/api/professionals/me', {
+            headers: {
+                'Accept': 'application/json',
+            },
+            credentials: 'same-origin',
+        });
+
+        if (!res.ok) {
+            throw new Error('Não foi possível carregar seus dados.');
         }
-    } : null;
 
-    document.getElementById("user-name").textContent = user.name;
-    document.getElementById("user-avatar").src = user.avatar;
+        const data = await res.json();
+        const user = data.user || {};
 
-    document.getElementById("count-patients").textContent = user.stats.patients;
-    document.getElementById("count-appointments").textContent = user.stats.appointments;
-    document.getElementById("count-earnings").textContent = user.stats.earnings;
+        if (fields.fullName) fields.fullName.value = user.fullName || '';
+        if (fields.username) fields.username.value = user.username || '';
+        if (fields.email) fields.email.value = user.email || '';
+        if (fields.country) fields.country.value = user.country || '';
+        if (fields.contact) fields.contact.value = user.contact || '';
+        if (fields.expertise) fields.expertise.value = data.expertise || '';
 
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-        localStorage.removeItem("jwt_token");
-        window.location.href = "/login.html";
-    });
+        if (fields.preferences) {
+            fields.preferences.innerHTML = '';
+            const prefs = [];
+            if (user.whatsapp) prefs.push('WhatsApp');
+            if (user.telegram) prefs.push('Telegram');
+            if (!prefs.length) prefs.push('Sem preferência');
+            prefs.forEach((label) => {
+                const badge = document.createElement('span');
+                badge.className = 'badge bg-secondary';
+                badge.textContent = label;
+                fields.preferences.appendChild(badge);
+            });
+        }
+
+        if (fields.paymentStatus) {
+            const paid = Boolean(data.paymentCompleted);
+            fields.paymentStatus.className = `badge ${paid ? 'bg-success' : 'bg-warning text-dark'}`;
+            fields.paymentStatus.textContent = paid ? 'Ativo' : 'Pagamento pendente';
+            if (fields.paymentHint) {
+                fields.paymentHint.textContent = paid
+                    ? 'Sua assinatura está ativa.'
+                    : 'Finalize o pagamento para liberar todos os recursos.';
+            }
+        }
+    } catch (error) {
+        if (fields.paymentStatus) {
+            fields.paymentStatus.className = 'badge bg-danger';
+            fields.paymentStatus.textContent = 'Erro ao carregar';
+        }
+        if (fields.paymentHint) {
+            fields.paymentHint.textContent = 'Faça login novamente para continuar.';
+        }
+    }
 });

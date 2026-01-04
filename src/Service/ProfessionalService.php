@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Professional;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProfessionalService
@@ -11,12 +12,11 @@ class ProfessionalService
         private EntityManagerInterface $em
     ) {}
 
-    public function create(array $data): Professional
+    public function create(array $data, User $user): Professional
     {
         $p = new Professional();
-
-        $p->setFirstName($data['firstName'] ?? '');
-
+        $p->setUser($user);
+        $p->setExpertise($data['expertise'] ?? null);
 
         $this->em->persist($p);
         $this->em->flush();
@@ -26,13 +26,10 @@ class ProfessionalService
 
     public function update(Professional $p, array $data): Professional
     {
-        $p->setFirstName($data['firstName'] ?? $p->getFirstName());
-        $p->setLastName($data['lastName'] ?? $p->getLastName());
-        $p->setUsername($data['username'] ?? $p->getUsername());
-        $p->setEmail($data['email'] ?? $p->getEmail());
-        $p->setCountry($data['country'] ?? $p->getCountry());
-        $p->setPhone($data['phone'] ?? $p->getPhone());
-        $p->setWhatsapp($data['whatsapp'] ?? $p->getWhatsapp());
+        $p->setExpertise($data['expertise'] ?? $p->getExpertise());
+        if (array_key_exists('paymentCompleted', $data)) {
+            $p->setPaymentCompleted((bool) $data['paymentCompleted']);
+        }
 
         $this->em->flush();
 

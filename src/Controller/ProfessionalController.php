@@ -23,9 +23,13 @@ class ProfessionalController extends AbstractController
     #[Route('', methods: ['POST'])]
     public function create(Request $request, ProfessionalService $service): JsonResponse
     {
-        dd('teetet');
         $data = json_decode($request->getContent(), true);
-        $professional = $service->create($data);
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->json(['error' => 'Unauthenticated'], 401);
+        }
+
+        $professional = $service->create($data ?? [], $user);
 
         return $this->json($professional, 201);
     }
@@ -59,5 +63,36 @@ class ProfessionalController extends AbstractController
         $em->flush();
 
         return $this->json(['message' => 'Professional removed']);
+    }
+
+    #[Route('/me', methods: ['GET'])]
+    public function me(ProfessionalRepository $repo): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->json(['error' => 'Unauthenticated'], 401);
+        }
+
+        $professional = $repo->findOneByUser($user);
+        if (!$professional) {
+            return $this->json(['error' => 'Professional profile not found'], 404);
+        }
+
+        return $this->json([
+            'id' => $professional->getId(),
+            'expertise' => $professional->getExpertise(),
+            'paymentCompleted' => $professional->isPaymentCompleted(),
+            'user' => [
+                'id' => $user->getId(),
+                'fullName' => $user->getFullName(),
+                'username' => $user->getUsername(),
+                'email' => $user->getEmail(),
+                'country' => $user->getCountry(),
+                'contact' => $user->getContact(),
+                'whatsapp' => $user->isWhatsapp(),
+                'telegram' => $user->isTelegram(),
+                'roles' => $user->getRoles(),
+            ],
+        ]);
     }
 }

@@ -78,10 +78,13 @@ class ProfessionalController extends AbstractController
             return $this->json(['error' => 'Professional profile not found'], 404);
         }
 
+        $adDetails = $professional->getAdDetails();
+
         return $this->json([
             'id' => $professional->getId(),
             'expertise' => $professional->getExpertise(),
             'paymentCompleted' => $professional->isPaymentCompleted(),
+            'adDetails' => $adDetails ? json_decode($adDetails, true) : null,
             'user' => [
                 'id' => $user->getId(),
                 'fullName' => $user->getFullName(),
@@ -94,5 +97,32 @@ class ProfessionalController extends AbstractController
                 'roles' => $user->getRoles(),
             ],
         ]);
+    }
+
+    #[Route('/ad-details', methods: ['POST'])]
+    public function saveAdDetails(
+        Request $request,
+        ProfessionalRepository $repo,
+        EntityManagerInterface $em
+    ): JsonResponse {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->json(['error' => 'Unauthenticated'], 401);
+        }
+
+        $professional = $repo->findOneByUser($user);
+        if (!$professional) {
+            return $this->json(['error' => 'Professional profile not found'], 404);
+        }
+
+        $data = json_decode($request->getContent(), true);
+        if (!is_array($data)) {
+            $data = $request->request->all();
+        }
+
+        $professional->setAdDetails(json_encode($data, JSON_UNESCAPED_UNICODE));
+        $em->flush();
+
+        return $this->json(['success' => true]);
     }
 }

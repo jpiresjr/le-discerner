@@ -17,6 +17,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         adSpecialty: document.getElementById('ad-specialty'),
     };
 
+    const adForm = document.getElementById('professionalAdEditForm');
+    const adFormFields = adForm
+        ? Object.fromEntries(Array.from(adForm.elements).filter((el) => el.name).map((el) => [el.name, el]))
+        : {};
+
     try {
         const res = await fetch('/api/professionals/me', {
             headers: {
@@ -38,14 +43,35 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (fields.country) fields.country.value = user.country || '';
         if (fields.contact) fields.contact.value = user.contact || '';
         if (fields.expertise) fields.expertise.value = data.expertise || '';
-        if (fields.adFullName) fields.adFullName.textContent = user.fullName || 'Não informado';
-        if (fields.adEmail) fields.adEmail.textContent = user.email || 'Não informado';
-        if (fields.adPhone) fields.adPhone.textContent = user.contact || 'Não informado';
+
+        const adDetails = data.adDetails || {};
+        const adDefaults = {
+            fullName: user.fullName || '',
+            email: user.email || '',
+            phone: user.contact || '',
+            whatsapp: user.whatsapp ? user.contact || '' : '',
+            country: user.country || '',
+            specialty: data.expertise || '',
+        };
+
+        const mergedAd = { ...adDefaults, ...adDetails };
+
+        if (fields.adFullName) fields.adFullName.textContent = mergedAd.fullName || 'Não informado';
+        if (fields.adEmail) fields.adEmail.textContent = mergedAd.email || 'Não informado';
+        if (fields.adPhone) fields.adPhone.textContent = mergedAd.phone || 'Não informado';
         if (fields.adWhatsapp) {
-            fields.adWhatsapp.textContent = user.whatsapp ? user.contact || 'WhatsApp habilitado' : 'Não informado';
+            fields.adWhatsapp.textContent = mergedAd.whatsapp || 'Não informado';
         }
-        if (fields.adCountry) fields.adCountry.textContent = user.country || 'Não informado';
-        if (fields.adSpecialty) fields.adSpecialty.textContent = data.expertise || 'Não informado';
+        if (fields.adCountry) fields.adCountry.textContent = mergedAd.country || 'Não informado';
+        if (fields.adSpecialty) fields.adSpecialty.textContent = mergedAd.specialty || 'Não informado';
+
+        if (adForm) {
+            Object.entries(adFormFields).forEach(([key, field]) => {
+                if (mergedAd[key] !== undefined && field) {
+                    field.value = mergedAd[key] ?? '';
+                }
+            });
+        }
 
         if (fields.preferences) {
             fields.preferences.innerHTML = '';
@@ -79,5 +105,40 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (fields.paymentHint) {
             fields.paymentHint.textContent = 'Faça login novamente para continuar.';
         }
+    }
+
+    if (adForm) {
+        adForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const payload = Object.fromEntries(new FormData(adForm).entries());
+
+            try {
+                const response = await fetch('/api/professionals/ad-details', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify(payload),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Não foi possível salvar o anúncio.');
+                }
+
+                if (fields.adFullName) fields.adFullName.textContent = payload.fullName || 'Não informado';
+                if (fields.adEmail) fields.adEmail.textContent = payload.email || 'Não informado';
+                if (fields.adPhone) fields.adPhone.textContent = payload.phone || 'Não informado';
+                if (fields.adWhatsapp) fields.adWhatsapp.textContent = payload.whatsapp || 'Não informado';
+                if (fields.adCountry) fields.adCountry.textContent = payload.country || 'Não informado';
+                if (fields.adSpecialty) fields.adSpecialty.textContent = payload.specialty || 'Não informado';
+
+                alert('✅ Anúncio atualizado com sucesso!');
+            } catch (error) {
+                alert(error.message);
+            }
+        });
     }
 });

@@ -251,11 +251,9 @@ ob_start();
 </main>
 
 <script>
-    // Validação e interatividade básica
-    document.getElementById('professionalAdForm').addEventListener('submit', function(e) {
+    document.getElementById('professionalAdForm').addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        // Validação básica
         const requiredFields = this.querySelectorAll('[required]');
         let isValid = true;
 
@@ -268,10 +266,31 @@ ob_start();
             }
         });
 
-        if (isValid) {
-            alert('Formulário validado com sucesso! (funcionalidade a ser implementada)');
-        } else {
+        if (!isValid) {
             alert('Por favor, preencha todos os campos obrigatórios.');
+            return;
+        }
+
+        const payload = Object.fromEntries(new FormData(this).entries());
+
+        try {
+            const response = await fetch('/api/professionals/ad-details', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error('Não foi possível salvar o anúncio.');
+            }
+
+            window.location.href = '/dashboard/professional/payment';
+        } catch (error) {
+            alert(error.message);
         }
     });
 </script>

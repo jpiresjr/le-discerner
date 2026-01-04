@@ -91,9 +91,7 @@
                                 Revise as informações que aparecem no seu perfil público.
                             </p>
                         </div>
-                        <a class="btn btn-outline-secondary mt-3 mt-lg-0" href="/ad-details.php">
-                            Editar anúncio
-                        </a>
+                        <span class="badge bg-light text-dark mt-3 mt-lg-0">Editar nesta aba</span>
                     </div>
 
                     <div class="row g-4">
@@ -229,6 +227,103 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="card shadow-sm border-0 p-5 mx-auto" style="max-width:1200px;">
+                    <h4 class="mb-4">Editar anúncio</h4>
+                    <form id="professionalAdEditForm" class="row g-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Nome completo</label>
+                            <input class="form-control" name="fullName">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email de contato</label>
+                            <input class="form-control" name="email" type="email">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Telefone</label>
+                            <input class="form-control" name="phone">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">WhatsApp</label>
+                            <input class="form-control" name="whatsapp">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Naturalidade</label>
+                            <input class="form-control" name="naturality">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Idade</label>
+                            <input class="form-control" name="age" type="number">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Formação acadêmica</label>
+                            <input class="form-control" name="education">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Especialidade</label>
+                            <input class="form-control" name="specialty">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Tempo de carreira</label>
+                            <input class="form-control" name="experience">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Valor da consulta</label>
+                            <input class="form-control" name="price">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Duração (min)</label>
+                            <input class="form-control" name="duration">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Categoria</label>
+                            <input class="form-control" name="category">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Especialidade da consulta</label>
+                            <input class="form-control" name="consultationSpecialty">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Gênero atendido</label>
+                            <input class="form-control" name="gender">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Portfólio</label>
+                            <input class="form-control" name="portfolio">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Redes sociais</label>
+                            <input class="form-control" name="socialMedia">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">País</label>
+                            <input class="form-control" name="country">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Endereço</label>
+                            <input class="form-control" name="address">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Localização</label>
+                            <input class="form-control" name="location">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Horário de funcionamento</label>
+                            <input class="form-control" name="workingHours">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Fuso horário</label>
+                            <input class="form-control" name="timezone">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Descrição</label>
+                            <textarea class="form-control" name="description" rows="4"></textarea>
+                        </div>
+                        <div class="col-12 d-flex justify-content-end">
+                            <button class="btn btn-ipg-cta" type="submit">Salvar alterações</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 

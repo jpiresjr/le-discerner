@@ -48,6 +48,9 @@ class Professional
     #[ORM\Column(type: "text", nullable: true)]
     private ?string $financialHistory = null;
 
+    #[ORM\Column(type: "text", nullable: true)]
+    private ?string $adDetails = null;
+
     public function getId(): ?int { return $this->id; }
 
     public function getUser(): User { return $this->user; }
@@ -82,4 +85,7 @@ class Professional
 
     public function getFinancialHistory(): ?string { return $this->financialHistory; }
     public function setFinancialHistory(?string $financialHistory): self { $this->financialHistory = $financialHistory; return $this; }
+
+    public function getAdDetails(): ?string { return $this->adDetails; }
+    public function setAdDetails(?string $adDetails): self { $this->adDetails = $adDetails; return $this; }
 }

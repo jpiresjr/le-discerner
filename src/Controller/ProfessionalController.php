@@ -34,13 +34,13 @@ class ProfessionalController extends AbstractController
         return $this->json($professional, 201);
     }
 
-    #[Route('/{id}', methods: ['GET'])]
+    #[Route('/{id}', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function getOne(Professional $professional): JsonResponse
     {
         return $this->json($professional);
     }
 
-    #[Route('/{id}', methods: ['PUT'])]
+    #[Route('/{id}', requirements: ['id' => '\d+'], methods: ['PUT'])]
     public function update(
         Professional $professional,
         Request $request,
@@ -53,7 +53,7 @@ class ProfessionalController extends AbstractController
         return $this->json($updated);
     }
 
-    #[Route('/{id}', methods: ['DELETE'])]
+    #[Route('/{id}', requirements: ['id' => '\d+'], methods: ['DELETE'])]
     public function delete(
         Professional $professional,
         EntityManagerInterface $em

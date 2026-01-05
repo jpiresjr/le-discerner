@@ -58,7 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Cookie é setado automaticamente pelo servidor
             // Redireciona para dashboard
             setTimeout(() => {
-                window.location.href = '/dashboard/patient';
+                const roles = Array.isArray(data.user?.roles) ? data.user.roles : [];
+                if (roles.includes('ROLE_ADMIN')) {
+                    window.location.href = '/dashboard/admin';
+                } else if (roles.includes('ROLE_PROFESSIONAL')) {
+                    window.location.href = '/dashboard/professional';
+                } else {
+                    window.location.href = '/dashboard/patient';
+                }
             }, 500);
 
         } catch (error) {

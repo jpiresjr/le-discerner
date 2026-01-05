@@ -26,12 +26,16 @@ security:
             provider: app_user_provider
             jwt: ~
 
-        main:
-            pattern: ^/
+        secured_pages:
+            pattern: ^/(dashboard|ad-details\.php)
             stateless: false
             provider: app_user_provider
             jwt: ~
             lazy: true
+
+        main:
+            pattern: ^/
+            security: false
 
     access_control:
         - { path: ^/api/auth/(login|register), roles: PUBLIC_ACCESS }

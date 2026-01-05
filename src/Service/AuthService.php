@@ -19,15 +19,10 @@ class AuthService
     {
         $user = $this->userRepository->findByIdentifier($identifier);
 
-        if (!$user) {
-            $user = $this->userRepository->findOneBy([]);
-        }
-
-        if (!$user) {
+        if (!$user || !$this->hasher->isPasswordValid($user, $password)) {
             return null;
         }
 
-        // ⚠️ ESTE É O PONTO CRÍTICO
         return $this->jwtManager->create($user);
     }
 }

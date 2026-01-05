@@ -26,16 +26,18 @@ security:
             provider: app_user_provider
             jwt: ~
 
-        dashboard:
-            pattern: ^/dashboard
-            stateless: false  # ← IMPORTANTE: false para cookies
+        main:
+            pattern: ^/
+            stateless: false
             provider: app_user_provider
-            jwt: ~  # Lexik vai buscar token no cookie automaticamente
+            jwt: ~
+            lazy: true
 
     access_control:
         - { path: ^/api/auth/(login|register), roles: PUBLIC_ACCESS }
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/register, roles: PUBLIC_ACCESS }
         - { path: ^/$, roles: PUBLIC_ACCESS }
+        - { path: ^/ad-details\.php, roles: ROLE_PROFESSIONAL }
+        - { path: ^/dashboard, roles: ROLE_USER }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/dashboard, roles: PUBLIC_ACCESS }

@@ -1,4 +1,29 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', async () => {
+            const authToken = localStorage.getItem('auth_token');
+            const headers = {
+                'Accept': 'application/json',
+            };
+            if (authToken) {
+                headers.Authorization = `Bearer ${authToken}`;
+            }
+
+            try {
+                await fetch('/api/auth/logout', {
+                    method: 'POST',
+                    headers,
+                    credentials: 'include',
+                });
+            } finally {
+                localStorage.removeItem('auth_token');
+                localStorage.removeItem('user_role');
+                window.location.href = '/';
+            }
+        });
+    }
+
     const fields = {
         fullName: document.getElementById('pro-fullName'),
         username: document.getElementById('pro-username'),

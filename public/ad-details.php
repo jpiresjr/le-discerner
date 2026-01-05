@@ -274,12 +274,18 @@ ob_start();
         const payload = Object.fromEntries(new FormData(this).entries());
 
         try {
+            const authToken = localStorage.getItem('auth_token');
+            const headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            };
+            if (authToken) {
+                headers.Authorization = `Bearer ${authToken}`;
+            }
+
             const response = await fetch('/api/professionals/ad-details', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
+                headers,
                 credentials: 'same-origin',
                 body: JSON.stringify(payload)
             });
@@ -296,8 +302,14 @@ ob_start();
 
     document.addEventListener('DOMContentLoaded', async () => {
         try {
+            const authToken = localStorage.getItem('auth_token');
+            const headers = { 'Accept': 'application/json' };
+            if (authToken) {
+                headers.Authorization = `Bearer ${authToken}`;
+            }
+
             const response = await fetch('/api/professionals/me', {
-                headers: { 'Accept': 'application/json' },
+                headers,
                 credentials: 'include'
             });
 

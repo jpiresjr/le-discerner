@@ -17,10 +17,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         : {};
 
     try {
+        const authToken = localStorage.getItem('auth_token');
+        const headers = {
+            'Accept': 'application/json',
+        };
+        if (authToken) {
+            headers.Authorization = `Bearer ${authToken}`;
+        }
+
         const res = await fetch('/api/professionals/me', {
-            headers: {
-                'Accept': 'application/json',
-            },
+            headers,
             credentials: 'include',
         });
 
@@ -103,11 +109,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             const payload = Object.fromEntries(formData.entries());
 
             try {
+                const authToken = localStorage.getItem('auth_token');
+                const headers = {
+                    'Accept': 'application/json',
+                };
+                if (authToken) {
+                    headers.Authorization = `Bearer ${authToken}`;
+                }
+
                 const response = await fetch('/api/professionals/ad-details', {
                     method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                    },
+                    headers,
                     credentials: 'same-origin',
                     body: formData,
                 });

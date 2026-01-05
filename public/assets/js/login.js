@@ -48,6 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             console.log('✅ Login bem-sucedido!');
+            if (data.token) {
+                localStorage.setItem('auth_token', data.token);
+            }
+            if (data.user?.roles) {
+                localStorage.setItem('user_role', JSON.stringify(data.user.roles));
+            }
 
             // Cookie é setado automaticamente pelo servidor
             // Redireciona para dashboard

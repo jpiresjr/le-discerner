@@ -298,7 +298,7 @@ ob_start();
         try {
             const response = await fetch('/api/professionals/me', {
                 headers: { 'Accept': 'application/json' },
-                credentials: 'same-origin'
+                credentials: 'include'
             });
 
             if (!response.ok) {

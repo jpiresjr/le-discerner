@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             headers: {
                 'Accept': 'application/json',
             },
-            credentials: 'same-origin',
+            credentials: 'include',
         });
 
         if (!res.ok) {

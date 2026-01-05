@@ -507,6 +507,11 @@
             try {
                 const response = await fetch('/api/auth/register', {
                     method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    credentials: 'include',
                     body: new FormData(this)
                 });
 

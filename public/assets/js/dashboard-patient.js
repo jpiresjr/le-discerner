@@ -24,6 +24,44 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    const form = document.querySelector('#tab-account form');
+    if (form) {
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const authToken = localStorage.getItem('auth_token');
+            const headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            };
+            if (authToken) {
+                headers.Authorization = `Bearer ${authToken}`;
+            }
+
+            const payload = Object.fromEntries(new FormData(form).entries());
+            payload.whatsapp = Boolean(form.querySelector('[name="whatsapp"]')?.checked);
+            payload.telegram = Boolean(form.querySelector('[name="telegram"]')?.checked);
+            payload.email_contact = Boolean(form.querySelector('[name="email_contact"]')?.checked);
+
+            try {
+                const response = await fetch('/api/patients/me', {
+                    method: 'PUT',
+                    headers,
+                    credentials: 'include',
+                    body: JSON.stringify(payload),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Não foi possível salvar as alterações.');
+                }
+
+                alert('✅ Dados atualizados com sucesso!');
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+    }
+
     try {
         const authToken = localStorage.getItem('auth_token');
         const headers = {
@@ -48,8 +86,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const user = data.user || {};
         const patient = data.patient || {};
-
-        const form = document.querySelector('#tab-account form');
         if (!form) {
             return;
         }

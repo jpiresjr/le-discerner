@@ -124,15 +124,38 @@ class ProfessionalController extends AbstractController
         $data = is_array($data) ? $data : [];
 
         $files = $request->files->all();
-        foreach (['idDocumentFile' => 'idDocument', 'photoFile' => 'photo', 'councilDocFile' => 'councilDoc'] as $fileKey => $baseKey) {
-            if (isset($files[$fileKey]) && $files[$fileKey] instanceof UploadedFile && $files[$fileKey]->isValid()) {
-                $upload = $this->storeAdDetailsFile($files[$fileKey], $baseKey);
-                $data["{$baseKey}Name"] = $upload['name'];
-                $data["{$baseKey}Path"] = $upload['path'];
-        foreach (['idDocumentFile' => 'idDocumentName', 'photoFile' => 'photoName', 'councilDocFile' => 'councilDocName'] as $fileKey => $nameKey) {
-            if (isset($files[$fileKey]) && $files[$fileKey]->isValid()) {
-                $data[$nameKey] = $files[$fileKey]->getClientOriginalName();
+        try {
+            foreach (['idDocumentFile' => 'idDocument', 'photoFile' => 'photo', 'councilDocFile' => 'councilDoc'] as $fileKey => $baseKey) {
+                if (!isset($files[$fileKey])) {
+                    continue;
+                }
+
+                $filePayload = $files[$fileKey];
+                if (is_array($filePayload)) {
+                    $names = [];
+                    $paths = [];
+                    foreach ($filePayload as $file) {
+                        if ($file instanceof UploadedFile && $file->isValid()) {
+                            $upload = $this->storeAdDetailsFile($file, $baseKey);
+                            $names[] = $upload['name'];
+                            $paths[] = $upload['path'];
+                        }
+                    }
+                    if ($names) {
+                        $data["{$baseKey}Name"] = $names;
+                        $data["{$baseKey}Path"] = $paths;
+                    }
+                    continue;
+                }
+
+                if ($filePayload instanceof UploadedFile && $filePayload->isValid()) {
+                    $upload = $this->storeAdDetailsFile($filePayload, $baseKey);
+                    $data["{$baseKey}Name"] = $upload['name'];
+                    $data["{$baseKey}Path"] = $upload['path'];
+                }
             }
+        } catch (\RuntimeException $exception) {
+            return $this->json(['error' => $exception->getMessage()], 400);
         }
 
         $professional->setAdDetails(json_encode($data, JSON_UNESCAPED_UNICODE));
@@ -145,7 +168,9 @@ class ProfessionalController extends AbstractController
     {
         $uploadDir = $this->getParameter('kernel.project_dir') . '/public/uploads/ad-details';
         if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
+            if (!mkdir($uploadDir, 0755, true) && !is_dir($uploadDir)) {
+                throw new \RuntimeException('Não foi possível criar a pasta de uploads.');
+            }
         }
 
         $originalName = $file->getClientOriginalName();
@@ -153,7 +178,11 @@ class ProfessionalController extends AbstractController
         $safePrefix = preg_replace('/[^a-zA-Z0-9_-]/', '', $prefix);
         $filename = sprintf('%s-%s.%s', $safePrefix, bin2hex(random_bytes(8)), $extension);
 
-        $file->move($uploadDir, $filename);
+        try {
+            $file->move($uploadDir, $filename);
+        } catch (\Exception $exception) {
+            throw new \RuntimeException('Não foi possível salvar o arquivo enviado.');
+        }
 
         return [
             'name' => $originalName,

@@ -156,6 +156,8 @@ class ProfessionalController extends AbstractController
             }
         } catch (\RuntimeException $exception) {
             return $this->json(['error' => $exception->getMessage()], 400);
+        } catch (\Throwable $exception) {
+            return $this->json(['error' => 'Não foi possível salvar o anúncio.'], 500);
         }
 
         $professional->setAdDetails(json_encode($data, JSON_UNESCAPED_UNICODE));
@@ -171,6 +173,9 @@ class ProfessionalController extends AbstractController
             if (!mkdir($uploadDir, 0755, true) && !is_dir($uploadDir)) {
                 throw new \RuntimeException('Não foi possível criar a pasta de uploads.');
             }
+        }
+        if (!is_writable($uploadDir)) {
+            throw new \RuntimeException('A pasta de uploads não tem permissão de escrita.');
         }
 
         $originalName = $file->getClientOriginalName();

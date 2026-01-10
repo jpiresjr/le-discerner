@@ -102,7 +102,7 @@ ob_start();
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Documento do Conselho Profissional</label>
+                        <label class="form-label">Certificado</label>
                         <div class="file-upload-area" onclick="document.getElementById('councilDoc').click()">
                             <i class="bi bi-file-earmark-text"></i>
                             <p class="mb-1">Clique para fazer upload</p>
@@ -204,18 +204,18 @@ ob_start();
                             <option value="outro">Outro</option>
                         </select>
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Endereço *</label>
-                        <input type="text" class="form-control" name="address" required placeholder="Rua, número, bairro">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Localização (Cidade/Estado) *</label>
-                        <input type="text" class="form-control" name="location" required placeholder="Cidade - Estado">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Horário de Funcionamento *</label>
-                        <input type="text" class="form-control" name="workingHours" required placeholder="Ex: Seg-Sex, 9h-18h">
-                    </div>
+<!--                    <div class="col-md-6">-->
+<!--                        <label class="form-label">Endereço *</label>-->
+<!--                        <input type="text" class="form-control" name="address" required placeholder="Rua, número, bairro">-->
+<!--                    </div>-->
+<!--                    <div class="col-md-6">-->
+<!--                        <label class="form-label">Localização (Cidade/Estado) *</label>-->
+<!--                        <input type="text" class="form-control" name="location" required placeholder="Cidade - Estado">-->
+<!--                    </div>-->
+<!--                    <div class="col-md-6">-->
+<!--                        <label class="form-label">Horário de Funcionamento *</label>-->
+<!--                        <input type="text" class="form-control" name="workingHours" required placeholder="Ex: Seg-Sex, 9h-18h">-->
+<!--                    </div>-->
                     <div class="col-md-6">
                         <label class="form-label">Fuso Horário *</label>
                         <select class="form-select" name="timezone" required>

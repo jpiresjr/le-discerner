@@ -172,13 +172,15 @@ class ProfessionalController extends AbstractController
         }
 
         $professional->setAdDetails($payload);
-            return $this->json(['error' => 'Não foi possível salvar o anúncio.'], 500);
-        }
-
-        $professional->setAdDetails(json_encode($data, JSON_UNESCAPED_UNICODE));
         $em->flush();
 
         return $this->json(['success' => true]);
+    }
+
+    #[Route('/ad-details', methods: ['GET'])]
+    public function adDetailsMethodNotAllowed(): JsonResponse
+    {
+        return $this->json(['error' => 'Método não permitido. Use POST para salvar o anúncio.'], 405);
     }
 
     private function storeAdDetailsFile(UploadedFile $file, string $prefix): array
@@ -209,9 +211,6 @@ class ProfessionalController extends AbstractController
             $randomSuffix = uniqid('', true);
         }
         $filename = sprintf('%s-%s.%s', $safePrefix, $randomSuffix, $extension);
-        $extension = $file->guessExtension() ?: $file->getClientOriginalExtension() ?: 'bin';
-        $safePrefix = preg_replace('/[^a-zA-Z0-9_-]/', '', $prefix);
-        $filename = sprintf('%s-%s.%s', $safePrefix, bin2hex(random_bytes(8)), $extension);
 
         try {
             $file->move($uploadDir, $filename);

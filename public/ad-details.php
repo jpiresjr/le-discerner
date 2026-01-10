@@ -44,8 +44,12 @@ ob_start();
             <div class="form-body">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label">Nome Completo *</label>
-                        <input type="text" class="form-control" name="fullName" required placeholder="Digite seu nome completo">
+                        <label class="form-label">First name *</label>
+                        <input type="text" class="form-control" name="firstName" required placeholder="Digite seu primeiro nome">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Last name *</label>
+                        <input type="text" class="form-control" name="lastName" required placeholder="Digite seu sobrenome">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Email de Contato *</label>
@@ -53,7 +57,10 @@ ob_start();
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Número de Telefone *</label>
-                        <input type="tel" class="form-control" name="phone" required placeholder="(11) 99999-9999">
+                        <div class="input-group">
+                            <select id="codigo_pais" class="form-select" name="phoneCountryCode" style="max-width:120px;"></select>
+                            <input type="tel" class="form-control" name="phone" required placeholder="(11) 99999-9999">
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">WhatsApp</label>
@@ -61,7 +68,10 @@ ob_start();
                             <div class="form-check form-switch me-3">
                                 <input class="form-check-input" type="checkbox" role="switch" name="whatsappToggle">
                             </div>
-                            <input type="tel" class="form-control" name="whatsapp" placeholder="(11) 99999-9999">
+                            <div class="input-group">
+                                <select id="codigo_pais_whatsapp" class="form-select" name="whatsappCountryCode" style="max-width:120px;"></select>
+                                <input type="tel" class="form-control" name="whatsapp" placeholder="(11) 99999-9999">
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -102,7 +112,7 @@ ob_start();
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Certificado</label>
+                        <label class="form-label">Documento do Conselho Profissional</label>
                         <div class="file-upload-area" onclick="document.getElementById('councilDoc').click()">
                             <i class="bi bi-file-earmark-text"></i>
                             <p class="mb-1">Clique para fazer upload</p>
@@ -320,12 +330,17 @@ ob_start();
             const data = await response.json();
             const user = data.user || {};
             const adDetails = data.adDetails || {};
+            const fullName = user.fullName || '';
+            const [firstName = '', ...lastNameParts] = fullName.split(' ');
 
             const defaults = {
-                fullName: user.fullName || '',
+                firstName,
+                lastName: lastNameParts.join(' ').trim(),
                 email: user.email || '',
                 phone: user.contact || '',
                 whatsapp: user.whatsapp ? user.contact || '' : '',
+                phoneCountryCode: user.country || '',
+                whatsappCountryCode: user.country || '',
                 country: user.country || '',
                 specialty: data.expertise || ''
             };
@@ -338,9 +353,46 @@ ob_start();
                     field.value = value ?? '';
                 }
             });
+
+            if (merged.phoneCountryCode) {
+                const select = document.getElementById('codigo_pais');
+                if (select) select.value = merged.phoneCountryCode;
+            }
+            if (merged.whatsappCountryCode) {
+                const select = document.getElementById('codigo_pais_whatsapp');
+                if (select) select.value = merged.whatsappCountryCode;
+            }
         } catch (error) {
             console.error('Erro ao carregar dados do profissional:', error);
         }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const phoneSelect = document.getElementById("codigo_pais");
+        const whatsappSelect = document.getElementById("codigo_pais_whatsapp");
+
+        if (!phoneSelect || !whatsappSelect) {
+            return;
+        }
+
+        fetch("/assets/data/countries.json")
+            .then(r => r.json())
+            .then(countries => {
+                countries.forEach(item => {
+                    const option = document.createElement("option");
+                    option.value = item.code;
+                    option.textContent = `${item.flag} ${item.code}`;
+                    phoneSelect.appendChild(option);
+                });
+
+                countries.forEach(item => {
+                    const option = document.createElement("option");
+                    option.value = item.code;
+                    option.textContent = `${item.flag} ${item.code}`;
+                    whatsappSelect.appendChild(option);
+                });
+            })
+            .catch(console.error);
     });
 </script>
 

@@ -34,7 +34,7 @@ ob_start();
 
 <!-- Main Form -->
 <main class="container form-container">
-    <form id="professionalAdForm" method="POST" action="#" novalidate>
+    <form id="professionalAdForm" method="POST" action="/api/professionals/ad-details" enctype="multipart/form-data" novalidate>
 
         <!-- Section 1: Detalhes do Anúncio -->
         <div class="form-section">

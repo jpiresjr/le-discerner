@@ -157,6 +157,21 @@ class ProfessionalController extends AbstractController
         } catch (\RuntimeException $exception) {
             return $this->json(['error' => $exception->getMessage()], 400);
         } catch (\Throwable $exception) {
+            return $this->json([
+                'error' => 'Não foi possível salvar o anúncio.',
+                'details' => $exception->getMessage(),
+            ], 500);
+        }
+
+        $payload = json_encode(
+            $data,
+            JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE
+        );
+        if ($payload === false) {
+            return $this->json(['error' => 'Não foi possível serializar os dados do anúncio.'], 400);
+        }
+
+        $professional->setAdDetails($payload);
             return $this->json(['error' => 'Não foi possível salvar o anúncio.'], 500);
         }
 

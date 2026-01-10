@@ -302,29 +302,6 @@ ob_start();
                 throw new Error('Não foi possível salvar o anúncio.');
             }
 
-        const payload = Object.fromEntries(new FormData(this).entries());
-
-        try {
-            const authToken = localStorage.getItem('auth_token');
-            const headers = {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            };
-            if (authToken) {
-                headers.Authorization = `Bearer ${authToken}`;
-            }
-
-            const response = await fetch('/api/professionals/ad-details', {
-                method: 'POST',
-                headers,
-                credentials: 'same-origin',
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                throw new Error('Não foi possível salvar o anúncio.');
-            }
-
             window.location.href = '/dashboard/professional/payment';
         } catch (error) {
             alert(error.message);

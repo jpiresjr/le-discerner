@@ -23,20 +23,24 @@ class ProfessionalController extends AbstractController
     #[Route('', methods: ['POST'])]
     public function create(Request $request, ProfessionalService $service): JsonResponse
     {
-        dd('teetet');
         $data = json_decode($request->getContent(), true);
-        $professional = $service->create($data);
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->json(['error' => 'Unauthenticated'], 401);
+        }
+
+        $professional = $service->create($data ?? [], $user);
 
         return $this->json($professional, 201);
     }
 
-    #[Route('/{id}', methods: ['GET'])]
+    #[Route('/{id}', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function getOne(Professional $professional): JsonResponse
     {
         return $this->json($professional);
     }
 
-    #[Route('/{id}', methods: ['PUT'])]
+    #[Route('/{id}', requirements: ['id' => '\d+'], methods: ['PUT'])]
     public function update(
         Professional $professional,
         Request $request,
@@ -49,7 +53,7 @@ class ProfessionalController extends AbstractController
         return $this->json($updated);
     }
 
-    #[Route('/{id}', methods: ['DELETE'])]
+    #[Route('/{id}', requirements: ['id' => '\d+'], methods: ['DELETE'])]
     public function delete(
         Professional $professional,
         EntityManagerInterface $em
@@ -59,5 +63,75 @@ class ProfessionalController extends AbstractController
         $em->flush();
 
         return $this->json(['message' => 'Professional removed']);
+    }
+
+    #[Route('/me', methods: ['GET'])]
+    public function me(ProfessionalRepository $repo): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->json(['error' => 'Unauthenticated'], 401);
+        }
+
+        $professional = $repo->findOneByUser($user);
+        if (!$professional) {
+            return $this->json(['error' => 'Professional profile not found'], 404);
+        }
+
+        $adDetails = $professional->getAdDetails();
+
+        return $this->json([
+            'id' => $professional->getId(),
+            'expertise' => $professional->getExpertise(),
+            'paymentCompleted' => $professional->isPaymentCompleted(),
+            'adDetails' => $adDetails ? json_decode($adDetails, true) : null,
+            'user' => [
+                'id' => $user->getId(),
+                'fullName' => $user->getFullName(),
+                'username' => $user->getUsername(),
+                'email' => $user->getEmail(),
+                'country' => $user->getCountry(),
+                'contact' => $user->getContact(),
+                'whatsapp' => $user->isWhatsapp(),
+                'telegram' => $user->isTelegram(),
+                'roles' => $user->getRoles(),
+            ],
+        ]);
+    }
+
+    #[Route('/ad-details', methods: ['POST'])]
+    public function saveAdDetails(
+        Request $request,
+        ProfessionalRepository $repo,
+        EntityManagerInterface $em
+    ): JsonResponse {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->json(['error' => 'Unauthenticated'], 401);
+        }
+
+        $professional = $repo->findOneByUser($user);
+        if (!$professional) {
+            return $this->json(['error' => 'Professional profile not found'], 404);
+        }
+
+        $data = $request->request->all();
+        if (!$data) {
+            $data = json_decode($request->getContent(), true);
+        }
+
+        $data = is_array($data) ? $data : [];
+
+        $files = $request->files->all();
+        foreach (['idDocumentFile' => 'idDocumentName', 'photoFile' => 'photoName', 'councilDocFile' => 'councilDocName'] as $fileKey => $nameKey) {
+            if (isset($files[$fileKey]) && $files[$fileKey]->isValid()) {
+                $data[$nameKey] = $files[$fileKey]->getClientOriginalName();
+            }
+        }
+
+        $professional->setAdDetails(json_encode($data, JSON_UNESCAPED_UNICODE));
+        $em->flush();
+
+        return $this->json(['success' => true]);
     }
 }

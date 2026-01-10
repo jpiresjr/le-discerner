@@ -129,6 +129,9 @@ class ProfessionalController extends AbstractController
                 $upload = $this->storeAdDetailsFile($files[$fileKey], $baseKey);
                 $data["{$baseKey}Name"] = $upload['name'];
                 $data["{$baseKey}Path"] = $upload['path'];
+        foreach (['idDocumentFile' => 'idDocumentName', 'photoFile' => 'photoName', 'councilDocFile' => 'councilDocName'] as $fileKey => $nameKey) {
+            if (isset($files[$fileKey]) && $files[$fileKey]->isValid()) {
+                $data[$nameKey] = $files[$fileKey]->getClientOriginalName();
             }
         }
 

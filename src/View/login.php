@@ -22,7 +22,12 @@
 
                         <div class="mb-3">
                             <label class="form-label">Senha</label>
-                            <input class="form-control" type="password" name="password" required>
+                            <div class="input-group">
+                                <input class="form-control" type="password" name="password" id="loginPassword" required>
+                                <button class="btn btn-outline-secondary" type="button" id="toggleLoginPassword">
+                                    Mostrar
+                                </button>
+                            </div>
                         </div>
 
                         <div class="d-grid mt-4">

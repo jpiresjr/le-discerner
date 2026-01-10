@@ -194,6 +194,9 @@ class ProfessionalController extends AbstractController
             $randomSuffix = uniqid('', true);
         }
         $filename = sprintf('%s-%s.%s', $safePrefix, $randomSuffix, $extension);
+        $extension = $file->guessExtension() ?: $file->getClientOriginalExtension() ?: 'bin';
+        $safePrefix = preg_replace('/[^a-zA-Z0-9_-]/', '', $prefix);
+        $filename = sprintf('%s-%s.%s', $safePrefix, bin2hex(random_bytes(8)), $extension);
 
         try {
             $file->move($uploadDir, $filename);

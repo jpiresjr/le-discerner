@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/api/professionals')]
@@ -123,6 +124,11 @@ class ProfessionalController extends AbstractController
         $data = is_array($data) ? $data : [];
 
         $files = $request->files->all();
+        foreach (['idDocumentFile' => 'idDocument', 'photoFile' => 'photo', 'councilDocFile' => 'councilDoc'] as $fileKey => $baseKey) {
+            if (isset($files[$fileKey]) && $files[$fileKey] instanceof UploadedFile && $files[$fileKey]->isValid()) {
+                $upload = $this->storeAdDetailsFile($files[$fileKey], $baseKey);
+                $data["{$baseKey}Name"] = $upload['name'];
+                $data["{$baseKey}Path"] = $upload['path'];
         foreach (['idDocumentFile' => 'idDocumentName', 'photoFile' => 'photoName', 'councilDocFile' => 'councilDocName'] as $fileKey => $nameKey) {
             if (isset($files[$fileKey]) && $files[$fileKey]->isValid()) {
                 $data[$nameKey] = $files[$fileKey]->getClientOriginalName();
@@ -133,5 +139,25 @@ class ProfessionalController extends AbstractController
         $em->flush();
 
         return $this->json(['success' => true]);
+    }
+
+    private function storeAdDetailsFile(UploadedFile $file, string $prefix): array
+    {
+        $uploadDir = $this->getParameter('kernel.project_dir') . '/public/uploads/ad-details';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
+        $originalName = $file->getClientOriginalName();
+        $extension = $file->guessExtension() ?: $file->getClientOriginalExtension() ?: 'bin';
+        $safePrefix = preg_replace('/[^a-zA-Z0-9_-]/', '', $prefix);
+        $filename = sprintf('%s-%s.%s', $safePrefix, bin2hex(random_bytes(8)), $extension);
+
+        $file->move($uploadDir, $filename);
+
+        return [
+            'name' => $originalName,
+            'path' => '/uploads/ad-details/' . $filename,
+        ];
     }
 }

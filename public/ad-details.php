@@ -99,7 +99,7 @@ ob_start();
                             <i class="bi bi-cloud-arrow-up"></i>
                             <p class="mb-1">Clique para fazer upload</p>
                             <p class="file-info">Máx. 10 MB • 5 fotos permitidas</p>
-                            <input type="file" id="idDocument" name="idDocument" class="d-none" accept="image/*,.pdf" multiple>
+                            <input type="file" id="idDocument" name="idDocumentFile" class="d-none" accept="image/*,.pdf" multiple>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -108,7 +108,7 @@ ob_start();
                             <i class="bi bi-camera"></i>
                             <p class="mb-1">Clique para fazer upload</p>
                             <p class="file-info">Máx. 5 MB • Formato JPG ou PNG</p>
-                            <input type="file" id="photo" name="photo" class="d-none" accept="image/*">
+                            <input type="file" id="photo" name="photoFile" class="d-none" accept="image/*">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -117,7 +117,7 @@ ob_start();
                             <i class="bi bi-file-earmark-text"></i>
                             <p class="mb-1">Clique para fazer upload</p>
                             <p class="file-info">Máx. 5 MB • PDF ou imagem</p>
-                            <input type="file" id="councilDoc" name="councilDoc" class="d-none" accept="image/*,.pdf">
+                            <input type="file" id="councilDoc" name="councilDocFile" class="d-none" accept="image/*,.pdf">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -280,6 +280,27 @@ ob_start();
             alert('Por favor, preencha todos os campos obrigatórios.');
             return;
         }
+
+        try {
+            const authToken = localStorage.getItem('auth_token');
+            const headers = {
+                'Accept': 'application/json'
+            };
+            if (authToken) {
+                headers.Authorization = `Bearer ${authToken}`;
+            }
+
+            const payload = new FormData(this);
+            const response = await fetch('/api/professionals/ad-details', {
+                method: 'POST',
+                headers,
+                credentials: 'same-origin',
+                body: payload
+            });
+
+            if (!response.ok) {
+                throw new Error('Não foi possível salvar o anúncio.');
+            }
 
         const payload = Object.fromEntries(new FormData(this).entries());
 

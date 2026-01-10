@@ -179,6 +179,21 @@ class ProfessionalController extends AbstractController
         }
 
         $originalName = $file->getClientOriginalName();
+        $extension = null;
+        try {
+            $extension = $file->guessExtension();
+        } catch (\Throwable $exception) {
+            $extension = null;
+        }
+        $extension = $extension ?: $file->getClientOriginalExtension() ?: 'bin';
+        $safePrefix = preg_replace('/[^a-zA-Z0-9_-]/', '', $prefix);
+        $randomSuffix = null;
+        try {
+            $randomSuffix = bin2hex(random_bytes(8));
+        } catch (\Throwable $exception) {
+            $randomSuffix = uniqid('', true);
+        }
+        $filename = sprintf('%s-%s.%s', $safePrefix, $randomSuffix, $extension);
         $extension = $file->guessExtension() ?: $file->getClientOriginalExtension() ?: 'bin';
         $safePrefix = preg_replace('/[^a-zA-Z0-9_-]/', '', $prefix);
         $filename = sprintf('%s-%s.%s', $safePrefix, bin2hex(random_bytes(8)), $extension);

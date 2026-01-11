@@ -1,6 +1,13 @@
 .search-professionals {
     padding: 40px 0 80px;
     background-color: #fbf9f4;
+.hero-banner--compact {
+    padding: 120px 0 50px;
+}
+
+.search-professionals {
+    padding: 40px 0 80px;
+    background-color: #f6f3ef;
 }
 
 .filters-card {
@@ -28,6 +35,29 @@
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+.btn-theme {
+    background: #6b5434;
+    color: #fff;
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-weight: 600;
+}
+
+.btn-theme:hover {
+    background: #5b4529;
+    color: #fff;
+}
+
+.btn-outline-theme {
+    border: 1px solid #6b5434;
+    color: #6b5434;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.btn-outline-theme:hover {
+    background: #6b5434;
+    color: #fff;
 }
 
 .results-header {

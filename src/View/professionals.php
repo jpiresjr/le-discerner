@@ -7,11 +7,19 @@ ob_start();
 
     <div class="container-lg hero-ipg__content">
         <h1 class="hero-ipg__title">BUSCAR PROFISSIONAIS</h1>
+    </div>
+</header>
         <p class="hero-ipg__sub">
             Encontre especialistas por área, localização ou disponibilidade.
         </p>
     </div>
 </header>
+<section class="hero-banner hero-banner--compact">
+    <div class="container">
+        <h1>Buscar Profissionais</h1>
+        <p class="lead">Encontre especialistas por área, localização ou disponibilidade.</p>
+    </div>
+</section>
 
 <section class="search-professionals">
     <div class="container">
@@ -56,6 +64,9 @@ ob_start();
                             </select>
                         </div>
                         <button type="submit" class="btn btn-ipg-cta w-100">
+                        <button type="submit" class="btn btn-ipg-cta w-100 search-filter-btn">
+                        <button type="submit" class="btn btn-ipg-cta w-100">
+                        <button type="submit" class="btn btn-theme w-100">
                             <i class="bi bi-filter-circle me-2"></i>Buscar
                         </button>
                     </form>
@@ -70,6 +81,7 @@ ob_start();
                     </div>
                     <div class="results-actions">
                         <button class="btn btn-ipg-outline" id="resetFilters">
+                        <button class="btn btn-outline-theme" id="resetFilters">
                             <i class="bi bi-arrow-counterclockwise me-2"></i>Limpar filtros
                         </button>
                     </div>

@@ -183,6 +183,48 @@ class ProfessionalController extends AbstractController
         return $this->json(['error' => 'Método não permitido. Use POST para salvar o anúncio.'], 405);
     }
 
+    #[Route('/search', methods: ['GET'])]
+    public function search(Request $request, ProfessionalRepository $repo): JsonResponse
+    {
+        $query = mb_strtolower(trim((string) $request->query->get('q', '')));
+        $specialty = mb_strtolower(trim((string) $request->query->get('specialty', '')));
+        $country = mb_strtolower(trim((string) $request->query->get('country', '')));
+        $category = mb_strtolower(trim((string) $request->query->get('category', '')));
+
+        $items = [];
+        foreach ($repo->findAll() as $professional) {
+            $user = $professional->getUser();
+            $adDetails = $professional->getAdDetails();
+            $adData = $adDetails ? json_decode($adDetails, true) : [];
+
+            $name = trim((string) $user->getFullName());
+            $specialtyValue = (string) ($adData['specialty'] ?? $professional->getExpertise() ?? '');
+            $countryValue = (string) ($adData['country'] ?? '');
+            $categoryValue = (string) ($adData['category'] ?? '');
+
+            $matchesQuery = $query === '' || str_contains(
+                mb_strtolower($name . ' ' . $specialtyValue),
+                $query
+            );
+            $matchesSpecialty = $specialty === '' || str_contains(mb_strtolower($specialtyValue), $specialty);
+            $matchesCountry = $country === '' || mb_strtolower($countryValue) === $country;
+            $matchesCategory = $category === '' || mb_strtolower($categoryValue) === $category;
+
+            if (!$matchesQuery || !$matchesSpecialty || !$matchesCountry || !$matchesCategory) {
+                continue;
+            }
+
+            $items[] = [
+                'id' => $professional->getId(),
+                'name' => $name ?: $user->getUsername(),
+                'specialty' => $specialtyValue,
+                'adDetails' => $adData ?: null,
+            ];
+        }
+
+        return $this->json(['items' => $items]);
+    }
+
     private function storeAdDetailsFile(UploadedFile $file, string $prefix): array
     {
         $uploadDir = $this->getParameter('kernel.project_dir') . '/public/uploads/ad-details';

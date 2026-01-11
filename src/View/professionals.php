@@ -63,6 +63,7 @@ ob_start();
                                 <option value="hibrido">Híbrido</option>
                             </select>
                         </div>
+                        <button type="submit" class="btn btn-ipg-cta w-100">
                         <button type="submit" class="btn btn-ipg-cta w-100 search-filter-btn">
                         <button type="submit" class="btn btn-ipg-cta w-100">
                         <button type="submit" class="btn btn-theme w-100">

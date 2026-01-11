@@ -19,6 +19,7 @@ const buildCard = (professional) => {
                     <span class="professional-card__badge">${badge}</span>
                 </div>
                 <div class="professional-card__body">
+                    <div class="professional-card__status">Disponível</div>
                     <div class="professional-card__title">${professional.name}</div>
                     <div class="professional-card__meta">
                         <span><i class="bi bi-briefcase"></i>${professional.specialty || 'Especialidade não informada'}</span>

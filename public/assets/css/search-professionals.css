@@ -68,6 +68,7 @@
     align-items: center;
     margin-bottom: 24px;
     gap: 16px;
+    flex-wrap: wrap;
 }
 
 .results-title {
@@ -79,6 +80,22 @@
 .results-subtitle {
     margin: 6px 0 0;
     color: #7d6a50;
+}
+
+.results-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.filters-actions {
+    margin-top: 16px;
+}
+
+.filters-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .professional-card {
@@ -117,6 +134,12 @@
     color: #6b5434;
 }
 
+.professional-card__status {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #6b5434;
+}
+
 .professional-card__body {
     padding: 18px;
     display: flex;
@@ -143,6 +166,10 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
+}
+
+.professional-card__meta span i {
+    color: #6b5434;
 }
 
 .professional-card__price {

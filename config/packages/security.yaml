@@ -20,6 +20,11 @@ security:
             stateless: true
             security: false
 
+        api_public:
+            pattern: ^/api/professionals/search
+            stateless: true
+            security: false
+
         api:
             pattern: ^/api
             stateless: true
@@ -39,6 +44,7 @@ security:
 
     access_control:
         - { path: ^/api/auth/(login|register), roles: PUBLIC_ACCESS }
+        - { path: ^/api/professionals/search, roles: PUBLIC_ACCESS }
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/register, roles: PUBLIC_ACCESS }
         - { path: ^/$, roles: PUBLIC_ACCESS }

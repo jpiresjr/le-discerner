@@ -63,6 +63,11 @@ ob_start();
                                 <option value="hibrido">Híbrido</option>
                             </select>
                         </div>
+                        <div class="filters-actions">
+                            <button type="submit" class="btn btn-theme w-100">
+                            <i class="bi bi-filter-circle me-2"></i>Buscar
+                            </button>
+                        </div>
                         <button type="submit" class="btn btn-ipg-cta w-100">
                         <button type="submit" class="btn btn-ipg-cta w-100 search-filter-btn">
                         <button type="submit" class="btn btn-ipg-cta w-100">
@@ -80,6 +85,7 @@ ob_start();
                         <p class="results-subtitle" id="resultsCount">Carregando resultados...</p>
                     </div>
                     <div class="results-actions">
+                        <button class="btn btn-outline-theme" id="resetFilters" type="button">
                         <button class="btn btn-ipg-outline" id="resetFilters">
                         <button class="btn btn-outline-theme" id="resetFilters">
                             <i class="bi bi-arrow-counterclockwise me-2"></i>Limpar filtros

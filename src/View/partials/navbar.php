@@ -38,7 +38,7 @@
         <div class="navbar-ipg__right d-none d-lg-flex">
             <ul class="navbar-nav align-items-center">
                 <li class="nav-item"><a class="nav-link" href="/website-operation">website operation</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">search professionals</a></li>
+                <li class="nav-item"><a class="nav-link" href="/professionals">search professionals</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">contact</a></li>
             </ul>
         </div>
@@ -67,7 +67,7 @@
                 <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">therapies</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">website operation</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">search professionals</a></li>
+                <li class="nav-item"><a class="nav-link" href="/professionals">search professionals</a></li>
                 <!-- CORREÇÃO: Aspas duplas removidas -->
                 <li class="nav-item mt-2"><a class="nav-link" href="#">contact</a></li>
             </ul>

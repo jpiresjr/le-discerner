@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -52,6 +53,9 @@ class AuthController extends AbstractController
         if ($userRepository->findOneBy(['email' => $data['email']])) {
             return $this->json(['error' => 'Email already registered'], 400);
         }
+        if ($userRepository->findOneBy(['username' => $data['username']])) {
+            return $this->json(['error' => 'Username already registered'], 400);
+        }
 
         $user = new User();
         $user->setFullName($data['fullName']);
@@ -83,11 +87,43 @@ class AuthController extends AbstractController
         // 🔑 LOGIN AUTOMÁTICO
         $token = $authService->login($data['email'], $data['password']);
 
-        return $this->json([
+        if (!$request->isXmlHttpRequest() && str_contains((string) $request->headers->get('Accept'), 'text/html')) {
+            $redirectUrl = $role === User::ROLE_PROFESSIONAL ? '/ad-details.php' : '/dashboard/patient';
+            $response = new RedirectResponse($redirectUrl);
+            $response->headers->setCookie(new Cookie(
+                'AUTH_TOKEN',
+                $token,
+                time() + 86400,
+                '/',
+                null,
+                $request->isSecure(),
+                true,
+                false,
+                Cookie::SAMESITE_STRICT
+            ));
+
+            return $response;
+        }
+
+        $response = $this->json([
             'message' => 'User created',
             'token' => $token,
             'role' => $role
         ], 201);
+
+        $response->headers->setCookie(new Cookie(
+            'AUTH_TOKEN',
+            $token,
+            time() + 86400,
+            '/',
+            null,
+            $request->isSecure(),
+            true,
+            false,
+            Cookie::SAMESITE_STRICT
+        ));
+
+        return $response;
     }
 
     #[Route('/login', name: 'api_login', methods: ['POST'])]
@@ -98,19 +134,24 @@ class AuthController extends AbstractController
     ): JsonResponse {
 
         $data = json_decode($request->getContent(), true);
-
-        if (empty($data['email']) || empty($data['password'])) {
-            return $this->json(['error' => 'Email e senha são obrigatórios'], Response::HTTP_BAD_REQUEST);
+        if (!is_array($data)) {
+            $data = $request->request->all();
         }
 
-        $token = $authService->login($data['email'], $data['password']);
+        $identifier = trim((string) ($data['email'] ?? $data['username'] ?? ''));
+        $password = (string) ($data['password'] ?? '');
+
+        if ($identifier === '') {
+            return $this->json(['error' => 'Email/usuário é obrigatório'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $token = $authService->login($identifier, $password);
 
         if (!$token) {
             return $this->json(['error' => 'Credenciais inválidas'], Response::HTTP_UNAUTHORIZED);
         }
 
-        $user = $userRepository->findOneBy(['email' => $data['email']]);
-
+        $user = $userRepository->findByIdentifier($identifier);
         if (!$user) {
             return $this->json(['error' => 'Usuário não encontrado'], Response::HTTP_NOT_FOUND);
         }
@@ -141,6 +182,15 @@ class AuthController extends AbstractController
         ));
 
         return $response;
+    }
+
+    #[Route('/login', name: 'api_login_get', methods: ['GET'])]
+    public function loginMethodNotAllowed(): JsonResponse
+    {
+        return $this->json(
+            ['error' => 'Método não permitido. Use POST para autenticar.'],
+            Response::HTTP_METHOD_NOT_ALLOWED
+        );
     }
 
     #[Route('/logout', name: 'api_logout', methods: ['POST'])]

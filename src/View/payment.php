@@ -90,6 +90,9 @@ ob_start();
                         <span>Total</span>
                         <span>€30.00 / mês</span>
                     </div>
+                </div>
+
+                <div class="payment-method">
                         <span>€0.00</span>
                     </div>
                     <div class="summary-total total">

@@ -12,6 +12,15 @@
     box-shadow: 0 15px 40px rgba(47, 36, 20, 0.08);
 }
 
+.payment-summary,
+.payment-method {
+    border: 1px solid #eee5d6;
+}
+
+.payment-summary + .payment-method {
+    margin-top: 24px;
+}
+
 .payment-summary {
     border: 1px solid #eee5d6;
 }

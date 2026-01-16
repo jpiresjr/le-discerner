@@ -2,6 +2,7 @@
 ob_start();
 ?>
 
+<!-- HEADER / BANNER -->
 <header id="hero" class="hero-ipg">
     <div class="hero-ipg__bg"></div>
 
@@ -70,6 +71,7 @@ ob_start();
             </div>
 
             <div class="col-lg-5 payment-sidebar">
+            <div class="col-lg-5">
                 <div class="payment-summary">
                     <h5 class="mb-3">Produto</h5>
                     <div class="summary-item">
@@ -79,6 +81,7 @@ ob_start();
                         </div>
                         <div class="summary-qty">x 1</div>
                     </div>
+
                     <div class="summary-divider"></div>
                     <div class="summary-total">
                         <span>Subtotal</span>
@@ -91,6 +94,24 @@ ob_start();
                 </div>
 
                 <div class="payment-method">
+                        <span>€0.00</span>
+                    </div>
+                    <div class="summary-total total">
+                        <span>Total</span>
+                        <span>€30.00</span>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-total">
+                        <span>Subtotal</span>
+                        <span>€30.00 / mês</span>
+                    </div>
+                    <div class="summary-total total">
+                        <span>Total recorrente</span>
+                        <span>€30.00 / mês</span>
+                    </div>
+                </div>
+
+                <div class="payment-method mt-4">
                     <div class="payment-method__header">
                         <span class="badge rounded-pill bg-success">Cartão de crédito/débito</span>
                     </div>
@@ -123,6 +144,8 @@ ob_start();
     </div>
 </section>
 
+
+<!-- ================= FOOTER ================= -->
 <footer class="bg-theme-dark text-light pt-5 pb-4">
     <div class="container">
         <div class="row">
@@ -150,6 +173,9 @@ ob_start();
                     <li>Email: suporte@suaterapiaon.com</li>
                     <li>Endereço:
                         Rua quinta dos casquilhos 3 1 dt Barreiro - Setúbal PT 2830-499</li>
+                    <li>Telefone: (310) 461-4148</li>
+                    <li>Email: contato@ipgterapia.com</li>
+                    <li>Endereço: Beverly Hills, CA</li>
                 </ul>
             </div>
             <div class="col-6 col-md-3 mb-3">

@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!button) return;
 
     const submitPayment = async () => {
+
+    if (!button) return;
+
+    button.addEventListener('click', async () => {
         button.disabled = true;
         button.textContent = 'Gerando...';
         if (status) {
@@ -54,4 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitPayment();
         });
     }
+            button.textContent = 'Gerar link de pagamento';
+        }
+    });
 });

@@ -1,3 +1,6 @@
+.search-professionals {
+    padding: 40px 0 80px;
+    background-color: #fbf9f4;
 .hero-banner--compact {
     padding: 120px 0 50px;
 }
@@ -5,6 +8,7 @@
 .search-professionals {
     padding: 40px 0 80px;
     background-color: #fbf9f4;
+    background-color: #f6f3ef;
 }
 
 .filters-card {
@@ -27,6 +31,11 @@
     color: #6b5434;
 }
 
+.search-filter-btn {
+    box-shadow: 0 12px 25px rgba(47, 36, 20, 0.18);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 .btn-theme {
     background: #6b5434;
     color: #fff;

@@ -21,6 +21,15 @@ class Professional
     #[ORM\Column(type: "boolean")]
     private bool $paymentCompleted = false;
 
+    #[ORM\Column(type: "string", length: 50, nullable: true)]
+    private ?string $paymentStatus = null;
+
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    private ?string $paymentProviderId = null;
+
+    #[ORM\Column(type: "datetime", nullable: true)]
+    private ?\DateTimeInterface $paymentUpdatedAt = null;
+
     #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $expertise = null;
 
@@ -58,6 +67,15 @@ class Professional
 
     public function isPaymentCompleted(): bool { return $this->paymentCompleted; }
     public function setPaymentCompleted(bool $done): self { $this->paymentCompleted = $done; return $this; }
+
+    public function getPaymentStatus(): ?string { return $this->paymentStatus; }
+    public function setPaymentStatus(?string $paymentStatus): self { $this->paymentStatus = $paymentStatus; return $this; }
+
+    public function getPaymentProviderId(): ?string { return $this->paymentProviderId; }
+    public function setPaymentProviderId(?string $paymentProviderId): self { $this->paymentProviderId = $paymentProviderId; return $this; }
+
+    public function getPaymentUpdatedAt(): ?\DateTimeInterface { return $this->paymentUpdatedAt; }
+    public function setPaymentUpdatedAt(?\DateTimeInterface $paymentUpdatedAt): self { $this->paymentUpdatedAt = $paymentUpdatedAt; return $this; }
 
     public function getExpertise(): ?string { return $this->expertise; }
     public function setExpertise(?string $expertise): self { $this->expertise = $expertise; return $this; }

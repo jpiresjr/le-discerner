@@ -85,6 +85,9 @@ class ProfessionalController extends AbstractController
             'id' => $professional->getId(),
             'expertise' => $professional->getExpertise(),
             'paymentCompleted' => $professional->isPaymentCompleted(),
+            'paymentStatus' => $professional->getPaymentStatus(),
+            'paymentProviderId' => $professional->getPaymentProviderId(),
+            'paymentUpdatedAt' => $professional->getPaymentUpdatedAt()?->format(DATE_ATOM),
             'adDetails' => $adDetails ? json_decode($adDetails, true) : null,
             'user' => [
                 'id' => $user->getId(),

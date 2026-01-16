@@ -70,6 +70,7 @@ ob_start();
                 </div>
             </div>
 
+            <div class="col-lg-5 payment-sidebar">
             <div class="col-lg-5">
                 <div class="payment-summary">
                     <h5 class="mb-3">Produto</h5>

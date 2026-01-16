@@ -15,23 +15,28 @@
     <div class="container-fluid px-lg-5">
 
         <!-- TABS -->
-        <ul class="nav nav-pills justify-content-center mb-5" role="tablist">
-            <li class="nav-item">
-                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-account">
-                    Minha Conta
-                </button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-appointments">
-                    Minhas Consultas
-                </button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-messages">
-                    Mensagens
-                </button>
-            </li>
-        </ul>
+        <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 mb-5">
+            <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-account">
+                        Minha Conta
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-appointments">
+                        Minhas Consultas
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-messages">
+                        Mensagens
+                    </button>
+                </li>
+            </ul>
+            <button type="button" class="btn btn-outline-danger btn-sm" id="logoutBtn">
+                Sair
+            </button>
+        </div>
 
         <div class="tab-content">
 
@@ -178,4 +183,3 @@
         </div>
     </div>
 </footer>
-

@@ -1,14 +1,20 @@
 // assets/js/login.js
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('loginForm');
+    const passwordInput = document.getElementById('loginPassword');
+    const togglePasswordButton = document.getElementById('toggleLoginPassword');
 
     if (!form) return;
 
-    // Se já tem cookie/sessão, redireciona
-    if (document.cookie.includes('AUTH_TOKEN=')) {
-        window.location.href = '/dashboard/patient';
-        return;
+    if (passwordInput && togglePasswordButton) {
+        togglePasswordButton.addEventListener('click', () => {
+            const isMasked = passwordInput.type === 'password';
+            passwordInput.type = isMasked ? 'text' : 'password';
+            togglePasswordButton.textContent = isMasked ? 'Ocultar' : 'Mostrar';
+        });
     }
+
+    // Cookie é HTTP-only, não dá para ler pelo JS.
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -29,21 +35,37 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
+                credentials: 'same-origin',
                 body: JSON.stringify({ email, password })
             });
 
-            const data = await response.json();
+            const contentType = response.headers.get('content-type') || '';
+            const isJson = contentType.includes('application/json');
+            const data = isJson ? await response.json() : { error: await response.text() };
 
             if (!response.ok) {
                 throw new Error(data.error || 'Erro ao fazer login');
             }
 
             console.log('✅ Login bem-sucedido!');
+            if (data.token) {
+                localStorage.setItem('auth_token', data.token);
+            }
+            if (data.user?.roles) {
+                localStorage.setItem('user_role', JSON.stringify(data.user.roles));
+            }
 
             // Cookie é setado automaticamente pelo servidor
             // Redireciona para dashboard
             setTimeout(() => {
-                window.location.href = '/dashboard/patient';
+                const roles = Array.isArray(data.user?.roles) ? data.user.roles : [];
+                if (roles.includes('ROLE_ADMIN')) {
+                    window.location.href = '/dashboard/admin';
+                } else if (roles.includes('ROLE_PROFESSIONAL')) {
+                    window.location.href = '/dashboard/professional';
+                } else {
+                    window.location.href = '/dashboard/patient';
+                }
             }, 500);
 
         } catch (error) {

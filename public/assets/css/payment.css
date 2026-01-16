@@ -21,6 +21,10 @@
     margin-top: 24px;
 }
 
+.payment-summary {
+    border: 1px solid #eee5d6;
+}
+
 .summary-item {
     display: flex;
     justify-content: space-between;

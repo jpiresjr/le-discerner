@@ -75,6 +75,8 @@ ob_start();
                     <h5 class="mb-3">Produto</h5>
                     <div class="summary-item">
                         <div>
+                            <strong>Mensalidade Profissional</strong>
+                            <div class="text-muted">€30.00 / mês</div>
                             <strong>Assinatura Profissional</strong>
                             <div class="text-muted">€30.00 / mês</div>
                             <strong>Plano Profissional</strong>

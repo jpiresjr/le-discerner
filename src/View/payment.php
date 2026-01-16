@@ -135,6 +135,11 @@ ob_start();
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <!-- ================= FOOTER ================= -->
 <footer class="bg-theme-dark text-light pt-5 pb-4">
@@ -160,6 +165,10 @@ ob_start();
             <div class="col-6 col-md-3 mb-3">
                 <h5>Contato</h5>
                 <ul class="list-unstyled">
+                    <li>Telefone: +351 913 700 783</li>
+                    <li>Email: suporte@suaterapiaon.com</li>
+                    <li>Endereço:
+                        Rua quinta dos casquilhos 3 1 dt Barreiro - Setúbal PT 2830-499</li>
                     <li>Telefone: (310) 461-4148</li>
                     <li>Email: contato@ipgterapia.com</li>
                     <li>Endereço: Beverly Hills, CA</li>

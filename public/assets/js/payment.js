@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const button = document.getElementById('createPaymentLink');
     const status = document.getElementById('paymentStatus');
+    const form = document.getElementById('paymentForm');
+
+    if (!button) return;
+
+    const submitPayment = async () => {
 
     if (!button) return;
 
@@ -9,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
         button.textContent = 'Gerando...';
         if (status) {
             status.classList.remove('d-none');
+            status.classList.add('alert-info');
+            status.classList.remove('alert-danger');
             status.textContent = 'Preparando o link de pagamento...';
         }
 
@@ -39,6 +46,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 status.textContent = error.message;
             }
             button.disabled = false;
+            button.textContent = 'Confirmar assinatura';
+        }
+    };
+
+    button.addEventListener('click', submitPayment);
+
+    if (form) {
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            submitPayment();
+        });
+    }
             button.textContent = 'Gerar link de pagamento';
         }
     });

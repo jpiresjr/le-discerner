@@ -23,6 +23,12 @@ class Patient
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $language = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $therapyType = null;
+
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $status = null;
+
     public function getId(): ?int { return $this->id; }
 
     public function getUser(): User { return $this->user; }
@@ -33,4 +39,10 @@ class Patient
 
     public function getLanguage(): ?string { return $this->language; }
     public function setLanguage(?string $language): self { $this->language = $language; return $this; }
+
+    public function getTherapyType(): ?string { return $this->therapyType; }
+    public function setTherapyType(?string $therapyType): self { $this->therapyType = $therapyType; return $this; }
+
+    public function getStatus(): ?string { return $this->status; }
+    public function setStatus(?string $status): self { $this->status = $status; return $this; }
 }

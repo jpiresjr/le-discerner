@@ -2,6 +2,7 @@
 ob_start();
 ?>
 
+<!-- HEADER / BANNER -->
 <header id="hero" class="hero-ipg">
     <div class="hero-ipg__bg"></div>
 
@@ -142,11 +143,33 @@ ob_start();
                         </div>
                     </div>
                 </div>
+<section class="py-5 bg-light">
+    <div class="container" style="max-width: 760px;">
+        <div class="card shadow-sm border-0 p-5">
+            <h4 class="mb-3">Assinatura Profissional</h4>
+            <p class="text-muted mb-4">
+                Gere um link de pagamento seguro para concluir sua assinatura e liberar todos os recursos do painel
+                profissional.
+            </p>
+
+            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+                <div>
+                    <div class="fw-bold">Plano mensal</div>
+                    <div class="text-muted">€ 30,00</div>
+                </div>
+                <button class="btn btn-ipg-cta btn-lg" id="createPaymentLink">
+                    Gerar link de pagamento
+                </button>
+            </div>
+
+            <div class="alert alert-info mt-4 d-none" role="alert" id="paymentStatus">
+                Preparando o link de pagamento...
             </div>
         </div>
     </div>
 </section>
 
+<!-- ================= FOOTER ================= -->
 <footer class="bg-theme-dark text-light pt-5 pb-4">
     <div class="container">
         <div class="row">

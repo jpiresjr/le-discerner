@@ -3,6 +3,10 @@
     padding: 60px 0 80px;
 }
 
+.payment-section .container {
+    max-width: 1200px;
+}
+
 .payment-card,
 .payment-summary,
 .payment-method {
@@ -94,6 +98,14 @@
 
 .StripeElement {
     width: 100%;
+}
+
+.stripe-placeholder .StripeElement {
+    flex: 1 1 auto;
+}
+
+.stripe-placeholder iframe {
+    width: 100% !important;
 }
 
 .StripeElement--focus {

@@ -58,19 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const submitPayment = async () => {
-    cardNumber.mount('#stripeCardNumber');
-    cardExpiry.mount('#stripeCardExpiry');
-    cardCvc.mount('#stripeCardCvc');
-
-    const submitPayment = async () => {
-
-    if (!button) return;
-
-    const submitPayment = async () => {
-
-    if (!button) return;
-
-    button.addEventListener('click', async () => {
         button.disabled = true;
         button.textContent = 'Gerando...';
         if (status) {
@@ -82,11 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const response = await fetch('/api/payments/create-intent', {
-            status.textContent = 'Preparando o link de pagamento...';
-        }
-
-        try {
-            const response = await fetch('/api/payments/create-link', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -96,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!response.ok) {
                 throw new Error('Não foi possível iniciar o pagamento.');
-                throw new Error('Não foi possível criar o link de pagamento.');
             }
 
             const data = await response.json();
@@ -135,11 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 status.textContent = 'Pagamento confirmado com sucesso.';
             }
             button.textContent = 'Pagamento confirmado';
-            if (!data.payment_url) {
-                throw new Error('Link de pagamento não retornado.');
-            }
-
-            window.location.href = data.payment_url;
         } catch (error) {
             if (status) {
                 status.classList.remove('alert-info');
@@ -148,10 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             button.disabled = false;
             button.textContent = 'Confirmar pagamento';
-                status.textContent = error.message;
-            }
-            button.disabled = false;
-            button.textContent = 'Confirmar assinatura';
         }
     };
 
@@ -163,7 +135,4 @@ document.addEventListener('DOMContentLoaded', () => {
             submitPayment();
         });
     }
-            button.textContent = 'Gerar link de pagamento';
-        }
-    });
 });

@@ -183,21 +183,3 @@
         </div>
     </div>
 </footer>
-
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const select = document.getElementById("codigo_pais");
-
-        fetch("/assets/data/countries.json")
-            .then(r => r.json())
-            .then(countries => {
-                countries.forEach(item => {
-                    const option = document.createElement("option");
-                    option.value = item.code;
-                    option.textContent = `${item.flag} ${item.code}`;
-                    select.appendChild(option);
-                });
-            })
-            .catch(console.error);
-    });
-</script>

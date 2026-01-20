@@ -68,9 +68,6 @@ Em produção é altamente recomendado usar **webhooks** para confirmar pagament
 2. O JS faz POST em `/api/payments/create-intent`.
 3. O backend cria o Payment Intent com `STRIPE_SECRET_KEY`.
 4. O frontend confirma o pagamento com Stripe Elements usando o `client_secret`.
-2. O JS faz POST em `/api/payments/create-link`.
-3. O backend usa `PaymentService` com `STRIPE_SECRET_KEY` e cria um Payment Link.
-4. O usuário é redirecionado para o checkout do Stripe.
 
 ---
 

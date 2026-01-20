@@ -12,6 +12,10 @@
     box-shadow: 0 15px 40px rgba(47, 36, 20, 0.08);
 }
 
+.payment-card {
+    height: 100%;
+}
+
 .payment-summary,
 .payment-method {
     border: 1px solid #eee5d6;

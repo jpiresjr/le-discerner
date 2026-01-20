@@ -13,6 +13,50 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class PaymentController extends AbstractController
 {
+    #[Route('/api/payments/create-intent', methods: ['POST'])]
+    public function createPaymentIntent(
+        Request $request,
+        PaymentService $payment,
+        ProfessionalRepository $professionals,
+        EntityManagerInterface $em,
+        LoggerInterface $logger
+    ): JsonResponse {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->json(['error' => 'Unauthenticated'], 401);
+        }
+
+        $professional = $professionals->findOneBy(['user' => $user]);
+        if (!$professional) {
+            return $this->json(['error' => 'Professional profile not found'], 404);
+        }
+
+        $logger->info('Creating Stripe payment intent.', [
+            'user_id' => $user->getId(),
+            'professional_id' => $professional->getId(),
+            'ip' => $request->getClientIp(),
+        ]);
+
+        try {
+            $intent = $payment->createPaymentIntent($professional, 3000);
+            $professional->setPaymentStatus('pending');
+            $professional->setPaymentProviderId($intent['payment_intent_id']);
+            $professional->setPaymentUpdatedAt(new \DateTimeImmutable());
+            $em->flush();
+        } catch (\Throwable $exception) {
+            $logger->error('Failed to create Stripe payment intent.', [
+                'professional_id' => $professional->getId(),
+                'error' => $exception->getMessage(),
+            ]);
+
+            return $this->json(['error' => 'Payment intent creation failed.'], 500);
+        }
+
+        return $this->json([
+            'client_secret' => $intent['client_secret'],
+        ]);
+    }
+
     #[Route('/api/payments/create-link', methods: ['POST'])]
     public function createPaymentLink(
         Request $request,

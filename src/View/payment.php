@@ -14,6 +14,9 @@ ob_start();
     </div>
 </header>
 
+<section class="payment-section" data-stripe-publishable-key="<?= htmlspecialchars($_ENV['STRIPE_PUBLISHABLE_KEY'] ?? '') ?>">
+    <div class="container">
+        <div class="row g-4 align-items-stretch">
 <section class="payment-section">
     <div class="container">
         <div class="row g-4">
@@ -117,6 +120,15 @@ ob_start();
                     </div>
                     <div class="payment-method__body">
                         <label class="form-label">Número do cartão</label>
+                        <div class="stripe-placeholder" id="stripeCardNumber"></div>
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-6">
+                                <label class="form-label">Data de validade</label>
+                                <div class="stripe-placeholder" id="stripeCardExpiry"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Código de segurança</label>
+                                <div class="stripe-placeholder" id="stripeCardCvc"></div>
                         <div class="stripe-placeholder" id="stripeCardNumber">1234 1234 1234 1234</div>
                         <div class="row g-3 mt-2">
                             <div class="col-md-6">
@@ -132,6 +144,7 @@ ob_start();
                             Ao fornecer seus dados de cartão, você permite que a SUATERAPIA faça a cobrança para pagamentos futuros em conformidade com os respectivos termos.
                         </p>
                         <button class="btn btn-ipg-cta w-100 mt-3" id="createPaymentLink" type="button">
+                            Confirmar pagamento
                             Confirmar assinatura
                         </button>
                         <div class="alert alert-info mt-3 d-none" role="alert" id="paymentStatus">
@@ -197,6 +210,10 @@ $title = 'Pagamento';
 $extraCss = [
     'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css',
     '/assets/css/payment.css',
+];
+$extraJs = [
+    'https://js.stripe.com/v3/',
+    '/assets/js/payment.js',
 ];
 $extraJs = ['/assets/js/payment.js'];
 

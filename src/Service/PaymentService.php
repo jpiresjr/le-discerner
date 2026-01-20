@@ -51,4 +51,31 @@ class PaymentService
             'payment_link_id' => $paymentLink->id,
         ];
     }
+
+    /**
+     * @return array{client_secret: string, payment_intent_id: string}
+     */
+    public function createPaymentIntent(Professional $professional, int $amountCents): array
+    {
+        $intent = $this->stripe->paymentIntents->create([
+            'amount' => $amountCents,
+            'currency' => 'eur',
+            'metadata' => [
+                'professional_id' => (string) $professional->getId(),
+            ],
+            'automatic_payment_methods' => [
+                'enabled' => true,
+            ],
+        ]);
+
+        return [
+            'client_secret' => $intent->client_secret,
+            'payment_intent_id' => $intent->id,
+        ]);
+
+        return [
+            'url' => $paymentLink->url,
+            'payment_link_id' => $paymentLink->id,
+        ];
+    }
 }

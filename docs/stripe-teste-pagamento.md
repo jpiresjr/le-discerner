@@ -26,6 +26,12 @@ Para webhooks, também configure:
 STRIPE_WEBHOOK_SECRET=whsec_...
 ```
 
+E para Stripe Elements (pagamento dentro do site), configure a chave pública:
+
+```
+STRIPE_PUBLISHABLE_KEY=pk_test_...
+```
+
 ## 3) O que acontece depois de configurar a chave
 
 Com a chave de teste válida:
@@ -34,6 +40,8 @@ Com a chave de teste válida:
 - O botão de pagamento chama `POST /api/payments/create-link`.
 - O endpoint retorna uma URL do Stripe e o front redireciona para o checkout.
 - Você pode finalizar o pagamento usando **cartões de teste** fornecidos pelo Stripe.
+
+Se estiver usando **Stripe Elements** (pagamento dentro da sua página), o backend cria um Payment Intent e o frontend confirma o pagamento com `client_secret`.
 
 ## 4) Posso simular um pagamento real?
 
@@ -57,6 +65,9 @@ Em produção é altamente recomendado usar **webhooks** para confirmar pagament
 ## 6) Fluxo atual no projeto (resumo)
 
 1. Tela de pagamento chama o JS em `public/assets/js/payment.js`.
+2. O JS faz POST em `/api/payments/create-intent`.
+3. O backend cria o Payment Intent com `STRIPE_SECRET_KEY`.
+4. O frontend confirma o pagamento com Stripe Elements usando o `client_secret`.
 2. O JS faz POST em `/api/payments/create-link`.
 3. O backend usa `PaymentService` com `STRIPE_SECRET_KEY` e cria um Payment Link.
 4. O usuário é redirecionado para o checkout do Stripe.

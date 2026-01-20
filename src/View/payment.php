@@ -16,6 +16,8 @@ ob_start();
 
 <section class="payment-section" data-stripe-publishable-key="<?= htmlspecialchars($_ENV['STRIPE_PUBLISHABLE_KEY'] ?? '') ?>">
     <div class="container">
+        <div class="payment-grid">
+            <div class="payment-main">
         <div class="row g-4 align-items-stretch">
 <section class="payment-section">
     <div class="container">
@@ -73,6 +75,7 @@ ob_start();
                 </div>
             </div>
 
+            <div class="payment-sidebar">
             <div class="col-lg-5 payment-sidebar">
             <div class="col-lg-5">
                 <div class="payment-summary">

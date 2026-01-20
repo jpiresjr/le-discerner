@@ -7,6 +7,18 @@
     max-width: 1200px;
 }
 
+.payment-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 32px;
+    align-items: start;
+}
+
+.payment-main,
+.payment-sidebar {
+    min-width: 0;
+}
+
 .payment-card,
 .payment-summary,
 .payment-method {
@@ -126,5 +138,9 @@
 @media (max-width: 991px) {
     .payment-section {
         padding: 40px 0 60px;
+    }
+
+    .payment-grid {
+        grid-template-columns: 1fr;
     }
 }

@@ -71,6 +71,16 @@ class PaymentService
         return [
             'client_secret' => $intent->client_secret,
             'payment_intent_id' => $intent->id,
+        ]);
+
+        return [
+            'client_secret' => $intent->client_secret,
+            'payment_intent_id' => $intent->id,
+        ]);
+
+        return [
+            'url' => $paymentLink->url,
+            'payment_link_id' => $paymentLink->id,
         ];
     }
 }

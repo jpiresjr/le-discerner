@@ -2,6 +2,7 @@
 ob_start();
 ?>
 
+<!-- HEADER / BANNER -->
 <header id="hero" class="hero-ipg">
     <div class="hero-ipg__bg"></div>
 
@@ -16,6 +17,9 @@ ob_start();
 <section class="payment-section" data-stripe-publishable-key="<?= htmlspecialchars($_ENV['STRIPE_PUBLISHABLE_KEY'] ?? '') ?>">
     <div class="container">
         <div class="row g-4 align-items-stretch">
+<section class="payment-section">
+    <div class="container">
+        <div class="row g-4">
             <div class="col-lg-7">
                 <div class="payment-card">
                     <h4 class="mb-3">Detalhes de cobrança</h4>
@@ -70,6 +74,7 @@ ob_start();
             </div>
 
             <div class="col-lg-5 payment-sidebar">
+            <div class="col-lg-5">
                 <div class="payment-summary">
                     <h5 class="mb-3">Produto</h5>
                     <div class="summary-item">
@@ -79,6 +84,7 @@ ob_start();
                         </div>
                         <div class="summary-qty">x 1</div>
                     </div>
+
                     <div class="summary-divider"></div>
                     <div class="summary-total">
                         <span>Subtotal</span>
@@ -91,6 +97,24 @@ ob_start();
                 </div>
 
                 <div class="payment-method">
+                        <span>€0.00</span>
+                    </div>
+                    <div class="summary-total total">
+                        <span>Total</span>
+                        <span>€30.00</span>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-total">
+                        <span>Subtotal</span>
+                        <span>€30.00 / mês</span>
+                    </div>
+                    <div class="summary-total total">
+                        <span>Total recorrente</span>
+                        <span>€30.00 / mês</span>
+                    </div>
+                </div>
+
+                <div class="payment-method mt-4">
                     <div class="payment-method__header">
                         <span class="badge rounded-pill bg-success">Cartão de crédito/débito</span>
                     </div>
@@ -105,6 +129,15 @@ ob_start();
                             <div class="col-md-6">
                                 <label class="form-label">Código de segurança</label>
                                 <div class="stripe-placeholder" id="stripeCardCvc"></div>
+                        <div class="stripe-placeholder" id="stripeCardNumber">1234 1234 1234 1234</div>
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-6">
+                                <label class="form-label">Data de validade</label>
+                                <div class="stripe-placeholder" id="stripeCardExpiry">MM / AA</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Código de segurança</label>
+                                <div class="stripe-placeholder" id="stripeCardCvc">CVC</div>
                             </div>
                         </div>
                         <p class="text-muted small mt-3">
@@ -112,6 +145,7 @@ ob_start();
                         </p>
                         <button class="btn btn-ipg-cta w-100 mt-3" id="createPaymentLink" type="button">
                             Confirmar pagamento
+                            Confirmar assinatura
                         </button>
                         <div class="alert alert-info mt-3 d-none" role="alert" id="paymentStatus">
                             Preparando o link de pagamento...
@@ -123,6 +157,8 @@ ob_start();
     </div>
 </section>
 
+
+<!-- ================= FOOTER ================= -->
 <footer class="bg-theme-dark text-light pt-5 pb-4">
     <div class="container">
         <div class="row">
@@ -150,6 +186,9 @@ ob_start();
                     <li>Email: suporte@suaterapiaon.com</li>
                     <li>Endereço:
                         Rua quinta dos casquilhos 3 1 dt Barreiro - Setúbal PT 2830-499</li>
+                    <li>Telefone: (310) 461-4148</li>
+                    <li>Email: contato@ipgterapia.com</li>
+                    <li>Endereço: Beverly Hills, CA</li>
                 </ul>
             </div>
             <div class="col-6 col-md-3 mb-3">
@@ -176,6 +215,7 @@ $extraJs = [
     'https://js.stripe.com/v3/',
     '/assets/js/payment.js',
 ];
+$extraJs = ['/assets/js/payment.js'];
 
 require __DIR__ . '/layout.php';
 ?>

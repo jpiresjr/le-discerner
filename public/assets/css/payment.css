@@ -42,6 +42,12 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+.payment-summary + .payment-method {
+    margin-top: 24px;
+}
+
+.payment-summary {
+    border: 1px solid #eee5d6;
 }
 
 .summary-item {

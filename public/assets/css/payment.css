@@ -9,6 +9,11 @@
 
 .payment-grid {
     display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.9fr);
+    gap: 28px;
+    align-items: start;
+    max-width: 980px;
+    margin: 0 auto;
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
     gap: 32px;
     align-items: start;
@@ -63,6 +68,20 @@
     border-bottom: none;
 }
 
+.summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+}
+
+.summary-label {
+    font-size: 0.85rem;
+    color: #9b8a74;
+    font-weight: 600;
+}
+
+.summary-price {
 .summary-qty {
     font-weight: 600;
     color: #6b5434;

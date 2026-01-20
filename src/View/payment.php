@@ -76,6 +76,18 @@ ob_start();
             </div>
 
             <div class="payment-sidebar">
+                <div class="payment-summary">
+                    <div class="summary-header">
+                        <h5 class="mb-0">Produto</h5>
+                        <span class="summary-label">Subtotal</span>
+                    </div>
+                    <div class="summary-item">
+                        <div>
+                            <strong>Mensalidade Profissional</strong>
+                            <div class="text-muted">x 1</div>
+                        </div>
+                        <div class="summary-price">€30.00 / mês</div>
+                    </div>
             <div class="col-lg-5 payment-sidebar">
             <div class="col-lg-5">
                 <div class="payment-summary">

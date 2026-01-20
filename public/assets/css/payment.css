@@ -8,6 +8,10 @@
 }
 
 .payment-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: flex-start;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
     gap: 24px;
@@ -26,6 +30,14 @@
 .payment-main,
 .payment-sidebar {
     min-width: 0;
+}
+
+.payment-main {
+    flex: 1 1 0;
+}
+
+.payment-sidebar {
+    flex: 0 0 360px;
 }
 
 .payment-card,
@@ -168,11 +180,14 @@
     }
 
     .payment-grid {
+        flex-direction: column;
         grid-template-columns: 1fr;
     }
 }
 
 @media (min-width: 1200px) {
+    .payment-sidebar {
+        flex-basis: 420px;
     .payment-grid {
         grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
     }

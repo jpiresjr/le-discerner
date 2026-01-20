@@ -265,6 +265,12 @@
     </div>
 </section>
 
+<?php if (!empty($professionalBootstrapJson)): ?>
+    <script>
+        window.professionalBootstrap = <?= $professionalBootstrapJson ?>;
+    </script>
+<?php endif; ?>
+
 <!-- ================= FOOTER ================= -->
 <footer class="bg-theme-dark text-light pt-5 pb-4">
     <div class="container">

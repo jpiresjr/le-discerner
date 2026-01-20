@@ -4,10 +4,14 @@ namespace App\Service;
 use App\Entity\Patient;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class PatientService
 {
-    public function __construct(private EntityManagerInterface $em) {}
+    public function __construct(
+        private EntityManagerInterface $em,
+        private UserPasswordHasherInterface $hasher
+    ) {}
 
     public function createFromPayload(array $data, User $user): Patient
     {
@@ -21,9 +25,7 @@ class PatientService
 
         return $patient;
     }
-
-
-public function update(Patient $patient, array $data): Patient
+    public function update(Patient $patient, array $data): Patient
     {
         $user = $patient->getUser();
 
@@ -32,7 +34,9 @@ public function update(Patient $patient, array $data): Patient
         $user->setEmail($data['email'] ?? $user->getEmail());
         $user->setCountry($data['country'] ?? $user->getCountry());
         $user->setContact($data['contact'] ?? $user->getContact());
-        $user->setWhatsapp($data['whatsapp'] ?? $user->getWhatsapp());
+        if (array_key_exists('whatsapp', $data)) {
+            $user->setWhatsapp((bool) $data['whatsapp']);
+        }
 
         if (!empty($data['password'])) {
             $hashed = $this->hasher->hashPassword($user, $data['password']);

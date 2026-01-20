@@ -9,6 +9,10 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/dashboard/professional')]
 class ProfessionalDashboardController extends AbstractController
 {
+    public function __construct(
+        private readonly string $stripePublishableKey
+    ) {}
+
     #[Route('', name: 'professional_dashboard')]
     public function index(): Response
     {
@@ -27,15 +31,17 @@ class ProfessionalDashboardController extends AbstractController
     #[Route('/payment', name: 'professional_payment')]
     public function payment(): Response
     {
-        ob_start();
-        require __DIR__ . '/../../View/payment.php';
-        $content = ob_get_clean();
-
-        $title = 'Pagamento';
-        $extraJs = ['/assets/js/payment.js'];
-
-        ob_start();
-        require __DIR__ . '/../../View/layout.php';
-        return new Response(ob_get_clean());
+        return $this->render('dashboard/payment.html.twig', [
+            'title' => 'Pagamento',
+            'stripePublishableKey' => $this->stripePublishableKey,
+            'extraCss' => [
+                'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css',
+                '/assets/css/payment.css',
+            ],
+            'extraJs' => [
+                'https://js.stripe.com/v3/',
+                '/assets/js/payment.js',
+            ],
+        ]);
     }
 }

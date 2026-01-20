@@ -18,19 +18,83 @@ class PatientController extends AbstractController
     #[Route('/me', methods: ['GET'])]
     public function me(PatientRepository $repo): JsonResponse
     {
-        error_reporting(E_ALL);
-        ini_set('display_errors', 'on');
         /** @var User $user */
         $user = $this->getUser();
+        if (!$user) {
+            return $this->json(['error' => 'Unauthenticated'], 401);
+        }
 
         $patient = $repo->findOneByUser($user);
 
         return $this->json([
-            'fullName' => $user->getFullName(),
-            'email' => $user->getEmail(),
-            'gender' => $patient?->getGender(),
-            'language' => $patient?->getLanguage(),
+            'user' => [
+                'id' => $user->getId(),
+                'fullName' => $user->getFullName(),
+                'username' => $user->getUsername(),
+                'email' => $user->getEmail(),
+                'country' => $user->getCountry(),
+                'contact' => $user->getContact(),
+                'whatsapp' => $user->isWhatsapp(),
+                'telegram' => $user->isTelegram(),
+                'roles' => $user->getRoles(),
+            ],
+            'patient' => $patient ? [
+                'gender' => $patient->getGender(),
+                'language' => $patient->getLanguage(),
+            ] : null,
         ]);
+    }
+
+    #[Route('/me', methods: ['PUT'])]
+    public function updateMe(
+        Request $request,
+        PatientRepository $repo,
+        EntityManagerInterface $em
+    ): JsonResponse {
+        /** @var User $user */
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->json(['error' => 'Unauthenticated'], 401);
+        }
+
+        $patient = $repo->findOneByUser($user);
+        if (!$patient) {
+            return $this->json(['error' => 'Patient profile not found'], 404);
+        }
+
+        $data = json_decode($request->getContent(), true);
+        if (!is_array($data)) {
+            $data = $request->request->all();
+        }
+
+        if (array_key_exists('fullName', $data)) {
+            $user->setFullName((string) $data['fullName']);
+        }
+        if (array_key_exists('email', $data)) {
+            $user->setEmail((string) $data['email']);
+        }
+        if (array_key_exists('country', $data)) {
+            $user->setCountry((string) $data['country']);
+        }
+        if (array_key_exists('contact', $data)) {
+            $user->setContact((string) $data['contact']);
+        }
+        if (array_key_exists('whatsapp', $data)) {
+            $user->setWhatsapp((bool) $data['whatsapp']);
+        }
+        if (array_key_exists('telegram', $data)) {
+            $user->setTelegram((bool) $data['telegram']);
+        }
+        if (array_key_exists('gender', $data)) {
+            $patient->setGender($data['gender'] !== '' ? (string) $data['gender'] : null);
+        }
+        if (array_key_exists('language', $data)) {
+            $patient->setLanguage($data['language'] !== '' ? (string) $data['language'] : null);
+        }
+
+        $em->flush();
+
+        return $this->json(['success' => true]);
     }
 
     #[Route('', methods: ['GET'])]

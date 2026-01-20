@@ -9,6 +9,11 @@ require dirname(__DIR__).'/vendor/autoload.php';
 $env = $_SERVER['APP_ENV'] ?? 'dev';
 $debug = $_SERVER['APP_DEBUG'] ?? ('prod' !== $env);
 
+if (!isset($_SERVER['JWT_COOKIE_SECURE']) && !isset($_ENV['JWT_COOKIE_SECURE'])) {
+    $_SERVER['JWT_COOKIE_SECURE'] = '0';
+    $_ENV['JWT_COOKIE_SECURE'] = '0';
+}
+
 if ($debug) {
     umask(0000);
     Debug::enable();

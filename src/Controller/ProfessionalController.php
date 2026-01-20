@@ -189,14 +189,25 @@ class ProfessionalController extends AbstractController
     #[Route('/search', methods: ['GET'])]
     public function search(Request $request, ProfessionalRepository $repo): JsonResponse
     {
-        $query = mb_strtolower(trim((string) $request->query->get('q', '')));
-        $specialty = mb_strtolower(trim((string) $request->query->get('specialty', '')));
-        $country = mb_strtolower(trim((string) $request->query->get('country', '')));
-        $category = mb_strtolower(trim((string) $request->query->get('category', '')));
+        $normalize = static fn (string $value): string => function_exists('mb_strtolower')
+            ? mb_strtolower($value)
+            : strtolower($value);
+        $contains = static fn (string $haystack, string $needle): bool => $needle === ''
+            || (function_exists('str_contains')
+                ? str_contains($haystack, $needle)
+                : strpos($haystack, $needle) !== false);
+
+        $query = $normalize(trim((string) $request->query->get('q', '')));
+        $specialty = $normalize(trim((string) $request->query->get('specialty', '')));
+        $country = $normalize(trim((string) $request->query->get('country', '')));
+        $category = $normalize(trim((string) $request->query->get('category', '')));
 
         $items = [];
         foreach ($repo->findAll() as $professional) {
             $user = $professional->getUser();
+            if (!$user) {
+                continue;
+            }
             $adDetails = $professional->getAdDetails();
             $adData = $adDetails ? json_decode($adDetails, true) : [];
 
@@ -205,13 +216,10 @@ class ProfessionalController extends AbstractController
             $countryValue = (string) ($adData['country'] ?? '');
             $categoryValue = (string) ($adData['category'] ?? '');
 
-            $matchesQuery = $query === '' || str_contains(
-                mb_strtolower($name . ' ' . $specialtyValue),
-                $query
-            );
-            $matchesSpecialty = $specialty === '' || str_contains(mb_strtolower($specialtyValue), $specialty);
-            $matchesCountry = $country === '' || mb_strtolower($countryValue) === $country;
-            $matchesCategory = $category === '' || mb_strtolower($categoryValue) === $category;
+            $matchesQuery = $contains($normalize($name . ' ' . $specialtyValue), $query);
+            $matchesSpecialty = $contains($normalize($specialtyValue), $specialty);
+            $matchesCountry = $country === '' || $normalize($countryValue) === $country;
+            $matchesCategory = $category === '' || $normalize($categoryValue) === $category;
 
             if (!$matchesQuery || !$matchesSpecialty || !$matchesCountry || !$matchesCategory) {
                 continue;

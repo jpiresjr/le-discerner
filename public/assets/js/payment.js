@@ -17,6 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    if (!window.Stripe) {
+        if (status) {
+            status.classList.remove('d-none');
+            status.classList.add('alert-danger');
+            status.textContent = 'Stripe.js não foi carregado. Atualize a página.';
+        }
+        button.disabled = true;
+        return;
+    }
+
     const stripe = window.Stripe(publishableKey);
     const elements = stripe.elements();
 
@@ -33,6 +43,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardExpiry = elements.create('cardExpiry', { style: { base: { fontSize: '16px', fontFamily: 'inherit' } } });
     const cardCvc = elements.create('cardCvc', { style: { base: { fontSize: '16px', fontFamily: 'inherit' } } });
 
+    try {
+        cardNumber.mount('#stripeCardNumber');
+        cardExpiry.mount('#stripeCardExpiry');
+        cardCvc.mount('#stripeCardCvc');
+    } catch (error) {
+        if (status) {
+            status.classList.remove('d-none');
+            status.classList.add('alert-danger');
+            status.textContent = 'Não foi possível inicializar os campos do cartão.';
+        }
+        button.disabled = true;
+        return;
+    }
+
+    const submitPayment = async () => {
     cardNumber.mount('#stripeCardNumber');
     cardExpiry.mount('#stripeCardExpiry');
     cardCvc.mount('#stripeCardCvc');

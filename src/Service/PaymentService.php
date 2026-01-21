@@ -8,10 +8,12 @@ use Stripe\StripeClient;
 class PaymentService
 {
     private StripeClient $stripe;
+    private string $priceId;
 
-    public function __construct(string $secretKey)
+    public function __construct(string $secretKey, string $priceId = '')
     {
         $this->stripe = new StripeClient($secretKey);
+        $this->priceId = $priceId;
     }
 
     /**
@@ -19,20 +21,24 @@ class PaymentService
      */
     public function createPaymentLink(Professional $professional, int $amountCents): array
     {
-        $product = $this->stripe->products->create([
-            'name' => 'Mensalidade Plataforma Le-Discerner',
-        ]);
+        $priceId = $this->priceId;
+        if ($priceId === '') {
+            $product = $this->stripe->products->create([
+                'name' => 'Mensalidade Plataforma Le-Discerner',
+            ]);
 
-        $price = $this->stripe->prices->create([
-            'unit_amount' => $amountCents,
-            'currency' => 'eur',
-            'product' => $product->id,
-        ]);
+            $price = $this->stripe->prices->create([
+                'unit_amount' => $amountCents,
+                'currency' => 'eur',
+                'product' => $product->id,
+            ]);
+            $priceId = $price->id;
+        }
 
         $paymentLink = $this->stripe->paymentLinks->create([
             'line_items' => [
                 [
-                    'price' => $price->id,
+                    'price' => $priceId,
                     'quantity' => 1,
                 ]
             ],

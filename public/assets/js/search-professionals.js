@@ -57,9 +57,11 @@ const fetchProfessionals = async (params = {}) => {
     return response.json();
 };
 
-const updateResults = async (params = {}) => {
+let hasBootstrapRendered = false;
+
+const updateResults = async (params = {}, options = {}) => {
     try {
-        const data = await fetchProfessionals(params);
+        const data = options.bootstrap ? { items: options.bootstrap } : await fetchProfessionals(params);
         const list = data.items || [];
 
         resultsCount.textContent = `Mostrando ${list.length} profissionais`;
@@ -70,8 +72,13 @@ const updateResults = async (params = {}) => {
         }
 
         grid.innerHTML = list.map(buildCard).join('');
+        if (options.bootstrap) {
+            hasBootstrapRendered = true;
+        }
     } catch (error) {
-        renderEmpty(error.message);
+        if (!options.allowErrorFallback && !hasBootstrapRendered) {
+            renderEmpty(error.message);
+        }
     }
 };
 
@@ -89,6 +96,10 @@ if (resetButton) {
         form.reset();
         updateResults();
     });
+}
+
+if (window.professionalsBootstrap && Array.isArray(window.professionalsBootstrap)) {
+    updateResults({}, { bootstrap: window.professionalsBootstrap, allowErrorFallback: true });
 }
 
 updateResults();

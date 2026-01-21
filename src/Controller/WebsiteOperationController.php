@@ -11,18 +11,13 @@ class WebsiteOperationController extends AbstractController
     #[Route('/website-operation', name: 'website-operation')]
     public function index()
     {
-        ob_start();
-        require __DIR__ . '/../View/website-operation.php';
-        $content = ob_get_clean();
-
-        $title = 'Web-Operation';
-        $extraCss = [];
-
-        ob_start();
-        require __DIR__ . '/../View/layout.php';
-        return new Response(ob_get_clean());
-
-
+        return $this->render('public/website_operation.html.twig', [
+            'title' => 'Web-Operation',
+            'extraCss' => [],
+            'extraJs' => [
+                'https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js',
+            ],
+        ]);
     }
 
 }

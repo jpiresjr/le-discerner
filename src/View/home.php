@@ -5,8 +5,8 @@
     <div class="container-lg hero-ipg__content">
         <h1 class="hero-ipg__title">WELCOME</h1>
         <p class="hero-ipg__sub">
-            Descubra uma experiência única focada em você.
-            Aqui, sua saúde é a nossa prioridade. Conecte-se a profissionais qualificados e dedicados que se preocupam genuinamente com o seu bem-estar integral.
+            Discover a personalised experience, centred on you. Here, your well-being comes first.
+            Connect with qualified, dedicated professionals who genuinely care about you.
         </p>
 
         <div class="d-flex flex-wrap gap-2 justify-content-center">
@@ -95,7 +95,7 @@
                 Acreditamos que, através do trabalho conjunto entre cliente e terapeuta,
                 um crescimento significativo é possível.
             </p>
-            <a href="#" class="btn btn-ipg-cta mt-3">Saiba Mais</a>
+            <a href="#" class="btn btn-ipg-cta mt-3">Learn more</a>
         </div>
     </div>
 </section>
@@ -106,8 +106,8 @@
     <div class="container" data-aos="fade-up">
 
         <div class="text-center mb-5">
-            <h2 class="fw-light">Nossas Abordagens Terapêuticas</h2>
-            <p class="text-muted">Escolha o caminho que mais se conecta com você</p>
+            <h2 class="fw-light">Our Therapeutic Approaches</h2>
+            <p class="text-muted">Choose the path that resonates most with you</p>
         </div>
 
         <div class="row g-4">
@@ -119,7 +119,7 @@
                     <div class="therapy-card__content">
                         <h5>Psicanálise</h5>
                         <a href="/therapies.php#psicanalise" class="btn btn-ipg-cta w-100">
-                            Saiba mais
+                            Learn more
                         </a>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
                     <div class="therapy-card__content">
                         <h5>Terapia Integrativa</h5>
                         <a href="/therapies.php#terapia-integrativa" class="btn btn-ipg-cta w-100">
-                            Saiba mais
+                            Learn more
                         </a>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
                     <div class="therapy-card__content">
                         <h5>Coaching</h5>
                         <a href="/therapies.php#coaching" class="btn btn-ipg-cta w-100">
-                            Saiba mais
+                            Learn more
                         </a>
                     </div>
                 </div>
@@ -159,9 +159,9 @@
 
         <!-- TÍTULO -->
         <div class="text-center mb-5">
-            <h2 class="section-title">Profissionais em Destaque</h2>
+            <h2 class="section-title">Featured Professionals</h2>
             <p class="section-subtitle">
-                Especialistas cuidadosamente selecionados para acompanhar você.
+                Carefully selected specialists to support your journey.
             </p>
         </div>
 

@@ -189,6 +189,7 @@ class ProfessionalController extends AbstractController
     #[Route('/search', methods: ['GET'])]
     public function search(Request $request, ProfessionalRepository $repo): JsonResponse
     {
+        dd('seach');
         $normalize = static fn (string $value): string => function_exists('mb_strtolower')
             ? mb_strtolower($value)
             : strtolower($value);

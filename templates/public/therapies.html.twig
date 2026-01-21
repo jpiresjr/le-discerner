@@ -1,0 +1,141 @@
+{% extends 'public/layout.html.twig' %}
+
+{% block content %}
+<!-- ================= HERO ================= -->
+<header id="hero" class="hero-ipg">
+    <div class="hero-ipg__bg" style="background-image: url('/images/image12.jpg');"></div>
+    <div class="container-lg hero-ipg__content">
+        <h1 class="hero-ipg__title">Terapias</h1>
+        <p class="hero-ipg__sub">Explore abordagens terapêuticas que priorizam bem-estar, consciência e transformação.</p>
+    </div>
+</header>
+
+<!-- ================= SEÇÃO PSICANÁLISE ================= -->
+<section id="psicanalise" class="py-5">
+    <div class="container" data-aos="fade-up">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <img src="/images/Psicanalise.jpeg" alt="Psicanálise" class="img-fluid rounded shadow"/>
+            </div>
+            <div class="col-md-6">
+                <h2>Psicanálise</h2>
+                <p class="text-muted">
+                    A Psicanálise é um método que busca explorar o inconsciente, trazendo à consciência padrões,
+                    memórias e emoções que influenciam o comportamento e relações pessoais.
+                </p>
+                <p class="text-muted">
+                    Insira aqui informações sobre como funciona, quando é indicada, benefícios e outras considerações.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= SEÇÃO TERAPIA INTEGRATIVA ================= -->
+<section id="terapia-integrativa" class="py-5 bg-light">
+    <div class="container" data-aos="fade-up">
+        <div class="row align-items-center flex-md-row-reverse">
+            <div class="col-md-6">
+                <img src="/images/Terapia-integrativa.jpeg" alt="Terapia Integrativa"
+                     class="img-fluid rounded shadow"/>
+            </div>
+            <div class="col-md-6">
+                <h2>Terapia Integrativa</h2>
+                <p class="text-muted">
+                    A Terapia Integrativa considera a pessoa como um todo — corpo, mente e emoções — combinando
+                    abordagens para promover equilíbrio, autoconhecimento e bem-estar.
+                </p>
+                <p class="text-muted">
+                    Este é o lugar ideal para descrever as estratégias, modalidades usadas, e como o atendimento é feito.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= SEÇÃO COACHING ================= -->
+<section id="coaching" class="py-5">
+    <div class="container" data-aos="fade-up">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <img src="/images/Coaching.jpeg" alt="Coaching" class="img-fluid rounded shadow"/>
+            </div>
+            <div class="col-md-6">
+                <h2>Coaching</h2>
+                <p class="text-muted">
+                    O Coaching é um processo colaborativo centrado em objetivos, estimulando clareza,
+                    foco e transformação prática da vida pessoal ou profissional.
+                </p>
+                <p class="text-muted">
+                    Você pode detalhar os benefícios do coaching, público-alvo, e o que esperar das sessões.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-theme-dark text-light pt-5 pb-4">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+                <h5>Le Discerner</h5>
+                <ul class="list-unstyled small text-secondary">
+                    <li>Sobre nós</li>
+                    <li>Missão</li>
+                    <li>Contato</li>
+                </ul>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <h5>Navegação</h5>
+                <ul class="list-unstyled small">
+                    <li><a href="/" class="text-light text-decoration-none">Home</a></li>
+                    <li><a href="/about" class="text-light text-decoration-none">About</a></li>
+                    <li><a href="/therapies" class="text-light text-decoration-none">Therapies</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <h5>Contato</h5>
+                <p class="small mb-1">Email: contato@lediscerner.com</p>
+                <p class="small">© 2025 Le Discerner</p>
+            </div>
+
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
+{% block inline_javascripts %}
+<script>
+    AOS.init();
+
+    (() => {
+        const nav = document.getElementById('mainNavbar');
+        const hero = document.getElementById('hero');
+        const bg = document.querySelector('.hero-ipg__bg');
+        const content = document.querySelector('.hero-ipg__content');
+
+        function onScroll(){
+            const y = window.scrollY || 0;
+
+            nav.classList.toggle('scrolled', y > 10);
+
+            if (hero && bg){
+                const heroH = hero.offsetHeight;
+                const p = Math.min(1, y / heroH);
+                bg.style.transform = `translateY(${y * 0.25}px) scale(1.06)`;
+
+                if (content){
+                    content.style.opacity = (1 - p * 0.55).toFixed(3);
+                    content.style.transform = `translateY(${p * 18}px)`;
+                }
+            }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive:true });
+        onScroll();
+    })();
+</script>
+{% endblock %}

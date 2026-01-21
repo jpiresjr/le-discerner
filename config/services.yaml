@@ -1,6 +1,7 @@
 parameters:
   # Aqui você pode adicionar parâmetros globais caso precise
   locale: 'pt_BR'
+  stripe_publishable_key: ''
 
 services:
   # Configurações padrão
@@ -9,6 +10,8 @@ services:
     autoconfigure: true   # Registra automaticamente como Command/EventSubscriber/etc
     bind:
       string $stripeSecretKey: '%env(STRIPE_SECRET_KEY)%'
+      string $stripePublishableKey: '%env(default:stripe_publishable_key:STRIPE_PUBLISHABLE_KEY)%'
+      string $stripeWebhookSecret: '%env(STRIPE_WEBHOOK_SECRET)%'
 
   # Registra todos os serviços do diretório src/
   App\:
@@ -42,6 +45,7 @@ services:
   App\Service\PaymentService:
     arguments:
       $secretKey: '%env(STRIPE_SECRET_KEY)%'
+      $priceId: '%env(STRIPE_PRICE_ID)%'
 
   # Caso você use Redis futuramente:
   # redis.client:
@@ -51,4 +55,3 @@ services:
   #           arguments:
   #               - '%env(REDIS_HOST)%'
   #               - '%env(int:REDIS_PORT)%'
-

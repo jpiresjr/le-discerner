@@ -4,7 +4,7 @@ ob_start();
 
 <section class="hero-banner hero-banner--compact">
     <div class="container">
-        <h1>Buscar Profissionais</h1>
+        <h1>Discover Professionals</h1>
         <p class="lead">Encontre especialistas por área, localização ou disponibilidade.</p>
     </div>
 </section>

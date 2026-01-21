@@ -126,3 +126,11 @@
     </div>
 </footer>
 {% endblock %}
+
+{% block inline_javascripts %}
+    {% if professionalsBootstrap is defined %}
+        <script>
+            window.professionalsBootstrap = {{ professionalsBootstrap|json_encode|raw }};
+        </script>
+    {% endif %}
+{% endblock %}

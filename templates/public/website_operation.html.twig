@@ -1,0 +1,135 @@
+{% extends 'public/layout.html.twig' %}
+
+{% block content %}
+<!-- ================= HERO ================= -->
+<header id="hero" class="hero-ipg">
+    <div class="hero-ipg__bg"></div>
+
+    <div class="container-lg hero-ipg__content">
+        <h1 class="hero-ipg__title">WEBSITE OPERATION</h1>
+        <p class="hero-ipg__sub">
+            Tecnologia, estratégia e cuidado para uma presença digital consciente.
+        </p>
+    </div>
+</header>
+
+<!-- ================= CONTEÚDO ================= -->
+<section class="py-5 bg-light">
+    <div class="container" data-aos="fade-up">
+        <div class="row align-items-center g-5">
+
+            <!-- TEXTO -->
+            <div class="col-lg-6">
+                <span class="text-uppercase small text-muted">Website Operation</span>
+
+                <h2 class="mt-2" style="color:#3e4533;">
+                    Entenda como funciona
+                </h2>
+
+                <hr class="section-divider">
+
+                <ul class="text-muted mt-4">
+                    <li>Somos um site de busca. Reunimos profissional capacitados com um olhar exclusivo ao imigrante de CPLP.</li>
+                    <li>Ao filtrar as informações, serão disponibilizados opções de profissional, com informações e links de contato direto com eles.</li>
+                    <li>O pagamento das sessões, assim como o agendamento é direto com o profissional.</li>
+                    <li>Mas não deixamos sozinho. Estaremos acompanhando de perto seu tratamento. Com atenção e cuidado na qualidade, na informação.</li>
+                    <li>Porém estamos a disposição para auxiliar em tudo que for necessário ou no esclarecimento de dúvidas.</li>
+                </ul>
+
+                <p class="text-muted mt-4">
+                    Não trabalhamos com soluções genéricas ou robôs.
+                    Existe alguém aqui que está preocupado com você.
+                </p>
+
+                <a href="/contact.php" class="btn btn-ipg-cta mt-3">
+                    Fale com a gente
+                </a>
+            </div>
+
+            <!-- IMAGEM -->
+            <div class="col-lg-6">
+                <div class="p-4"
+                     style="background:#fbf9f4;border-radius:18px;">
+                    <img src="/images/website-operation.jpg"
+                         alt="Website Operation"
+                         class="img-fluid rounded shadow">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="bg-theme-dark text-light pt-5 pb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-md-3 mb-3">
+                <h5>Sobre</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-light text-decoration-none">Visão Geral</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Equipe</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Carreiras</a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-md-3 mb-3">
+                <h5>Serviços</h5>
+                <ul class="list-unstyled">
+                    <li>Website Operation</li>
+                    <li>Manutenção Digital</li>
+                    <li>Suporte Contínuo</li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-md-3 mb-3">
+                <h5>Contato</h5>
+                <ul class="list-unstyled">
+                    <li>Email: contato@lediscerner.com</li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-md-3 mb-3">
+                <h5>Siga-nos</h5>
+                <a href="#" class="text-light me-2"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+
+        <div class="text-center text-secondary small pt-3">
+            © 2025 Le Discerner. Todos os direitos reservados.
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
+{% block inline_javascripts %}
+<script>
+    AOS.init();
+
+    (() => {
+        const nav = document.getElementById('mainNavbar');
+        const hero = document.getElementById('hero');
+        const bg = document.querySelector('.hero-ipg__bg');
+        const content = document.querySelector('.hero-ipg__content');
+
+        function onScroll(){
+            const y = window.scrollY || 0;
+            nav.classList.toggle('scrolled', y > 10);
+
+            if (hero && bg){
+                const heroH = hero.offsetHeight;
+                const p = Math.min(1, y / heroH);
+                bg.style.transform = `translateY(${y * 0.25}px) scale(1.06)`;
+
+                if (content){
+                    content.style.opacity = (1 - p * 0.55);
+                    content.style.transform = `translateY(${p * 18}px)`;
+                }
+            }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive:true });
+        onScroll();
+    })();
+</script>
+{% endblock %}

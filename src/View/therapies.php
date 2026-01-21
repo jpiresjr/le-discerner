@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Terapias — Le Discerner</title>
+    <title>Therapies — Le Discerner</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -73,8 +73,8 @@
 <header id="hero" class="hero-ipg">
     <div class="hero-ipg__bg" style="background-image: url('/images/image12.jpg');"></div>
     <div class="container-lg hero-ipg__content">
-        <h1 class="hero-ipg__title">Terapias</h1>
-        <p class="hero-ipg__sub">Explore abordagens terapêuticas que priorizam bem-estar, consciência e transformação.</p>
+        <h1 class="hero-ipg__title">Therapies</h1>
+        <p class="hero-ipg__sub">Explore therapeutic approaches that prioritize well-being, awareness, and transformation.</p>
     </div>
 </header>
 

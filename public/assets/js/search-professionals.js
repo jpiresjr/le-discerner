@@ -13,22 +13,24 @@ const buildCard = (professional) => {
 
     return `
         <div class="col-md-6 col-xl-4">
-            <article class="professional-card">
-                <div class="professional-card__image">
-                    <img src="${photo || fallbackImage}" alt="${professional.name}">
-                    <span class="professional-card__badge">${badge}</span>
-                </div>
-                <div class="professional-card__body">
-                    <div class="professional-card__status">Disponível</div>
-                    <div class="professional-card__title">${professional.name}</div>
-                    <div class="professional-card__meta">
-                        <span><i class="bi bi-briefcase"></i>${professional.specialty || 'Especialidade não informada'}</span>
-                        <span><i class="bi bi-geo-alt"></i>${ad.country || 'Local não informado'}</span>
-                        <span><i class="bi bi-clock"></i>${ad.duration ? `${ad.duration} min` : 'Duração flexível'}</span>
+            <a class="professional-card-link" href="/professionals/${professional.id}">
+                <article class="professional-card">
+                    <div class="professional-card__image">
+                        <img src="${photo || fallbackImage}" alt="${professional.name}">
+                        <span class="professional-card__badge">${badge}</span>
                     </div>
-                    <div class="professional-card__price">${price}</div>
-                </div>
-            </article>
+                    <div class="professional-card__body">
+                        <div class="professional-card__status">Disponível</div>
+                        <div class="professional-card__title">${professional.name}</div>
+                        <div class="professional-card__meta">
+                            <span><i class="bi bi-briefcase"></i>${professional.specialty || 'Especialidade não informada'}</span>
+                            <span><i class="bi bi-geo-alt"></i>${ad.country || 'Local não informado'}</span>
+                            <span><i class="bi bi-clock"></i>${ad.duration ? `${ad.duration} min` : 'Duração flexível'}</span>
+                        </div>
+                        <div class="professional-card__price">${price}</div>
+                    </div>
+                </article>
+            </a>
         </div>
     `;
 };

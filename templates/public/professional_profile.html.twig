@@ -1,0 +1,90 @@
+{% extends 'public/layout.html.twig' %}
+
+{% block content %}
+<section class="hero-banner hero-banner--compact">
+    <div class="container">
+        <h1>{{ professional.name }}</h1>
+        <p class="lead">{{ professional.specialty ?: 'Especialidade não informada' }}</p>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <img class="card-img-top" src="{{ professional.photo }}" alt="{{ professional.name }}">
+                    <div class="card-body">
+                        <span class="badge bg-secondary mb-2">{{ professional.badge }}</span>
+                        <h5 class="card-title mb-1">{{ professional.name }}</h5>
+                        <p class="text-muted mb-3">{{ professional.specialty ?: 'Especialidade não informada' }}</p>
+                        <ul class="list-unstyled small mb-0">
+                            <li class="mb-2">
+                                <i class="bi bi-geo-alt me-2"></i>{{ professional.country ?: 'Local não informado' }}
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-clock me-2"></i>{{ professional.duration ?: 'Duração flexível' }}
+                            </li>
+                            <li>
+                                <i class="bi bi-currency-dollar me-2"></i>{{ professional.price ?: 'Valor a combinar' }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h4 class="mb-3">Sobre o profissional</h4>
+                        <p class="mb-4">{{ professional.description ?: 'Descrição não informada.' }}</p>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="border rounded-3 p-3 h-100">
+                                    <h6 class="mb-1">Atendimento</h6>
+                                    <p class="mb-0 text-muted">{{ professional.category ?: 'Não informado' }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border rounded-3 p-3 h-100">
+                                    <h6 class="mb-1">Contato</h6>
+                                    <p class="mb-0 text-muted">{{ professional.contact ?: 'Não informado' }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border rounded-3 p-3 h-100">
+                                    <h6 class="mb-1">Localização</h6>
+                                    <p class="mb-0 text-muted">{{ professional.location ?: 'Não informada' }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border rounded-3 p-3 h-100">
+                                    <h6 class="mb-1">Portfólio</h6>
+                                    <p class="mb-0 text-muted">{{ professional.portfolio ?: 'Não informado' }}</p>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="border rounded-3 p-3 h-100">
+                                    <h6 class="mb-1">Formação</h6>
+                                    <p class="mb-0 text-muted">{{ professional.education ?: 'Não informada' }}</p>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="border rounded-3 p-3 h-100">
+                                    <h6 class="mb-1">Redes sociais</h6>
+                                    <p class="mb-0 text-muted">{{ professional.socialMedia ?: 'Não informadas' }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <a class="btn btn-theme" href="/professionals">Voltar para busca</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

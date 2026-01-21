@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title><?= $title ?? 'Le Discerner' ?></title>
+    <title><?= htmlspecialchars($title ?? 'Le Discerner', ENT_QUOTES, 'UTF-8') ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap -->
@@ -14,7 +14,7 @@
     <!-- CSS extra por página -->
     <?php if (!empty($extraCss)): ?>
         <?php foreach ($extraCss as $css): ?>
-            <link rel="stylesheet" href="<?= $css ?>">
+            <link rel="stylesheet" href="<?= htmlspecialchars($css, ENT_QUOTES, 'UTF-8') ?>">
         <?php endforeach; ?>
     <?php endif; ?>
 </head>
@@ -38,7 +38,7 @@
 <!-- JS extra por página -->
 <?php if (!empty($extraJs)): ?>
     <?php foreach ($extraJs as $js): ?>
-        <script src="<?= $js ?>"></script>
+        <script src="<?= htmlspecialchars($js, ENT_QUOTES, 'UTF-8') ?>"></script>
     <?php endforeach; ?>
 <?php endif; ?>
 

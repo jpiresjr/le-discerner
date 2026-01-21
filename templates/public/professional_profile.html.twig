@@ -1,0 +1,133 @@
+{% extends 'public/layout.html.twig' %}
+
+{% block content %}
+<header id="hero" class="hero-ipg">
+    <div class="hero-ipg__bg"></div>
+
+    <div class="container-lg hero-ipg__content">
+        <h1 class="hero-ipg__title">{{ professional.name }}</h1>
+        <p class="hero-ipg__sub">{{ professional.specialty ?: 'Especialidade não informada' }}</p>
+    </div>
+</header>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <img class="card-img-top" src="{{ professional.photo }}" alt="{{ professional.name }}">
+                    <div class="card-body">
+                        <span class="badge bg-secondary mb-2">{{ professional.badge }}</span>
+                        <h5 class="card-title mb-1">{{ professional.name }}</h5>
+                        <p class="text-muted mb-3">{{ professional.specialty ?: 'Especialidade não informada' }}</p>
+                        <ul class="list-unstyled small mb-0">
+                            <li class="mb-2">
+                                <i class="bi bi-geo-alt me-2"></i>{{ professional.country ?: 'Local não informado' }}
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-clock me-2"></i>{{ professional.duration ?: 'Duração flexível' }}
+                            </li>
+                            <li>
+                                <i class="bi bi-currency-dollar me-2"></i>{{ professional.price ?: 'Valor a combinar' }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h4 class="mb-3">Sobre o profissional</h4>
+                        <p class="mb-4">{{ professional.description ?: 'Descrição não informada.' }}</p>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="border rounded-3 p-3 h-100">
+                                    <h6 class="mb-1">Atendimento</h6>
+                                    <p class="mb-0 text-muted">{{ professional.category ?: 'Não informado' }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border rounded-3 p-3 h-100">
+                                    <h6 class="mb-1">Contato</h6>
+                                    <p class="mb-0 text-muted">{{ professional.contact ?: 'Não informado' }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border rounded-3 p-3 h-100">
+                                    <h6 class="mb-1">Localização</h6>
+                                    <p class="mb-0 text-muted">{{ professional.location ?: 'Não informada' }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="border rounded-3 p-3 h-100">
+                                    <h6 class="mb-1">Portfólio</h6>
+                                    <p class="mb-0 text-muted">{{ professional.portfolio ?: 'Não informado' }}</p>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="border rounded-3 p-3 h-100">
+                                    <h6 class="mb-1">Formação</h6>
+                                    <p class="mb-0 text-muted">{{ professional.education ?: 'Não informada' }}</p>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="border rounded-3 p-3 h-100">
+                                    <h6 class="mb-1">Redes sociais</h6>
+                                    <p class="mb-0 text-muted">{{ professional.socialMedia ?: 'Não informadas' }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <a class="btn btn-theme" href="/professionals">Voltar para busca</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-theme-dark text-light pt-5 pb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-md-3 mb-3">
+                <h5>Sobre</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-light text-decoration-none">Visão Geral</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Equipe</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Carreiras</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+                <h5>Serviços</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-light text-decoration-none">Psicoterapia Individual</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Terapia de Casal</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Terapia Familiar</a></li>
+                    <li><a href="#" class="text-light text-decoration-none">Terapia em Grupo</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+                <h5>Contato</h5>
+                <ul class="list-unstyled">
+                    <li>Telefone: (310) 461-4148</li>
+                    <li>Email: contato@ipgterapia.com</li>
+                    <li>Endereço: Beverly Hills, CA</li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+                <h5>Siga-nos</h5>
+                <a href="#" class="text-light me-2"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-light me-2"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="text-center text-secondary small pt-3">
+            © 2025 Le-Discerner. Todos os direitos reservados.
+        </div>
+    </div>
+</footer>
+{% endblock %}

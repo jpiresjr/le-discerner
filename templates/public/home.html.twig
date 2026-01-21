@@ -168,103 +168,39 @@
         <!-- CARROSSEL -->
         <div id="carouselProfissionais" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-
-                <!-- SLIDE 1 -->
-                <div class="carousel-item active">
-                    <div class="row g-4 justify-content-center">
-
-                        <div class="col-md-6 col-lg-4">
-                            <div class="professional-card h-100">
-                                <div class="professional-image">
-                                    <img src="/images/profissional-1.jpg" alt="Profissional">
-                                </div>
-                                <div class="professional-body">
-                                    <h5>Dr. João Martins</h5>
-                                    <span>Psicanálise</span>
-                                    <p>Escuta profunda e acompanhamento emocional consciente.</p>
-                                    <a href="#" class="btn btn-ipg-cta w-100">Ver Perfil</a>
+                {% if featuredProfessionals is not empty %}
+                    {% for slide in featuredProfessionals %}
+                        <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                            <div class="row g-4 justify-content-center">
+                                {% for professional in slide %}
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="professional-card h-100">
+                                            <div class="professional-image">
+                                                <img src="{{ professional.photo }}" alt="Profissional">
+                                            </div>
+                                            <div class="professional-body">
+                                                <h5>{{ professional.name }}</h5>
+                                                <span>{{ professional.specialty ?: 'Especialidade não informada' }}</span>
+                                                <p>{{ professional.description }}</p>
+                                                <a href="/professionals/{{ professional.id }}" class="btn btn-ipg-cta w-100">Ver Perfil</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="carousel-item active">
+                        <div class="row g-4 justify-content-center">
+                            <div class="col-12">
+                                <div class="alert alert-light text-center">
+                                    Nenhum profissional em destaque disponível no momento.
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-6 col-lg-4">
-                            <div class="professional-card h-100">
-                                <div class="professional-image">
-                                    <img src="/images/profissional-2.jpg" alt="Profissional">
-                                </div>
-                                <div class="professional-body">
-                                    <h5>Dra. Ana Ribeiro</h5>
-                                    <span>Terapia Integrativa</span>
-                                    <p>Abordagem integrativa para mente, corpo e emoções.</p>
-                                    <a href="#" class="btn btn-ipg-cta w-100">Ver Perfil</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-lg-4">
-                            <div class="professional-card h-100">
-                                <div class="professional-image">
-                                    <img src="/images/profissional-3.jpg" alt="Profissional">
-                                </div>
-                                <div class="professional-body">
-                                    <h5>Dr. Carlos Lima</h5>
-                                    <span>Coaching</span>
-                                    <p>Orientação prática para resultados e bem-estar contínuo.</p>
-                                    <a href="#" class="btn btn-ipg-cta w-100">Ver Perfil</a>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="row g-4 justify-content-center">
-
-                        <div class="col-md-6 col-lg-4">
-                            <div class="professional-card h-100">
-                                <div class="professional-image">
-                                    <img src="/images/profissional-4.jpg" alt="Profissional">
-                                </div>
-                                <div class="professional-body">
-                                    <h5>Dra. Marina Costa</h5>
-                                    <span>Psicanálise</span>
-                                    <p>Atendimento humanizado com foco em autoconhecimento.</p>
-                                    <a href="#" class="btn btn-ipg-cta w-100">Ver Perfil</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-lg-4">
-                            <div class="professional-card h-100">
-                                <div class="professional-image">
-                                    <img src="/images/profissional-5.jpg" alt="Profissional">
-                                </div>
-                                <div class="professional-body">
-                                    <h5>Dr. Eduardo Faria</h5>
-                                    <span>Terapia Integrativa</span>
-                                    <p>Cuidado integrativo e acolhimento em cada sessão.</p>
-                                    <a href="#" class="btn btn-ipg-cta w-100">Ver Perfil</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-lg-4">
-                            <div class="professional-card h-100">
-                                <div class="professional-image">
-                                    <img src="/images/profissional-6.jpg" alt="Profissional">
-                                </div>
-                                <div class="professional-body">
-                                    <h5>Dra. Lucia Silva</h5>
-                                    <span>Coaching</span>
-                                    <p>Clareza e direção para alcançar suas metas com confiança.</p>
-                                    <a href="#" class="btn btn-ipg-cta w-100">Ver Perfil</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+                {% endif %}
 
             </div>
 

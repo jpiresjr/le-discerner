@@ -5,7 +5,7 @@
     <div class="container-lg hero-ipg__content">
         <h1 class="hero-ipg__title">WEBSITE OPERATION</h1>
         <p class="hero-ipg__sub">
-            Tecnologia, estratégia e cuidado para uma presença digital consciente.
+            Technology, strategy and care for a conscious digital presence.
         </p>
     </div>
 </header>

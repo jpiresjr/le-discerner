@@ -69,7 +69,7 @@ const updateResults = async (params = {}, options = {}) => {
         resultsCount.textContent = `Showing ${list.length} professionals`;
 
         if (!list.length) {
-            renderEmpty('No professionals found with these filters.');
+            renderEmpty('It was not possible to load the professionals.');
             return;
         }
 

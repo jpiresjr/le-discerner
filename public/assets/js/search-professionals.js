@@ -13,22 +13,24 @@ const buildCard = (professional) => {
 
     return `
         <div class="col-md-6 col-xl-4">
-            <article class="professional-card">
-                <div class="professional-card__image">
-                    <img src="${photo || fallbackImage}" alt="${professional.name}">
-                    <span class="professional-card__badge">${badge}</span>
-                </div>
-                <div class="professional-card__body">
-                    <div class="professional-card__status">Disponível</div>
-                    <div class="professional-card__title">${professional.name}</div>
-                    <div class="professional-card__meta">
-                        <span><i class="bi bi-briefcase"></i>${professional.specialty || 'Especialidade não informada'}</span>
-                        <span><i class="bi bi-geo-alt"></i>${ad.country || 'Local não informado'}</span>
-                        <span><i class="bi bi-clock"></i>${ad.duration ? `${ad.duration} min` : 'Duração flexível'}</span>
+            <a class="professional-card-link" href="/professionals/${professional.id}">
+                <article class="professional-card">
+                    <div class="professional-card__image">
+                        <img src="${photo || fallbackImage}" alt="${professional.name}">
+                        <span class="professional-card__badge">${badge}</span>
                     </div>
-                    <div class="professional-card__price">${price}</div>
-                </div>
-            </article>
+                    <div class="professional-card__body">
+                        <div class="professional-card__status">Disponível</div>
+                        <div class="professional-card__title">${professional.name}</div>
+                        <div class="professional-card__meta">
+                            <span><i class="bi bi-briefcase"></i>${professional.specialty || 'Especialidade não informada'}</span>
+                            <span><i class="bi bi-geo-alt"></i>${ad.country || 'Local não informado'}</span>
+                            <span><i class="bi bi-clock"></i>${ad.duration ? `${ad.duration} min` : 'Duração flexível'}</span>
+                        </div>
+                        <div class="professional-card__price">${price}</div>
+                    </div>
+                </article>
+            </a>
         </div>
     `;
 };
@@ -57,9 +59,11 @@ const fetchProfessionals = async (params = {}) => {
     return response.json();
 };
 
-const updateResults = async (params = {}) => {
+let hasBootstrapRendered = false;
+
+const updateResults = async (params = {}, options = {}) => {
     try {
-        const data = await fetchProfessionals(params);
+        const data = options.bootstrap ? { items: options.bootstrap } : await fetchProfessionals(params);
         const list = data.items || [];
 
         resultsCount.textContent = `Mostrando ${list.length} profissionais`;
@@ -70,8 +74,13 @@ const updateResults = async (params = {}) => {
         }
 
         grid.innerHTML = list.map(buildCard).join('');
+        if (options.bootstrap) {
+            hasBootstrapRendered = true;
+        }
     } catch (error) {
-        renderEmpty(error.message);
+        if (!options.allowErrorFallback && !hasBootstrapRendered) {
+            renderEmpty(error.message);
+        }
     }
 };
 
@@ -89,6 +98,10 @@ if (resetButton) {
         form.reset();
         updateResults();
     });
+}
+
+if (window.professionalsBootstrap && Array.isArray(window.professionalsBootstrap)) {
+    updateResults({}, { bootstrap: window.professionalsBootstrap, allowErrorFallback: true });
 }
 
 updateResults();

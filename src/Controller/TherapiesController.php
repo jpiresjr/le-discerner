@@ -11,16 +11,14 @@ class TherapiesController extends AbstractController
     #[Route('/therapies', name: 'therapies')]
     public function index(): Response
     {
-        ob_start();
-        require __DIR__ . '/../View/therapies.php';
-        $content = ob_get_clean();
-
-        $title = 'Therapies';
-        $extraCss = [];
-        $extraJs = [];
-
-        ob_start();
-        require __DIR__ . '/../View/layout.php';
-        return new Response(ob_get_clean());
+        return $this->render('public/therapies.html.twig', [
+            'title' => 'Therapies',
+            'extraCss' => [
+                'https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css',
+            ],
+            'extraJs' => [
+                'https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js',
+            ],
+        ]);
     }
 }

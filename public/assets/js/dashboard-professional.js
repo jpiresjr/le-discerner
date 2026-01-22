@@ -41,25 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         ? Object.fromEntries(Array.from(adForm.elements).filter((el) => el.name).map((el) => [el.name, el]))
         : {};
 
-    try {
-        const authToken = localStorage.getItem('auth_token');
-        const headers = {
-            'Accept': 'application/json',
-        };
-        if (authToken) {
-            headers.Authorization = `Bearer ${authToken}`;
-        }
-
-        const res = await fetch('/api/professionals/me', {
-            headers,
-            credentials: 'include',
-        });
-
-        if (!res.ok) {
-            throw new Error('Não foi possível carregar seus dados.');
-        }
-
-        const data = await res.json();
+    const applyProfessionalData = (data = {}) => {
         const user = data.user || {};
 
         if (fields.fullName) fields.fullName.value = user.fullName || '';
@@ -116,7 +98,38 @@ document.addEventListener('DOMContentLoaded', async () => {
                     : 'Finalize o pagamento para liberar todos os recursos.';
             }
         }
+    };
+
+    let hasBootstrapData = false;
+    if (window.professionalBootstrap) {
+        applyProfessionalData(window.professionalBootstrap);
+        hasBootstrapData = true;
+    }
+
+    try {
+        const authToken = localStorage.getItem('auth_token');
+        const headers = {
+            'Accept': 'application/json',
+        };
+        if (authToken) {
+            headers.Authorization = `Bearer ${authToken}`;
+        }
+
+        const res = await fetch('/api/professionals/me', {
+            headers,
+            credentials: 'include',
+        });
+
+        if (!res.ok) {
+            throw new Error('Não foi possível carregar seus dados.');
+        }
+
+        const data = await res.json();
+        applyProfessionalData(data);
     } catch (error) {
+        if (hasBootstrapData) {
+            return;
+        }
         if (fields.paymentStatus) {
             fields.paymentStatus.className = 'badge bg-danger';
             fields.paymentStatus.textContent = 'Erro ao carregar';

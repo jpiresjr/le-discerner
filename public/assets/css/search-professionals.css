@@ -99,6 +99,18 @@
     flex-direction: column;
 }
 
+.professional-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.professional-card-link:hover .professional-card {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 45px rgba(47, 36, 20, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
 .professional-card__image {
     position: relative;
     padding-top: 60%;

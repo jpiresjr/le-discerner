@@ -21,9 +21,9 @@
                         Therapies
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/therapies#psicanalise">Psicanálise</a></li>
-                        <li><a class="dropdown-item" href="/therapies#terapia-integrativa">Terapia Integrativa</a></li>
-                        <li><a class="dropdown-item" href="/therapies#coaching">Coaching</a></li>
+                        <li><a class="dropdown-item" href="/therapies#psicanalise">Psychoanalyst</a></li>
+                        <li><a class="dropdown-item" href="/therapies#terapia-integrativa">Integrative Therapist</a></li>
+                        <li><a class="dropdown-item" href="/therapies#coaching">Personal Development Coach</a></li>
                     </ul>
                 </li>
             </ul>

@@ -158,9 +158,9 @@
                             <label class="form-label">Tipo de terapia</label>
                             <select class="form-select" name="therapyType">
                                 <option value="">Todos</option>
-                                <option value="psicanalise">Psicanálise</option>
-                                <option value="terapia-integrativa">Terapia Integrativa</option>
-                                <option value="coaching">Coaching</option>
+                                <option value="psicanalise">Psychoanalyst</option>
+                                <option value="terapia-integrativa">Integrative Therapist</option>
+                                <option value="coaching">Personal Development Coach</option>
                             </select>
                         </div>
                         <div class="col-md-2">

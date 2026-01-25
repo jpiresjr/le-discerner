@@ -8,16 +8,16 @@
     <div class="container-lg hero-ipg__content">
         <h1 class="hero-ipg__title">WELCOME</h1>
         <p class="hero-ipg__sub">
-            Descubra uma experiência única focada em você.
-            Aqui, sua saúde é a nossa prioridade. Conecte-se a profissionais qualificados e dedicados que se preocupam genuinamente com o seu bem-estar integral.
+            Discover a personalised experience, centred on you. Here, your well-being comes first.
+            Connect with qualified, dedicated professionals who genuinely care about you.
         </p>
 
         <div class="d-flex flex-wrap gap-2 justify-content-center">
             <button type="button" class="btn btn-ipg-cta" data-bs-toggle="modal" data-bs-target="#authModal" data-form="paciente">
-                Sou Paciente
+                Client
             </button>
             <button type="button" class="btn btn-ipg-outline" data-bs-toggle="modal" data-bs-target="#authModal" data-form="profissional">
-                Sou Profissional
+                Professional
             </button>
         </div>
     </div>
@@ -46,11 +46,10 @@
             <div class="col-md-6">
                 <div class="ipg-therapy-card">
 
-                    <h2 class="ipg-therapy-title">Psicoterapia Consciente</h2>
+                    <h2 class="ipg-therapy-title">Conscious Psychotherapy</h2>
 
                     <p class="ipg-therapy-text">
-                        Focamos em uma ampla gama de modalidades de tratamento
-                        para aqueles que buscam se beneficiar da psicoterapia:
+                        We focus on a wide range of therapeutic modalities for those seeking to benefit from psychotherapy:
                     </p>
 
                     <!-- linha animada -->
@@ -58,13 +57,13 @@
 
                     <ul class="ipg-therapy-list">
                         <li>Individual</li>
-                        <li>Casal</li>
-                        <li>Família</li>
-                        <li>Grupo</li>
+                        <li>Couples</li>
+                        <li>Family</li>
+                        <li>Group</li>
                     </ul>
 
                     <a href="#" class="btn btn-ipg-cta mt-3">
-                        Agende uma Consulta
+                        Schedule a Consultation
                     </a>
 
                 </div>
@@ -87,20 +86,20 @@
     <div class="container">
         <div class="depth-card" data-aos="fade-up">
             <h2>
-                Abordagem Focada em Profundidade<br>
-                <small>na Psicoterapia</small>
+                A Depth-Focused Approach
+                <br>
+                <small>to Psychotherapy</small>
             </h2>
             <hr class="section-divider">
             <p>
-                Nossa metodologia busca explorar insights mais profundos sobre si mesmo
-                para ajudar os clientes a tomar decisões mais informadas e saudáveis
-                sobre seu presente e futuro.
+                Our methodology aims to explore deeper insights into the self,
+                helping clients make more informed and healthier decisions regarding their present and future.
             </p>
             <p>
-                Acreditamos que, através do trabalho conjunto entre cliente e terapeuta,
-                um crescimento significativo é possível.
+                We believe that, through collaborative work between client and therapist,
+                meaningful growth is possible.
             </p>
-            <a href="#" class="btn btn-ipg-cta mt-3">Saiba Mais</a>
+            <a href="#" class="btn btn-ipg-cta mt-3">Learn more</a>
         </div>
     </div>
 </section>
@@ -110,8 +109,8 @@
     <div class="container" data-aos="fade-up">
 
         <div class="text-center mb-5">
-            <h2 class="fw-light">Nossas Abordagens Terapêuticas</h2>
-            <p class="text-muted">Escolha o caminho que mais se conecta com você</p>
+            <h2 class="fw-light">Our Therapeutic Approaches</h2>
+            <p class="text-muted">Choose the path that resonates most with you</p>
         </div>
 
         <div class="row g-4">
@@ -121,9 +120,9 @@
                 <div class="therapy-card">
                     <div class="therapy-card__img" style="background-image:url('/images/Psicanalise.jpeg');"></div>
                     <div class="therapy-card__content">
-                        <h5>Psicanálise</h5>
+                        <h5>Psychoanalyst</h5>
                         <a href="/therapies#psicanalise" class="btn btn-ipg-cta w-100">
-                            Saiba mais
+                            Learn more
                         </a>
                     </div>
                 </div>
@@ -134,9 +133,9 @@
                 <div class="therapy-card">
                     <div class="therapy-card__img" style="background-image:url('/images/Terapia-integrativa.jpeg');"></div>
                     <div class="therapy-card__content">
-                        <h5>Terapia Integrativa</h5>
+                        <h5>Integrative Therapist</h5>
                         <a href="/therapies#terapia-integrativa" class="btn btn-ipg-cta w-100">
-                            Saiba mais
+                            Learn more
                         </a>
                     </div>
                 </div>
@@ -147,9 +146,9 @@
                 <div class="therapy-card">
                     <div class="therapy-card__img" style="background-image:url('/images/Coaching.jpeg');"></div>
                     <div class="therapy-card__content">
-                        <h5>Coaching</h5>
+                        <h5>Personal Development Coach</h5>
                         <a href="/therapies#coaching" class="btn btn-ipg-cta w-100">
-                            Saiba mais
+                            Learn more
                         </a>
                     </div>
                 </div>
@@ -163,9 +162,9 @@
 
         <!-- TÍTULO -->
         <div class="text-center mb-5">
-            <h2 class="section-title">Profissionais em Destaque</h2>
+            <h2 class="section-title">Featured Professionals</h2>
             <p class="section-subtitle">
-                Especialistas cuidadosamente selecionados para acompanhar você.
+                Carefully selected specialists to support your journey.
             </p>
         </div>
 
@@ -175,7 +174,7 @@
                 {% if featuredProfessionals is not empty %}
                     {% for slide in featuredProfessionals %}
                         <div class="carousel-item {{ loop.first ? 'active' : '' }}">
-                            <div class="row g-4 justify-content-center align-items-stretch">
+                            <div class="row g-4 justify-content-center">
                                 {% for professional in slide %}
                                     <div class="col-md-6 col-lg-4">
                                         <div class="professional-card h-100">

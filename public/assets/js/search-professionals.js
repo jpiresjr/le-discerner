@@ -66,10 +66,10 @@ const updateResults = async (params = {}, options = {}) => {
         const data = options.bootstrap ? { items: options.bootstrap } : await fetchProfessionals(params);
         const list = data.items || [];
 
-        resultsCount.textContent = `Mostrando ${list.length} profissionais`;
+        resultsCount.textContent = `Showing ${list.length} professionals`;
 
         if (!list.length) {
-            renderEmpty('Nenhum profissional encontrado com esses filtros.');
+            renderEmpty('It was not possible to load the professionals.');
             return;
         }
 

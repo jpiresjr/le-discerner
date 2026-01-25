@@ -40,6 +40,12 @@ class AuthController extends AbstractController
 
         $data = $request->request->all();
 
+        $data['fullName'] = trim((string) ($data['fullName'] ?? ''));
+        $data['username'] = trim((string) ($data['username'] ?? ''));
+        $data['email'] = mb_strtolower(trim((string) ($data['email'] ?? '')));
+        $data['country'] = trim((string) ($data['country'] ?? ''));
+        $data['contact'] = trim((string) ($data['contact'] ?? ''));
+
         $data['whatsapp'] = isset($data['whatsapp']);
         $data['telegram'] = isset($data['telegram']);
 
@@ -48,6 +54,14 @@ class AuthController extends AbstractController
             if (empty($data[$f])) {
                 return $this->json(['error' => "Missing field: $f"], 400);
             }
+        }
+
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            return $this->json(['error' => 'Invalid email format'], 400);
+        }
+
+        if (mb_strlen($data['password']) < 8) {
+            return $this->json(['error' => 'Password must be at least 8 characters'], 400);
         }
 
         if ($userRepository->findOneBy(['email' => $data['email']])) {
@@ -107,7 +121,6 @@ class AuthController extends AbstractController
 
         $response = $this->json([
             'message' => 'User created',
-            'token' => $token,
             'role' => $role
         ], 201);
 
@@ -159,7 +172,6 @@ class AuthController extends AbstractController
         // Criar resposta JSON
         $response = $this->json([
             'success' => true,
-            'token' => $token,  // Ainda retorna para JS se necessário
             'user' => [
                 'id' => $user->getId(),
                 'email' => $user->getEmail(),

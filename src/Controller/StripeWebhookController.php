@@ -15,6 +15,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class StripeWebhookController extends AbstractController
 {
+    public function __construct(
+        private readonly string $stripeWebhookSecret,
+        private readonly string $stripeSecretKey
+    ) {}
+
     #[Route('/api/payments/webhook', methods: ['POST'])]
     public function handleStripeWebhook(
         Request $request,
@@ -24,15 +29,14 @@ class StripeWebhookController extends AbstractController
     ): JsonResponse {
         $payload = $request->getContent();
         $signature = $request->headers->get('stripe-signature');
-        $secret = $_ENV['STRIPE_WEBHOOK_SECRET'] ?? '';
 
-        if ($secret === '') {
+        if ($this->stripeWebhookSecret === '') {
             $logger->warning('Stripe webhook secret is missing.');
             return $this->json(['error' => 'Webhook secret not configured.'], 500);
         }
 
         try {
-            $event = Webhook::constructEvent($payload, (string) $signature, $secret);
+            $event = Webhook::constructEvent($payload, (string) $signature, $this->stripeWebhookSecret);
         } catch (SignatureVerificationException $exception) {
             $logger->warning('Stripe webhook signature verification failed.', [
                 'message' => $exception->getMessage(),
@@ -59,9 +63,8 @@ class StripeWebhookController extends AbstractController
         if ($paymentIntent instanceof \Stripe\PaymentIntent) {
             $metadata = $paymentIntent->metadata ? $paymentIntent->metadata->toArray() : [];
         } elseif (is_string($paymentIntent) && $paymentIntent !== '') {
-            $stripeSecret = $_ENV['STRIPE_SECRET_KEY'] ?? '';
-            if ($stripeSecret !== '') {
-                $stripe = new StripeClient($stripeSecret);
+            if ($this->stripeSecretKey !== '') {
+                $stripe = new StripeClient($this->stripeSecretKey);
                 $intent = $stripe->paymentIntents->retrieve($paymentIntent, []);
                 $metadata = $intent->metadata ? $intent->metadata->toArray() : [];
                 $paymentIntent = $intent;

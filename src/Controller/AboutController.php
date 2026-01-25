@@ -11,16 +11,12 @@ class AboutController extends AbstractController
     #[Route('/about', name: 'about')]
     public function index(): Response
     {
-
-        ob_start();
-        require __DIR__ . '/../View/about.php';
-        $content = ob_get_clean();
-
-        $title = 'Sobre nós';
-        $extraCss = [];
-
-        ob_start();
-        require __DIR__ . '/../View/layout.php';
-        return new Response(ob_get_clean());
+        return $this->render('public/about.html.twig', [
+            'title' => 'Sobre nós',
+            'extraCss' => [],
+            'extraJs' => [
+                'https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js',
+            ],
+        ]);
     }
 }

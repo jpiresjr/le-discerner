@@ -76,11 +76,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 credentials: 'same-origin',
             });
 
-            if (!response.ok) {
-                throw new Error('Não foi possível iniciar o pagamento.');
+            let data = null;
+            if (response.headers.get('content-type')?.includes('application/json')) {
+                data = await response.json();
             }
 
-            const data = await response.json();
+            if (!response.ok) {
+                let message = 'Não foi possível iniciar o pagamento.';
+                if (response.status === 401) {
+                    message = 'Sua sessão expirou. Faça login novamente para continuar.';
+                } else if (data?.error) {
+                    message = data.error;
+                }
+                throw new Error(message);
+            }
+
+            if (!data) {
+                throw new Error('Resposta inválida do servidor.');
+            }
 
             if (!data.client_secret) {
                 throw new Error('Pagamento não inicializado corretamente.');

@@ -682,6 +682,60 @@ footer {
     color: #feffff;
 }
 
+footer.home-footer {
+    position: relative;
+    background: linear-gradient(135deg, #2f3527 0%, #3e4533 55%, #4b513f 100%);
+}
+
+footer.home-footer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(225,226,160,.18), transparent 55%);
+    pointer-events: none;
+}
+
+footer.home-footer .footer-brand h5 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+}
+
+footer.home-footer .footer-brand p {
+    color: rgba(254,255,255,.78);
+    max-width: 320px;
+}
+
+footer.home-footer .footer-kicker {
+    display: inline-block;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    font-size: .65rem;
+    color: rgba(225,226,160,.85);
+}
+
+footer.home-footer .footer-contact li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+footer.home-footer .footer-contact .bi {
+    font-size: 1rem;
+    color: rgba(225,226,160,.9);
+}
+
+footer.home-footer .footer-social {
+    margin-top: 12px;
+    display: flex;
+    gap: 12px;
+}
+
+footer.home-footer .footer-divider {
+    margin-top: 28px;
+    border-top: 1px solid rgba(254,255,255,.12);
+}
+
 /* títulos do footer */
 footer h5 {
     color: #feffff;
@@ -816,7 +870,6 @@ footer .text-secondary {
 #carouselProfissionais .carousel-control-next {
     width: 5%;
 }
-
 
 
 

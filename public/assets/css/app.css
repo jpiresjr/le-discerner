@@ -346,6 +346,7 @@ body{
     max-width: 520px;
     padding: 48px 46px;
     box-shadow: 0 30px 60px rgba(0,0,0,.18);
+    border-radius: 18px;
 }
 
 /* tipografia */
@@ -961,6 +962,5 @@ footer .text-secondary {
 #carouselProfissionais .carousel-control-next {
     width: 5%;
 }
-
 
 

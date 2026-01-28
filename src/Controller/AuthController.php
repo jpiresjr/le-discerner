@@ -121,7 +121,8 @@ class AuthController extends AbstractController
 
         $response = $this->json([
             'message' => 'User created',
-            'role' => $role
+            'role' => $role,
+            'token' => $token
         ], 201);
 
         $response->headers->setCookie(new Cookie(

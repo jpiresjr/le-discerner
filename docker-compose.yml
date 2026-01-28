@@ -12,6 +12,9 @@ services:
       JWT_SECRET_KEY: /var/www/le-discerner/config/jwt/private.pem
       JWT_PUBLIC_KEY: /var/www/le-discerner/config/jwt/public.pem
       JWT_PASSPHRASE: de58b3e3d8c7f4b443356ec2b814a86cacfb3102821372bc66968f95f0b66bfe
+      STRIPE_SECRET_KEY: sk_test_51Rr6xLLpwcDa2m14GYK9fKwK6zB1OgKdBB0zaYSD58L9BOjnhqDyAw0NK9FlCxnDi1nqyQD5Qnjj4rDWA8zpjKfa006C3pEbDC
+      STRIPE_WEBHOOK_SECRET: whsec_376b73ee3e1c796ca518e1fda3f06bfc137dd728105a8b20cef494ffbd5335da
+      STRIPE_PUBLISHABLE_KEY: pk_test_51Rr6xLLpwcDa2m14pEuXaaJjyRDIHFlAqAQv9CY4i0JrgrrPhTVGmYSIwRnqKRdUymLLOUgaXBYWl8loVusB6Q6u00PrK9RCEI
     depends_on:
       - mysql
       - redis
@@ -21,9 +24,11 @@ services:
     container_name: le_discerner_nginx
     ports:
       - "8080:80"
+      - "8443:443"
     volumes:
       - ./:/var/www/le-discerner/:ro
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/certs:/etc/nginx/certs:ro
     depends_on:
       - php
 

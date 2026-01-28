@@ -421,6 +421,7 @@ body{
     max-width: 520px;
     padding: 48px 46px;
     box-shadow: 0 30px 60px rgba(0,0,0,.18);
+    border-radius: 18px;
 }
 
 /* tipografia */
@@ -578,6 +579,7 @@ body{
     width: 100%;
     height: auto;
     display: block;
+    border-radius: 18px;
 }
 
 /* CARD BEGE */
@@ -587,6 +589,7 @@ body{
     max-width: 520px;
     box-shadow: 0 30px 60px rgba(0,0,0,.25);
     position: relative;
+    border-radius: 18px;
 }
 
 /* TÍTULO PEQUENO */
@@ -671,7 +674,7 @@ body{
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 2px; /* quase invisível, mas elegante */
+    border-radius: 18px;
     box-shadow:
         0 20px 45px rgba(0,0,0,.28);
 }
@@ -693,6 +696,7 @@ body{
     padding: 52px 48px;
     max-width: 520px;
     box-shadow: 0 30px 60px rgba(0,0,0,.25);
+    border-radius: 18px;
 }
 
 .ipg-therapy-title {
@@ -727,7 +731,7 @@ body{
 .ipg-therapy-image img {
     width: 100%;
     display: block;
-    border-radius: 2px;
+    border-radius: 18px;
     box-shadow: 0 20px 45px rgba(0,0,0,.28);
 }
 
@@ -857,6 +861,12 @@ footer.home-footer .footer-social a {
     background: rgba(254,255,255,.08);
     border: 1px solid rgba(254,255,255,.12);
     transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+
+footer.home-footer .footer-social__icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
 }
 
 footer.home-footer .footer-social a:hover {
@@ -1036,8 +1046,5 @@ footer .text-secondary {
 #carouselProfissionais .carousel-control-next {
     width: 5%;
 }
-
-
-
 
 

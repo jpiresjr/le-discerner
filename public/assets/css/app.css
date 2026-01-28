@@ -784,12 +784,6 @@ footer.home-footer .footer-social a {
     transition: transform .2s ease, background .2s ease, border-color .2s ease;
 }
 
-footer.home-footer .footer-social__icon {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
-}
-
 footer.home-footer .footer-social a:hover {
     transform: translateY(-2px);
     background: rgba(225,226,160,.18);
@@ -958,6 +952,7 @@ footer .text-secondary {
 #carouselProfissionais .carousel-control-next {
     width: 5%;
 }
+
 
 
 

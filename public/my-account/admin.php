@@ -80,9 +80,9 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Especialidade</th>
-                    <th>Data</th>
+                    <th>Name</th>
+                    <th>Specialty</th>
+                    <th>Date</th>
                 </tr>
                 </thead>
                 <tbody id="table-pros"></tbody>

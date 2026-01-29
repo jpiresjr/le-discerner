@@ -132,10 +132,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
         if (fields.paymentStatus) {
             fields.paymentStatus.className = 'badge bg-danger';
-            fields.paymentStatus.textContent = 'Erro ao carregar';
+            fields.paymentStatus.textContent = 'Error loading';
         }
         if (fields.paymentHint) {
-            fields.paymentHint.textContent = 'Faça login novamente para continuar.';
+            fields.paymentHint.textContent = 'Please log in again to continue.';
         }
     }
 

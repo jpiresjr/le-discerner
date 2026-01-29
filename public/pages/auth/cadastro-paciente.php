@@ -12,7 +12,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label">Usuário</label>
+                        <label class="form-label">User</label>
                         <input class="form-control" name="username" required>
                     </div>
 
@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="col-12">
-                        <label class="form-label">País</label>
+                        <label class="form-label">Country</label>
                         <input class="form-control" name="country" required>
                     </div>
 
@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="col-12">
-                        <label class="form-label">Tipo de Contato</label>
+                        <label class="form-label">Type of contact</label>
                         <div class="d-flex gap-4 flex-wrap">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="whatsapp" id="pac_whatsapp">

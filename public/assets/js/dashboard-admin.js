@@ -132,8 +132,8 @@ const renderPatientDetails = (patient) => {
             <div class="text-muted small">${patient.email || '-'}</div>
         </div>
         <div class="mb-2"><strong>Telefone:</strong> ${patient.phone || '-'}</div>
-        <div class="mb-2"><strong>Usuário:</strong> ${details.username || '-'}</div>
-        <div class="mb-2"><strong>País:</strong> ${details.country || '-'}</div>
+        <div class="mb-2"><strong>User:</strong> ${details.username || '-'}</div>
+        <div class="mb-2"><strong>Country:</strong> ${details.country || '-'}</div>
         <div class="mb-2"><strong>Gênero:</strong> ${details.gender || '-'}</div>
         <div class="mb-2"><strong>Idioma:</strong> ${details.language || '-'}</div>
         <div class="mb-2"><strong>WhatsApp:</strong> ${details.whatsapp ? 'Sim' : 'Não'}</div>
@@ -285,12 +285,12 @@ const renderProfessionalDetails = (professional) => {
             <div class="fw-semibold">${professional.fullName || '-'}</div>
             <div class="text-muted small">${professional.email || '-'}</div>
         </div>
-        <div class="mb-2"><strong>Especialidade:</strong> ${professional.specialty || professional.category || '-'}</div>
+        <div class="mb-2"><strong>Specialty:</strong> ${professional.specialty || professional.category || '-'}</div>
         <div class="mb-2"><strong>Credenciais:</strong> ${professional.credentials || 'Não informado'}</div>
         <div class="mb-2"><strong>Certificações:</strong> ${professional.certifications || 'Não informado'}</div>
         <div class="mb-2"><strong>Avaliações:</strong> ${professional.ratingAverage ? professional.ratingAverage.toFixed(1) : '—'} (${professional.ratingCount || 0})</div>
         <div class="mb-2"><strong>Histórico financeiro:</strong> ${professional.financialHistory || 'Sem histórico disponível'}</div>
-        <div class="mb-2"><strong>Documentos:</strong> ${professional.verificationDocs || 'Não enviados'}</div>
+        <div class="mb-2"><strong>Documents:</strong> ${professional.verificationDocs || 'Não enviados'}</div>
         <div class="mb-2"><strong>Status:</strong> ${professional.verificationStatus || 'pendente'}</div>
     `;
 };
@@ -372,7 +372,7 @@ const exportProfessionalsPdf = () => {
         <body>
         <h2>Lista de profissionais</h2>
         <table border="1" cellspacing="0" cellpadding="6">
-            <thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Especialidade</th><th>Rating</th><th>Status</th></tr></thead>
+            <thead><tr><th>ID</th><th>Nome</th><th>Email</th><th>Specialty</th><th>Rating</th><th>Status</th></tr></thead>
             <tbody>${rows}</tbody>
         </table>
         </body></html>

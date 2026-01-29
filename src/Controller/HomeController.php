@@ -30,7 +30,7 @@ class HomeController extends AbstractController
                 'id' => $professional->getId(),
                 'name' => $name ?: $user->getUsername(),
                 'specialty' => (string) ($adData['specialty'] ?? $professional->getExpertise() ?? ''),
-                'description' => (string) ($adData['description'] ?? 'Profissional disponível para atendimentos personalizados.'),
+                'description' => (string) ($adData['description'] ?? 'Professional available for personalised sessions'),
                 'photo' => $photo ?: '/images/profissional-1.jpg',
             ];
         }

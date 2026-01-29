@@ -15,15 +15,15 @@ ob_start();
     <div class="progress-indicator">
         <div class="progress-step active">
             <div class="step-number">1</div>
-            <div class="step-label">Informações Gerais</div>
+            <div class="step-label">General information</div>
         </div>
         <div class="progress-step">
             <div class="step-number">2</div>
-            <div class="step-label">Documentos</div>
+            <div class="step-label">Documents</div>
         </div>
         <div class="progress-step">
             <div class="step-number">3</div>
-            <div class="step-label">Consulta</div>
+            <div class="step-label">Consultation</div>
         </div>
         <div class="progress-step">
             <div class="step-number">4</div>
@@ -39,7 +39,7 @@ ob_start();
         <!-- Section 1: Detalhes do Anúncio -->
         <div class="form-section">
             <div class="form-header">
-                <h3><i class="bi bi-person-circle"></i> Detalhes do seu anúncio</h3>
+                <h3><i class="bi bi-person-circle"></i>Detalhes do seu anúncio</h3>
             </div>
             <div class="form-body">
                 <div class="row g-3">
@@ -75,11 +75,11 @@ ob_start();
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Naturalidade</label>
+                        <label class="form-label">Place of birth</label>
                         <input type="text" class="form-control" name="naturality" placeholder="Cidade e estado de origem">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Idade</label>
+                        <label class="form-label">Age</label>
                         <input type="number" class="form-control" name="age" min="18" max="100" placeholder="Sua idade">
                     </div>
                 </div>
@@ -89,12 +89,12 @@ ob_start();
         <!-- Section 2: Documentos -->
         <div class="form-section">
             <div class="form-header">
-                <h3><i class="bi bi-folder-check"></i> Documentos</h3>
+                <h3><i class="bi bi-folder-check"></i> Documents</h3>
             </div>
             <div class="form-body">
                 <div class="row g-4">
                     <div class="col-md-6">
-                        <label class="form-label">Documento de Identificação *</label>
+                        <label class="form-label">Identification document *</label>
                         <div class="file-upload-area" onclick="document.getElementById('idDocument').click()">
                             <i class="bi bi-cloud-arrow-up"></i>
                             <p class="mb-1">Clique para fazer upload</p>
@@ -103,7 +103,7 @@ ob_start();
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Foto Profissional *</label>
+                        <label class="form-label">Professional photo *</label>
                         <div class="file-upload-area" onclick="document.getElementById('photo').click()">
                             <i class="bi bi-camera"></i>
                             <p class="mb-1">Clique para fazer upload</p>
@@ -112,7 +112,7 @@ ob_start();
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Certificado *</label>
+                        <label class="form-label">Certificate *</label>
                         <div class="file-upload-area" onclick="document.getElementById('councilDoc').click()">
                             <i class="bi bi-file-earmark-text"></i>
                             <p class="mb-1">Clique para fazer upload</p>
@@ -121,15 +121,15 @@ ob_start();
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Formação Acadêmica *</label>
+                        <label class="form-label">Academic background *</label>
                         <input type="text" class="form-control" name="education" required placeholder="Ex: Medicina, Psicologia, Fisioterapia">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Especialidade *</label>
+                        <label class="form-label">Specialty *</label>
                         <input type="text" class="form-control" name="specialty" required placeholder="Sua especialização principal">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Tempo de Carreira *</label>
+                        <label class="form-label">Years of professional experience *</label>
                         <select class="form-select" name="experience" required>
                             <option value="" selected disabled>Selecione o tempo</option>
                             <option value="1-3">1-3 anos</option>
@@ -145,7 +145,7 @@ ob_start();
         <!-- Section 3: Consulta -->
         <div class="form-section">
             <div class="form-header">
-                <h3><i class="bi bi-calendar-check"></i> Consulta</h3>
+                <h3><i class="bi bi-calendar-check"></i> Consultation</h3>
             </div>
             <div class="form-body">
                 <div class="row g-3">
@@ -153,13 +153,13 @@ ob_start();
                         <label class="form-label">Valor e Tempo da Consulta *</label>
                         <div class="input-group">
                             <span class="input-group-text">R$</span>
-                            <input type="number" class="form-control" name="price" placeholder="Valor" step="0.01" required>
+                            <input type="number" class="form-control" name="price" placeholder="Fee" step="0.01" required>
                             <span class="input-group-text">min</span>
-                            <input type="number" class="form-control" name="duration" placeholder="Duração" required>
+                            <input type="number" class="form-control" name="duration" placeholder="Duration" required>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Categoria *</label>
+                        <label class="form-label">Category *</label>
                         <select class="form-select" name="category" required>
                             <option value="" selected disabled>Selecione uma categoria</option>
                             <option value="presencial">Presencial</option>
@@ -168,7 +168,7 @@ ob_start();
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Especialidade da Consulta *</label>
+                        <label class="form-label">Consultation specialty *</label>
                         <select class="form-select" name="consultationSpecialty" required>
                             <option value="" selected disabled>Selecione a especialidade</option>
                             <option value="psicologia">Psicologia</option>
@@ -203,7 +203,7 @@ ob_start();
                         <input type="url" class="form-control" name="portfolio" placeholder="https://seusite.com">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Redes Sociais</label>
+                        <label class="form-label">Social media</label>
                         <input type="text" class="form-control" name="socialMedia" placeholder="@seuusuario ou link">
                     </div>
                     <div class="col-md-6">
@@ -227,7 +227,7 @@ ob_start();
 <!--                        <input type="text" class="form-control" name="workingHours" required placeholder="Ex: Seg-Sex, 9h-18h">-->
 <!--                    </div>-->
                     <div class="col-md-6">
-                        <label class="form-label">Fuso Horário *</label>
+                        <label class="form-label">Time zone *</label>
                         <select class="form-select" name="timezone" required>
                             <option value="brt" selected>BRT (Brasília) UTC-3</option>
                             <option value="bst">BST (UTC+1)</option>
@@ -235,7 +235,7 @@ ob_start();
                         </select>
                     </div>
                     <div class="col-12">
-                        <label class="form-label">Descrição *</label>
+                        <label class="form-label">Description *</label>
                         <textarea class="form-control" name="description" rows="5" placeholder="Descreva sua abordagem, experiência, metodologia e informações relevantes para seus pacientes..." required></textarea>
                         <div class="form-text">Máximo 1000 caracteres</div>
                     </div>

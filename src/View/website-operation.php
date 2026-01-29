@@ -71,7 +71,7 @@
             </div>
 
             <div class="col-6 col-md-3 mb-3">
-                <h5>Serviços</h5>
+                <h5>Services</h5>
                 <ul class="list-unstyled">
                     <li>Website Operation</li>
                     <li>Manutenção Digital</li>
@@ -87,7 +87,7 @@
             </div>
 
             <div class="col-6 col-md-3 mb-3">
-                <h5>Siga-nos</h5>
+                <h5>Follow us</h5>
                 <a href="#" class="text-light me-2"><i class="bi bi-instagram"></i></a>
                 <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>
             </div>

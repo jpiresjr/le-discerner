@@ -42,7 +42,7 @@ function renderChart() {
         data: {
             labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
             datasets: [{
-                label: "Consultas",
+                label: "Consultation",
                 data: [20, 40, 35, 50, 60, 80],
                 borderWidth: 2
             }]

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         togglePasswordButton.addEventListener('click', () => {
             const isMasked = passwordInput.type === 'password';
             passwordInput.type = isMasked ? 'text' : 'password';
-            togglePasswordButton.textContent = isMasked ? 'Ocultar' : 'Mostrar';
+            togglePasswordButton.textContent = isMasked ? 'Ocultar' : 'Show';
         });
     }
 

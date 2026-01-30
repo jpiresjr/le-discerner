@@ -45,7 +45,7 @@ services:
   App\Service\PaymentService:
     arguments:
       $secretKey: '%env(STRIPE_SECRET_KEY)%'
-      $priceId: '%env(STRIPE_PRICE_ID)%'
+      $priceId: '%env(default::STRIPE_PRICE_ID)%'
 
   # Caso você use Redis futuramente:
   # redis.client:

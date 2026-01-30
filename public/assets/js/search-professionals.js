@@ -8,8 +8,8 @@ const fallbackImage = '/images/image1.jpg';
 const buildCard = (professional) => {
     const ad = professional.adDetails || {};
     const photo = Array.isArray(ad.photoPath) ? ad.photoPath[0] : ad.photoPath;
-    const badge = ad.category ? ad.category : 'Disponível';
-    const price = ad.price ? `R$ ${ad.price}` : 'Valor a combinar';
+    const badge = ad.category ? ad.category : 'Available';
+    const price = ad.price ? `R$ ${ad.price}` : 'Price upon request';
 
     return `
         <div class="col-md-6 col-xl-4">
@@ -20,12 +20,12 @@ const buildCard = (professional) => {
                         <span class="professional-card__badge">${badge}</span>
                     </div>
                     <div class="professional-card__body">
-                        <div class="professional-card__status">Disponível</div>
+                        <div class="professional-card__status">Available</div>
                         <div class="professional-card__title">${professional.name}</div>
                         <div class="professional-card__meta">
                             <span><i class="bi bi-briefcase"></i>${professional.specialty || 'Especialidade não informada'}</span>
-                            <span><i class="bi bi-geo-alt"></i>${ad.country || 'Local não informado'}</span>
-                            <span><i class="bi bi-clock"></i>${ad.duration ? `${ad.duration} min` : 'Duração flexível'}</span>
+                            <span><i class="bi bi-geo-alt"></i>${ad.country || 'Location not specified '}</span>
+                            <span><i class="bi bi-clock"></i>${ad.duration ? `${ad.duration} min` : 'Flexible session length '}</span>
                         </div>
                         <div class="professional-card__price">${price}</div>
                     </div>
@@ -69,7 +69,7 @@ const updateResults = async (params = {}, options = {}) => {
         resultsCount.textContent = `Showing ${list.length} professionals`;
 
         if (!list.length) {
-            renderEmpty('No professionals found with these filters.');
+            renderEmpty('It was not possible to load the professionals.');
             return;
         }
 

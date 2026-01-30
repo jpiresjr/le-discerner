@@ -136,6 +136,13 @@
 
 .stripe-placeholder iframe {
     width: 100% !important;
+    pointer-events: auto;
+}
+
+.stripe-placeholder {
+    pointer-events: auto;
+    position: relative;
+    z-index: 1;
 }
 
 .StripeElement--focus {

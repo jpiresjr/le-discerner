@@ -16,8 +16,8 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label">Usuário</label>
-                        <input class="form-control" name="username" placeholder="Usuário" required>
+                        <label class="form-label">User</label>
+                        <input class="form-control" name="username" placeholder="User" required>
                     </div>
 
                     <div class="col-md-6">
@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="col-12">
-                        <label class="form-label">País</label>
+                        <label class="form-label">Country</label>
                         <input class="form-control" name="country" placeholder="Seu país atual" required>
                     </div>
 
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="col-12">
-                        <label class="form-label">Tipo de Contato</label>
+                        <label class="form-label">Type of contact</label>
                         <div class="d-flex gap-4 flex-wrap">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="whatsapp" id="pro_whatsapp">
@@ -53,7 +53,7 @@
                     </div>
 
                     <div class="col-12">
-                        <label class="form-label">Especialidade</label>
+                        <label class="form-label">Specialty</label>
                         <input class="form-control" name="expertise" placeholder="Ex: Psicólogo, Terapeuta" required>
                     </div>
 

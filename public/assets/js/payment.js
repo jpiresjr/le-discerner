@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 let message = 'Não foi possível iniciar o pagamento.';
                 if (response.status === 401) {
-                    message = 'Sua sessão expirou. Faça login novamente para continuar.';
+                    message = 'Sua sessão expirou. Please log in again to continue.';
                 } else if (data?.error) {
                     message = data.error;
                 }

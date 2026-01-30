@@ -3,7 +3,7 @@
     <div class="hero-ipg__bg"></div>
 
     <div class="container-lg hero-ipg__content">
-        <h1 class="hero-ipg__title">MINHA CONTA</h1>
+        <h1 class="hero-ipg__title">My account</h1>
         <p class="hero-ipg__sub">
             Conheça a essência, os valores e a visão que guiam o Le Discerner.
         </p>
@@ -34,7 +34,7 @@
                 </li>
             </ul>
             <button type="button" class="btn btn-outline-danger btn-sm" id="logoutBtn">
-                Sair
+                Log out
             </button>
         </div>
 
@@ -44,7 +44,7 @@
             <div class="tab-pane fade show active" id="tab-account">
 
                 <div class="card shadow-sm border-0 p-5 mx-auto" style="max-width:1200px;">
-                    <h4 class="mb-4">Dados Pessoais</h4>
+                    <h4 class="mb-4">Personal details</h4>
 
                     <form action="/api/patients/me" method="POST">
 
@@ -54,32 +54,32 @@
 
                             <!-- NOME -->
                             <div class="col-12">
-                                <label class="form-label">Nome completo</label>
+                                <label class="form-label">Full name</label>
                                 <input class="form-control" name="fullName" placeholder="Nome e sobrenome">
                             </div>
 
                             <!-- USUÁRIO -->
                             <div class="col-md-4">
-                                <label class="form-label">Usuário</label>
+                                <label class="form-label">Username</label>
                                 <input class="form-control" name="username" disabled>
-                                <small class="text-muted">Este campo não pode ser alterado</small>
+                                <small class="text-muted">This field cannot be changed</small>
                             </div>
 
                             <!-- EMAIL -->
                             <div class="col-md-4">
-                                <label class="form-label">Email</label>
+                                <label class="form-label">Email address </label>
                                 <input class="form-control" type="email" name="email">
                             </div>
 
                             <!-- PAÍS -->
                             <div class="col-md-4">
-                                <label class="form-label">País</label>
+                                <label class="form-label">Country</label>
                                 <input class="form-control" name="country">
                             </div>
 
                             <!-- CONTATO -->
                             <div class="col-md-6">
-                                <label class="form-label">Número de Contato</label>
+                                <label class="form-label">Contact number</label>
                                 <div class="input-group">
                                     <select id="codigo_pais" class="form-select" style="max-width:120px;"></select>
                                     <input class="form-control" name="contact" placeholder="(00) 00000-0000">
@@ -88,7 +88,7 @@
 
                             <!-- TIPO CONTATO -->
                             <div class="col-md-6">
-                                <label class="form-label">Preferência de Contato</label>
+                                <label class="form-label">Contact preference</label>
                                 <div class="d-flex gap-4 flex-wrap pt-2">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="whatsapp" id="whatsapp">
@@ -107,16 +107,16 @@
 
                             <!-- SENHA -->
                             <div class="col-md-6">
-                                <label class="form-label">Nova Senha</label>
+                                <label class="form-label">New password</label>
                                 <input class="form-control" type="password" name="password">
-                                <small class="text-muted">Preencha apenas se desejar alterar</small>
+                                <small class="text-muted">Fill in only if you wish to change it</small>
                             </div>
 
                         </div>
 
                         <div class="d-flex justify-content-end mt-5">
                             <button class="btn btn-ipg-cta btn-lg px-5">
-                                Salvar Alterações
+                                Save changes
                             </button>
                         </div>
 
@@ -155,7 +155,7 @@
                 </ul>
             </div>
             <div class="col-6 col-md-3 mb-3">
-                <h5>Serviços</h5>
+                <h5>Services</h5>
                 <ul class="list-unstyled">
                     <li><a href="#" class="text-light text-decoration-none">Psicoterapia Individual</a></li>
                     <li><a href="#" class="text-light text-decoration-none">Terapia de Casal</a></li>
@@ -172,7 +172,7 @@
                 </ul>
             </div>
             <div class="col-6 col-md-3 mb-3">
-                <h5>Siga-nos</h5>
+                <h5>Follow us</h5>
                 <a href="#" class="text-light me-2"><i class="bi bi-facebook"></i></a>
                 <a href="#" class="text-light me-2"><i class="bi bi-instagram"></i></a>
                 <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>

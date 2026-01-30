@@ -30,7 +30,7 @@ ob_start();
                                 <input type="text" class="form-control" name="lastName" placeholder="Sobrenome" required>
                             </div>
                             <div class="col-12">
-                                <label class="form-label">País *</label>
+                                <label class="form-label">Country *</label>
                                 <select class="form-select" name="country" required>
                                     <option value="Portugal">Portugal</option>
                                     <option value="Brasil">Brasil</option>
@@ -138,7 +138,7 @@ ob_start();
                 </ul>
             </div>
             <div class="col-6 col-md-3 mb-3">
-                <h5>Serviços</h5>
+                <h5>Services</h5>
                 <ul class="list-unstyled">
                     <li><a href="#" class="text-light text-decoration-none">Psicoterapia Individual</a></li>
                     <li><a href="#" class="text-light text-decoration-none">Terapia de Casal</a></li>
@@ -156,7 +156,7 @@ ob_start();
                 </ul>
             </div>
             <div class="col-6 col-md-3 mb-3">
-                <h5>Siga-nos</h5>
+                <h5>Follow us</h5>
                 <a href="#" class="text-light me-2"><i class="bi bi-facebook"></i></a>
                 <a href="#" class="text-light me-2"><i class="bi bi-instagram"></i></a>
                 <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>

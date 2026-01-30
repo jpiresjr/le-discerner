@@ -43,11 +43,11 @@
             <!-- ===================== MINHA CONTA ===================== -->
             <div class="tab-pane fade show active" id="tab-account">
                 <div class="card shadow-sm border-0 p-5 mx-auto" style="max-width:1200px;">
-                    <h4 class="mb-4">Dados Profissionais</h4>
+                    <h4 class="mb-4">Personal details</h4>
 
                     <div class="row g-4">
                         <div class="col-12">
-                            <label class="form-label">Nome completo</label>
+                            <label class="form-label">Full name</label>
                             <input class="form-control" id="pro-fullName" disabled>
                         </div>
 
@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="col-md-4">
-                            <label class="form-label">Email</label>
+                            <label class="form-label">Email address</label>
                             <input class="form-control" type="email" id="pro-email" disabled>
                         </div>
 
@@ -67,12 +67,12 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label">Número de Contato</label>
+                            <label class="form-label">Contact number</label>
                             <input class="form-control" id="pro-contact" disabled>
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label">Preferências de Contato</label>
+                            <label class="form-label">Contact preference</label>
                             <div class="d-flex gap-2 flex-wrap pt-2" id="pro-contact-preferences">
                                 <span class="badge bg-secondary">Loading...</span>
                             </div>
@@ -105,27 +105,27 @@
                                 <h5 class="mb-3">General information</h5>
                                 <div class="row g-3">
                                     <div class="col-md-6">
-                                        <label class="form-label">Nome completo</label>
+                                        <label class="form-label">Full name</label>
                                         <input class="form-control" name="fullName">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Email de contato</label>
+                                        <label class="form-label">Email address</label>
                                         <input class="form-control" name="email" type="email">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Telefone</label>
+                                        <label class="form-label">Phone</label>
                                         <input class="form-control" name="phone">
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">WhatsApp</label>
-                                        <input class="form-control" name="whatsapp">
-                                    </div>
+<!--                                    <div class="col-md-6">-->
+<!--                                        <label class="form-label">WhatsApp</label>-->
+<!--                                        <input class="form-control" name="whatsapp">-->
+<!--                                    </div>-->
                                     <div class="col-md-6">
                                         <label class="form-label">Place of birth</label>
                                         <input class="form-control" name="naturality">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Idade</label>
+                                        <label class="form-label">Age</label>
                                         <input class="form-control" name="age" type="number">
                                     </div>
                                 </div>
@@ -184,7 +184,7 @@
                                         <input class="form-control" name="category">
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Especialidade da consulta</label>
+                                        <label class="form-label">Consultation specialty</label>
                                         <input class="form-control" name="consultationSpecialty">
                                     </div>
                                     <div class="col-md-6">
@@ -200,7 +200,7 @@
                                 <h5 class="mb-3">About the professional</h5>
                                 <div class="row g-3">
                                     <div class="col-md-6">
-                                        <label class="form-label">Portfólio</label>
+                                        <label class="form-label">Portfolio</label>
                                         <input class="form-control" name="portfolio">
                                     </div>
                                     <div class="col-md-6">
@@ -236,7 +236,7 @@
                         </div>
 
                         <div class="col-12 d-flex justify-content-end">
-                            <button class="btn btn-ipg-cta" type="submit">Salvar alterações</button>
+                            <button class="btn btn-ipg-cta" type="submit">Save changes</button>
                         </div>
                     </form>
                 </div>

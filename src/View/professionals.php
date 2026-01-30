@@ -20,7 +20,8 @@ ob_start();
                             <label class="form-label">Buscar por nome ou especialidade</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-search"></i></span>
-                                <input type="text" name="q" class="form-control" placeholder="Ex: Psicologia, Coach...">
+                                <input type="text" name="q" class="form-control" placeholder="Ex: Psychoanalyst,
+                                 Personal Development Coaching...">
                             </div>
                         </div>
                         <div class="mb-3">

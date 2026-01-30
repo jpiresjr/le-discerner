@@ -39,7 +39,7 @@
                 </p>
 
                 <a href="/contact.php" class="btn btn-ipg-cta mt-3">
-                    Fale com a gente
+                    Talk to us
                 </a>
             </div>
 

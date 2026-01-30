@@ -199,7 +199,7 @@ ob_start();
             <div class="form-body">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label">Portfólio Online</label>
+                        <label class="form-label">Portfolio Online</label>
                         <input type="url" class="form-control" name="portfolio" placeholder="https://seusite.com">
                     </div>
                     <div class="col-md-6">

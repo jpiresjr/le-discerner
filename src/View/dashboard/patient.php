@@ -5,7 +5,7 @@
     <div class="container-lg hero-ipg__content">
         <h1 class="hero-ipg__title">My account</h1>
         <p class="hero-ipg__sub">
-            Conheça a essência, os valores e a visão que guiam o Le Discerner.
+            Discover the essence, values, and vision that guide Le Discerner.
         </p>
     </div>
 </header>
@@ -19,17 +19,17 @@
             <ul class="nav nav-pills" role="tablist">
                 <li class="nav-item">
                     <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-account">
-                        Minha Conta
+                        My account
                     </button>
                 </li>
                 <li class="nav-item">
                     <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-appointments">
-                        Minhas Consultas
+                        My Consultations
                     </button>
                 </li>
                 <li class="nav-item">
                     <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-messages">
-                        Mensagens
+                        Messages
                     </button>
                 </li>
             </ul>
@@ -179,7 +179,7 @@
             </div>
         </div>
         <div class="text-center text-secondary small pt-3">
-            © 2025 Le-Discerner. Todos os direitos reservados.
+            © 2025 Le-Discerner. All rights reserved.
         </div>
     </div>
 </footer>

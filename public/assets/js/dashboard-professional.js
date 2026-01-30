@@ -91,11 +91,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (fields.paymentStatus) {
             const paid = Boolean(data.paymentCompleted);
             fields.paymentStatus.className = `badge ${paid ? 'bg-success' : 'bg-warning text-dark'}`;
-            fields.paymentStatus.textContent = paid ? 'Ativo' : 'Pagamento pendente';
+            fields.paymentStatus.textContent = paid ? 'Active' : 'Payment pending';
             if (fields.paymentHint) {
                 fields.paymentHint.textContent = paid
-                    ? 'Sua assinatura está ativa.'
-                    : 'Finalize o pagamento para liberar todos os recursos.';
+                    ? 'Your subscription is active.'
+                    : 'Complete the payment to unlock all features.';
             }
         }
     };
